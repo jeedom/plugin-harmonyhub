@@ -21,13 +21,39 @@ require_once dirname(__FILE__) . '/../../../../core/php/core.inc.php';
 
 
 class harmonyhub extends eqLogic {
+    
+    public static function health() {
+        $return = array();
+        $dep=false;
+        $config=false;
+        $filename = realpath(dirname(__FILE__) . '/../../3rdparty/Harmonyhubcontrol/HarmonyHubControl');
+        if (file_exists($filename)) {
+            $dep=true;
+        }
+        if (file_exists('/tmp/harmonyhubconfig.json')) {
+            $config=true;
+        }
+        $return[] = array(
+            'test' => __('Dépendances', __FILE__),
+            'result' => ($dep) ? __('OK', __FILE__) : __('NOK', __FILE__),
+            'advice' => ($dep) ? '' : __('Vérifiez que vous avez les droits Sudo et allez sur la page du plugin et cliquez sur le bouton "Installer Dépendances"', __FILE__),
+            'state' => $dep,
+        );
+        $return[] = array(
+            'test' => __('Fichier de config', __FILE__),
+            'result' => ($config) ? __('OK', __FILE__) : __('NOK', __FILE__),
+            'advice' => ($config) ? '' : __('Vérifiez que vous avez les droits Sudo et allez sur la page du plugin et cliquez sur le bouton "Créer/Maj config"', __FILE__),
+            'state' => $config,
+        );
+        return $return;
+    }
 	
 	public static function cron() {
 		$eqLogics = eqLogic::byType('harmonyhub');
 		foreach($eqLogics as $harmonyhub) {
 			if ($harmonyhub->getIsEnable() == 1 && $harmonyhub->getConfiguration('disponame')=='Activité' && $harmonyhub->getConfiguration('cronenabled')==1) {
 				foreach ($harmonyhub->getCmd('info') as $cmd) {
-					log::add('harmonyhub', 'debug', 'Pull Cron pour harmonyhub' );
+					//log::add('harmonyhub', 'debug', 'Pull Cron pour harmonyhub' );
 					$activityname= $harmonyhub->getactivityInfo();
 				}
 			}
@@ -74,9 +100,9 @@ class harmonyhub extends eqLogic {
 		$harmony_path = realpath(dirname(__FILE__) . '/../../3rdparty/Harmonyhubcontrol/');
 		$email = config::byKey('username', 'harmonyhub', 0);
 		$pass = config::byKey('password', 'harmonyhub', 0);
-		$ip = config::byKey('ip', 'harmonyhub', 0);		
+		$ip = config::byKey('ip', 'harmonyhub', 0);
 		$cmd='./HarmonyHubControl ' .$email.' ' .$pass . ' ' . $ip . ' get_current_activity_id_raw 2>&1';
-		log::add('harmonyhub','debug','Execution de :'. $cmd);		
+		//log::add('harmonyhub','debug','Execution de :'. $cmd);
 		chdir($harmony_path);
 		$activityid=trim(shell_exec($cmd));
 		$config=file_get_contents ( '/tmp/harmonyhubconfig.json');
@@ -88,6 +114,16 @@ class harmonyhub extends eqLogic {
 				$activityname=$value['name'];
 			}
 		}
+        $cmd_activity_info = $this->getCmd(null, 'activityinfo');
+        if (is_object($cmd_activity_info)) {
+            try {
+                if ($cmd_activity_info->execCmd(null,2)==$activityname){
+                    return $activityname;
+                }
+            } catch (Exception $e) {
+                log::add('harmonyhub','debug','Première création de l\'équipement activité');
+            }
+        }
 		log::add('harmonyhub','debug','L\'activité id est : ' .$activityid.' et son nom est ' . $activityname);
 		foreach ($this->getCmd('info') as $cmd) {
 			$cmd->event($activityname);
@@ -160,6 +196,19 @@ class harmonyhub extends eqLogic {
 				$harmonyhubCmd->setSubType('string');
 				$harmonyhubCmd->save();
 			}
+            $harmonyhubCmd = $this->getCmd(null, 'refreshactivity');
+			if (!is_object($harmonyhubCmd)) {
+				$harmonyhubCmd = new harmonyhubCmd();
+				$harmonyhubCmd->setName(__('Refresh Activity', __FILE__));
+				$harmonyhubCmd->setLogicalId('refreshactivity');
+				$harmonyhubCmd->setEqLogic_id($this->getId());
+				$harmonyhubCmd->setConfiguration('parameters', 'N/A');
+				$harmonyhubCmd->setUnite('');
+				$harmonyhubCmd->setType('action');
+				$harmonyhubCmd->setIsVisible(0);
+				$harmonyhubCmd->setSubType('other');
+				$harmonyhubCmd->save();
+			}
 			$this->getactivityInfo();
 		} else {
 			foreach ($result_json["device"] as $key => $value) {
@@ -210,7 +259,8 @@ class harmonyhubCmd extends cmd {
 		$pass = config::byKey('password', 'harmonyhub', 0);
 		$ip = config::byKey('ip', 'harmonyhub', 0);
 		$device = $harmonyhub->getConfiguration('dispoid');
-		if ($this->type == 'action') {
+        $logical = $this->getLogicalId();
+		if ($this->type == 'action' && $logical != 'refreshactivity') {
 			$action=$this->getConfiguration('parameters');
 			$type=$this->getConfiguration('type');
 			if ($type=='activity'){
@@ -221,7 +271,8 @@ class harmonyhubCmd extends cmd {
 			chdir($harmony_path);
 			exec($cmd);
 			log::add('harmonyhub','debug','Execution de : ' .$cmd . ' depuis : ' .$harmony_path);
-		} else {
+		}
+        else {
 			$activityname=$harmonyhub->getactivityInfo();
 			return $activityname;
 		}

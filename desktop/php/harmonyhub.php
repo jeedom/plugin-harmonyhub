@@ -25,9 +25,9 @@ $eqLogics = eqLogic::byType('harmonyhub');
         <div class="eqLogicThumbnailContainer">
                       <div class="cursor eqLogicAction" data-action="add" style="background-color : #ffffff; height : 200px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;" >
            <center>
-            <i class="fa fa-plus-circle" style="font-size : 7em;color:#28a3d3;"></i>
+            <i class="fa fa-plus-circle" style="font-size : 7em;color:#94ca02;"></i>
         </center>
-        <span style="font-size : 1.1em;position:relative; top : 23px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;;color:#28a3d3"><center>{{Ajouter}}</center></span>
+        <span style="font-size : 1.1em;position:relative; top : 23px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;;color:#94ca02"><center>{{Ajouter}}</center></span>
     </div>
          <?php
 				foreach ($eqLogics as $eqLogic) {
@@ -151,6 +151,8 @@ $eqLogics = eqLogic::byType('harmonyhub');
 								<option value="plugins/harmonyhub/core/template/images/console.png">{{Console de jeux}}</option>
 								<option value="plugins/harmonyhub/core/template/images/boxtv.png">{{Box TV}}</option>
 								<option value="plugins/harmonyhub/core/template/images/bandeauled.png">{{Bandeau Leds}}</option>
+								<option value="plugins/harmonyhub/core/template/images/action.png">{{Activité}}</option>
+								<option value="plugins/harmonyhub/core/template/images/photophore.png">{{Photophore}}</option>
 							</select>
                     		</div>
 							<div style="text-align: center">
