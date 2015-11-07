@@ -19,15 +19,17 @@ if (!isConnect('admin')) {
 }
 ?>
 <div id='div_configharmonyhubAlert' style="display: none;"></div>
+<a class="btn btn-warning pull-right" data-state="1" id="bt_harmonyLogStopStart"><i class="fa fa-pause"></i> {{Pause}}</a>
+<input class="form-control pull-right" id="in_harmonyLogSearch" style="width : 300px;" placeholder="{{Rechercher}}" />
+<br/><br/><br/>
 <pre id='pre_harmonyhubconfig' style='overflow: auto; height: 90%;with:90%;'></pre>
-
 
 <script>
 	$.ajax({
 		type: 'POST',
 		url: 'plugins/harmonyhub/core/ajax/harmonyhub.ajax.php',
 		data: {
-			action: 'configharmonyhub'
+			action: 'configharmonyhub',
 		},
 		dataType: 'json',
 		global: false,
@@ -35,46 +37,13 @@ if (!isConnect('admin')) {
 			handleAjaxError(request, status, error, $('#div_configharmonyhubAlert'));
 		},
 		success: function () {
-			getharmonyhubLog(1);
+			 jeedom.log.autoupdate({
+               log : 'harmonyhub_update',
+               display : $('#pre_harmonyhubconfig'),
+               search : $('#in_harmonyLogSearch'),
+               control : $('#bt_harmonyLogStopStart'),
+           });
 		}
 	});
 	$('#pre_harmonyhubconfig').text('########Recherche de la config en cours########\n');
-	function getharmonyhubLog(_autoUpdate) {
-		$.ajax({
-			type: 'POST',
-			url: 'core/ajax/log.ajax.php',
-			data: {
-				action: 'get',
-				logfile: 'harmonyhub_update',
-			},
-			dataType: 'json',
-			global: false,
-			error: function (request, status, error) {
-				setTimeout(function () {
-					getJeedomLog(_autoUpdate, _log)
-				}, 1000);
-			},
-			success: function (data) {
-				if (data.state != 'ok') {
-					$('#div_alert').showAlert({message: data.result, level: 'danger'});
-					return;
-				}
-				var log = '';
-				var regex = /<br\s*[\/]?>/gi;
-				for (var i in data.result.reverse()) {
-					log += data.result[i][2].replace(regex, "\n");
-				}
-				$('#pre_harmonyhubconfig').text(log);
-				$('#pre_harmonyhubconfig').scrollTop($('#pre_harmonyhubconfig').height() + 200000);
-				if (!$('#pre_harmonyhubconfig').is(':visible')) {
-					_autoUpdate = 0;
-				}
-				if (init(_autoUpdate, 0) == 1) {
-					setTimeout(function () {
-						getharmonyhubLog(_autoUpdate)
-					}, 1000);
-				}
-			}
-		});
-	}
 </script>

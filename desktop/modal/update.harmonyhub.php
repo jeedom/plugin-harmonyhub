@@ -19,15 +19,17 @@ if (!isConnect('admin')) {
 }
 ?>
 <div id='div_updateharmonyhubAlert' style="display: none;"></div>
+<a class="btn btn-warning pull-right" data-state="1" id="bt_harmonyLogStopStart"><i class="fa fa-pause"></i> {{Pause}}</a>
+<input class="form-control pull-right" id="in_harmonyLogSearch" style="width : 300px;" placeholder="{{Rechercher}}" />
+<br/><br/><br/>
 <pre id='pre_harmonyhubupdate' style='overflow: auto; height: 90%;with:90%;'></pre>
-
 
 <script>
 	$.ajax({
 		type: 'POST',
 		url: 'plugins/harmonyhub/core/ajax/harmonyhub.ajax.php',
 		data: {
-			action: 'updateharmonyhub'
+			action: 'updateharmonyhub',
 		},
 		dataType: 'json',
 		global: false,
@@ -35,45 +37,12 @@ if (!isConnect('admin')) {
 			handleAjaxError(request, status, error, $('#div_updateharmonyhubAlert'));
 		},
 		success: function () {
-			getharmonyhubLog(1);
+			 jeedom.log.autoupdate({
+               log : 'harmonyhub_update',
+               display : $('#pre_harmonyhubupdate'),
+               search : $('#in_harmonyLogSearch'),
+               control : $('#bt_harmonyLogStopStart'),
+           });
 		}
 	});
-	function getharmonyhubLog(_autoUpdate) {
-		$.ajax({
-			type: 'POST',
-			url: 'core/ajax/log.ajax.php',
-			data: {
-				action: 'get',
-				logfile: 'harmonyhub_update',
-			},
-			dataType: 'json',
-			global: false,
-			error: function (request, status, error) {
-				setTimeout(function () {
-					getJeedomLog(_autoUpdate, _log)
-				}, 1000);
-			},
-			success: function (data) {
-				if (data.state != 'ok') {
-					$('#div_alert').showAlert({message: data.result, level: 'danger'});
-					return;
-				}
-				var log = '';
-				var regex = /<br\s*[\/]?>/gi;
-				for (var i in data.result.reverse()) {
-					log += data.result[i][2].replace(regex, "\n");
-				}
-				$('#pre_harmonyhubupdate').text(log);
-				$('#pre_harmonyhubupdate').scrollTop($('#pre_harmonyhubupdate').height() + 200000);
-				if (!$('#pre_harmonyhubupdate').is(':visible')) {
-					_autoUpdate = 0;
-				}
-				if (init(_autoUpdate, 0) == 1) {
-					setTimeout(function () {
-						getharmonyhubLog(_autoUpdate)
-					}, 1000);
-				}
-			}
-		});
-	}
 </script>
