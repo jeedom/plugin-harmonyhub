@@ -131,9 +131,9 @@ if (count($eqLogics) == 0) {
                 </div>
 				<div class="cron">
 				<div class="form-group">
-				<label class="col-lg-8 control-label" >{{Activer la récupération des activités toutes les minutes}}</label>
+				<label class="col-lg-4 control-label" >{{Activer la récupération des activités toutes les minutes}}</label>
                     <div class="col-lg-1">
-                        <input type="checkbox" class="eqLogicAttr" data-l1key="configuration" data-l2key="cronenabled" checked/>
+                        <input type="checkbox" class="eqLogicAttr bootstrapSwitch" data-l1key="configuration" data-l2key="cronenabled" checked/>
                     </div>
 				</div>
 				</div>
