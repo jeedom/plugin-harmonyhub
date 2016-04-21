@@ -145,7 +145,10 @@
         "SqueezeBox": "SqueezeBox",
         "Htpc": "Htpc",
         "Wii-U": "Wii-U",
-        "Télévision": "Télévision"
+        "Télévision": "Télévision",
+        "NOK": "NOK",
+        "Vérifiez que vous avez les droits Sudo et allez sur la page du plugin et cliquez sur le bouton \"Créer\/Maj config\"": "Vérifiez que vous avez les droits Sudo et allez sur la page du plugin et cliquez sur le bouton \"Créer\/Maj config\"",
+        "Roku": "Roku"
     },
     "plugins\/harmonyhub\/desktop\/modal\/config.harmonyhub.php": {
         "Pause": "Pause",

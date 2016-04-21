@@ -24,11 +24,6 @@ try {
         throw new Exception(__('401 - Accès non autorisé', __FILE__));
     }
 	
-	if (init('action') == 'updateharmonyhub') {
-		harmonyhub::updateharmonyhub();
-		ajax::success();
-	}
-	
 	if (init('action') == 'configharmonyhub') {
 		harmonyhub::configharmonyhub();
 		ajax::success();

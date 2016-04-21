@@ -48,6 +48,30 @@ class harmonyhub extends eqLogic {
         return $return;
     }
 	
+	public static function dependancy_info() {
+		$return = array();
+		$return['log'] = 'harmonyhub_update';
+		$return['progress_file'] = '/tmp/dependancy_harmonyhub_in_progress';
+		$filename = realpath(dirname(__FILE__) . '/../../3rdparty/Harmonyhubcontrol/HarmonyHubControl');
+		if (file_exists($filename)) {
+			$return['state'] = 'ok';
+		} else {
+			$return['state'] = 'nok';
+		}
+		return $return;
+	}
+
+	public static function dependancy_install() {
+		if (file_exists('/tmp/dependancy_harmonyhub_in_progress')) {
+			return;
+		}
+		log::remove('harmonyhub_update');
+		$cmd = 'sudo /bin/bash ' .dirname(__FILE__) . '/../../3rdparty/install.sh';
+		$cmd .= ' >> ' . log::getPathToLog('harmonyhub_update') . ' 2>&1 &';
+		exec($cmd);
+	}
+    
+	
 	public static function cron() {
 		$eqLogics = eqLogic::byType('harmonyhub');
 		foreach($eqLogics as $harmonyhub) {
@@ -58,13 +82,6 @@ class harmonyhub extends eqLogic {
 				}
 			}
 		}
-	}
-	
-	public static function updateharmonyhub() {
-		log::remove('harmonyhub_update');
-		$cmd = '/bin/bash ' .dirname(__FILE__) . '/../../3rdparty/install.sh';
-		$cmd .= ' >> ' . log::getPathToLog('harmonyhub_update') . ' 2>&1 &';
-		exec($cmd);
 	}
 	
 	public static function start() {
@@ -195,7 +212,6 @@ class harmonyhub extends eqLogic {
 			$harmonyhubCmd->setConfiguration('parameters', 'N/A');
 			$harmonyhubCmd->setUnite('');
 			$harmonyhubCmd->setType('info');
-			$harmonyhubCmd->setEventOnly(1);
 			$harmonyhubCmd->setIsVisible(0);
 			$harmonyhubCmd->setSubType('string');
 			$harmonyhubCmd->save();
@@ -203,15 +219,14 @@ class harmonyhub extends eqLogic {
 			if (!is_object($harmonyhubCmd)) {
 				$harmonyhubCmd = new harmonyhubCmd();
 				$harmonyhubCmd->setName(__('Refresh Activity', __FILE__));
-				$harmonyhubCmd->setLogicalId('refreshactivity');
 				$harmonyhubCmd->setEqLogic_id($this->getId());
 				$harmonyhubCmd->setConfiguration('parameters', 'N/A');
 				$harmonyhubCmd->setUnite('');
 				$harmonyhubCmd->setType('action');
-				$harmonyhubCmd->setIsVisible(0);
 				$harmonyhubCmd->setSubType('other');
-				$harmonyhubCmd->save();
 			}
+			$harmonyhubCmd->setLogicalId('refresh');
+			$harmonyhubCmd->save();
 			$this->getactivityInfo();
 		} else {
 			foreach ($result_json["device"] as $key => $value) {
@@ -263,17 +278,24 @@ class harmonyhubCmd extends cmd {
 		$ip = config::byKey('ip', 'harmonyhub', 0);
 		$device = $harmonyhub->getConfiguration('dispoid');
         $logical = $this->getLogicalId();
+        $refreshactivity = 0;
 		if ($this->type == 'action' && $logical != 'refreshactivity') {
 			$action=$this->getConfiguration('parameters');
 			$type=$this->getConfiguration('type');
 			if ($type=='activity'){
 				$cmd='./HarmonyHubControl ' .$email.' "' .$pass . '" ' . $ip . ' start_activity "'.$action.'"';
+                $refreshactivity = 1;
 			} else {
 				$cmd='./HarmonyHubControl ' .$email.' "' .$pass . '" ' . $ip . ' issue_device_command '.$device.' "'.$action.'"';
 			}
 			chdir($harmony_path);
 			exec($cmd);
 			log::add('harmonyhub','debug','Execution de : ' .$cmd . ' depuis : ' .$harmony_path);
+            /*if ($refreshactivity == 1) {
+                log::add('harmonyhub','debug','Mise à jour de l\'activité');
+                sleep(3);
+                $harmonyhub->getactivityInfo();
+            }*/
 		}
         else {
 			$activityname=$harmonyhub->getactivityInfo();
