@@ -52,7 +52,7 @@
         "Dépendances : ": "Dépendances :",
         "Droits Sudo : ": "Hak-hak sudo:",
         "Email du compte : ": "Email du compte :",
-        "Mot de passe : ": "Mot de passe :",
+        "Mot de passe : ": "Password",
         "Adresse IP du Hub : ": "Adresse IP du Hub :",
         "Installer les dépendances :": "Installer les dépendances :",
         "Lancer": "Lancer",
@@ -90,7 +90,7 @@
         "Stop": "Stop",
         "Play": "Play",
         "Rewind": "Rewind",
-        "Pause": "Pause",
+        "Pause": "Berhenti Sebentar",
         "Fast Forward": "Fast Forward",
         "Record": "Record",
         "Return": "Return",
@@ -145,14 +145,17 @@
         "SqueezeBox": "SqueezeBox",
         "Htpc": "Htpc",
         "Wii-U": "Wii-U",
-        "Télévision": "Télévision"
+        "Télévision": "Télévision",
+        "NOK": "NOK",
+        "Vérifiez que vous avez les droits Sudo et allez sur la page du plugin et cliquez sur le bouton \"Créer/Maj config\"": "Vérifiez que vous avez les droits Sudo et allez sur la page du plugin et cliquez sur le bouton \"Créer/Maj config\"",
+        "Roku": "Roku"
     },
     "plugins/harmonyhub/desktop/modal/config.harmonyhub.php": {
-        "Pause": "Pause",
+        "Pause": "Berhenti Sebentar",
         "Rechercher": "Mencari"
     },
     "plugins/harmonyhub/desktop/modal/update.harmonyhub.php": {
-        "Pause": "Pause",
+        "Pause": "Berhenti Sebentar",
         "Rechercher": "Mencari"
     }
 }
