@@ -24,27 +24,6 @@ if (!isConnect()) {
 }
 ?>
 <form class="form-horizontal">
-<div class="form-group">
-<fieldset>
-		<label class="col-lg-2 control-label">{{Dépendances : }}</label>
-		<?php
-		$filename = realpath(dirname(__FILE__) . '/../3rdparty/Harmonyhubcontrol/HarmonyHubControl');
-		if (!file_exists($filename)) {
-			echo '<div class="col-lg-2"><span class="label label-danger">NOK</span></div>';
-		} else {
-			echo '<div class="col-lg-2"><span class="label label-success">OK</span></div>';
-		}
-		?>
-		<label class="col-lg-2 control-label">{{Droits Sudo : }}</label>
-		<?php
-		if (exec('sudo cat /etc/sudoers') != "") {
-			echo '<div class="col-lg-2"><span class="label label-success">OK</span></div>';
-		} else {
-			echo '<div class="col-lg-2"><span class="label label-danger">NOK</span>    <span><a href="http://doc.jeedom.fr/fr_FR/doc-installation.html#troubleshoting"><i class="fa fa-question-circle"></i></a></span></div>';
-		}
-		?>
-</fieldset>
-</div>
 <label></label>
 <fieldset>
 <div class="form-group">
@@ -65,10 +44,6 @@ if (!isConnect()) {
     </div>
 </div>
 <div class="form-group">
-<label class="col-lg-2 control-label">{{Installer les dépendances :}}</label>
-			<div class="col-lg-2">
-				<a class="btn btn-danger" id="bt_installDeps"><i class="fa fa-check"></i> {{Lancer}}</a>
-			</div>
 <label class="col-lg-2 control-label">{{Créer/MAJ la config :}}</label>
 			<div class="col-lg-2">
 				<a class="btn btn-warning" id="bt_update"><i class="fa fa-check"></i> {{Lancer}}</a>
@@ -77,14 +52,6 @@ if (!isConnect()) {
 </fieldset> 
 </form>
 <script>
-$('#bt_installDeps').on('click',function(){
-		bootbox.confirm('{{Etes-vous sûr de vouloir installer les dépendances }}', function (result) {
-			if (result) {
-				$('#md_modal').dialog({title: "{{Installation}}"});
-				$('#md_modal').load('index.php?v=d&plugin=harmonyhub&modal=update.harmonyhub').dialog('open');
-			}
-		});
-	});
 $('#bt_update').on('click',function(){
 		bootbox.confirm('{{Etes-vous sûr de vouloir installer/mettre à jour votre fichier de config ? }}', function (result) {
 			if (result) {

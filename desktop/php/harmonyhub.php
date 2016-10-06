@@ -35,6 +35,12 @@ foreach ($eqLogics as $eqLogic) {
     </center>
     <span style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;color:#767676"><center>{{Configuration}}</center></span>
   </div>
+  <div class="cursor" id="bt_healthharmony" style="background-color : #ffffff; height : 120px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;" >
+    <center>
+      <i class="fa fa-medkit" style="font-size : 5em;color:#767676;"></i>
+  </center>
+  <span style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;color:#767676"><center>{{Santé}}</center></span>
+</div>
 </div>
   <legend><i class="icon techno-home115"></i>  {{Mes Dispositifs}}
   </legend>
@@ -67,29 +73,42 @@ if (count($eqLogics) == 0) {
 </div> 
 
     <div class="col-lg-10 eqLogic" style="border-left: solid 1px #EEE; padding-left: 25px;display: none;">
-        <div class="row">
+         <a class="btn btn-success eqLogicAction pull-right" data-action="save"><i class="fa fa-check-circle"></i> {{Sauvegarder}}</a>
+    <a class="btn btn-danger eqLogicAction pull-right" data-action="remove"><i class="fa fa-minus-circle"></i> {{Supprimer}}</a>
+
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#eqlogictab" aria-controls="home" role="tab" data-toggle="tab"><i class="fa fa-tachometer"></i> {{Equipement}}</a></li>
+        <li role="presentation"><a href="#commandtab" aria-controls="profile" role="tab" data-toggle="tab"><i class="fa fa-list-alt"></i> {{Commandes}}</a></li>
+    </ul>
+
+    <div class="tab-content" style="height:calc(100% - 50px);overflow:auto;overflow-x: hidden;">
+        <div role="tabpanel" class="tab-pane active" id="eqlogictab">
+		<div class="row">
             <div class="col-sm-6">
 		<form class="form-horizontal">
             <fieldset>
                 <legend><i class="fa fa-arrow-circle-left eqLogicAction cursor" data-action="returnToThumbnailDisplay"id="refreshpage"></i> {{Général}}<i class='fa fa-cogs eqLogicAction pull-right cursor expertModeVisible' data-action='configure'></i></legend>
                 <div class="form-group">
-                    <label class="col-lg-2 control-label">{{Nom du dispositif}}</label>
-                    <div class="col-lg-3">
-                        <input type="text" class="eqLogicAttr form-control" data-l1key="id" style="display : none;" />
-                        <input type="text" class="eqLogicAttr form-control" data-l1key="name" placeholder="{{Nom de l'équipement harmonyhub}}"/>
+                        <label class="col-lg-3 control-label">{{Nom de l'équipement}}</label>
+                        <div class="col-lg-4">
+                            <input type="text" class="eqLogicAttr form-control" data-l1key="id" style="display : none;" />
+                            <input type="text" class="eqLogicAttr form-control" data-l1key="name" placeholder="{{Nom de l'équipement}}"/>
+                        </div>
+
                     </div>
-					<label class="col-lg-3 control-label" >{{Objet parent}}</label>
-                    <div class="col-lg-3">
-                        <select id="sel_object" class="eqLogicAttr form-control" data-l1key="object_id">
-                            <option value="">{{Aucun}}</option>
-                            <?php
-                            foreach (object::all() as $object) {
-                                echo '<option value="' . $object->getId() . '">' . $object->getName() . '</option>';
-                            }
-                            ?>
-                        </select>
-                    </div>
-                </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label" >{{Objet parent}}</label>
+                        <div class="col-lg-4">
+                            <select id="sel_object" class="eqLogicAttr form-control" data-l1key="object_id">
+                                <option value="">{{Aucun}}</option>
+                                <?php
+foreach (object::all() as $object) {
+	echo '<option value="' . $object->getId() . '">' . $object->getName() . '</option>';
+}
+?>
+                           </select>
+                       </div>
+                   </div>
                 <div class="form-group">
                     <label class="col-lg-2 control-label">{{Catégorie}}</label>
                     <div class="col-lg-9">
@@ -103,12 +122,12 @@ if (count($eqLogics) == 0) {
 
                     </div>
                 </div>
-                <div class="form-group">
-                <label class="col-sm-2 control-label" ></label>
-                <div class="col-sm-9">
-                 <input type="checkbox" class="eqLogicAttr bootstrapSwitch" data-label-text="{{Activer}}" data-l1key="isEnable" checked/>
-                  <input type="checkbox" class="eqLogicAttr bootstrapSwitch" data-label-text="{{Visible}}" data-l1key="isVisible" checked/>
-                </div>
+               <div class="form-group">
+                    <label class="col-sm-2 control-label"></label>
+                    <div class="col-sm-10">
+                        <label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="isEnable" checked/>{{Activer}}</label>
+                        <label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="isVisible" checked/>{{Visible}}</label>
+                    </div>
                 </div>
                 <legend><i class="fa fa-wrench"></i>  {{Configuration}}</legend>
                 <div class="form-group">
@@ -133,7 +152,7 @@ if (count($eqLogics) == 0) {
 				<div class="form-group">
 				<label class="col-lg-4 control-label" >{{Activer la récupération des activités toutes les minutes}}</label>
                     <div class="col-lg-1">
-                        <input type="checkbox" class="eqLogicAttr bootstrapSwitch" data-l1key="configuration" data-l2key="cronenabled" checked/>
+						<input type="checkbox" class="eqLogicAttr" data-l1key="configuration" data-l2key="cronenabled" checked/>
                     </div>
 				</div>
 				</div>
@@ -179,15 +198,8 @@ if (count($eqLogics) == 0) {
                 	</div>
 				</div>
 		</div>
-		<form class="form-horizontal">
-            <fieldset>
-			    <div class="form-actions" align="right">
-                    <a class="btn btn-danger eqLogicAction" data-action="remove"><i class="fa fa-minus-circle"></i> {{Supprimer}}</a>
-                    <a class="btn btn-success eqLogicAction" data-action="save"><i class="fa fa-check-circle"></i> {{Sauvegarder}}</a>
-                </div>
-            </fieldset>
-        </form>
-        <legend><i class="fa fa-list-alt"></i>  {{Tableau de commandes}}</legend>
+		</div>
+		<div role="tabpanel" class="tab-pane" id="commandtab">
         <table id="table_cmd" class="table table-bordered table-condensed">
             <thead>
                 <tr>
@@ -198,17 +210,9 @@ if (count($eqLogics) == 0) {
 
             </tbody>
         </table>
-
-        <form class="form-horizontal">
-            <fieldset>
-			    <div class="form-actions">
-                    <a class="btn btn-danger eqLogicAction" data-action="remove"><i class="fa fa-minus-circle"></i> {{Supprimer}}</a>
-                    <a class="btn btn-success eqLogicAction" data-action="save"><i class="fa fa-check-circle"></i> {{Sauvegarder}}</a>
-                </div>
-            </fieldset>
-        </form>
-
-    </div>
+</div>
+</div>
+</div>
 </div>
 
 <?php include_file('desktop', 'harmonyhub', 'js', 'harmonyhub'); ?>

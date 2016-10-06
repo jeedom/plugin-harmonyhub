@@ -1,0 +1,10 @@
+{
+	"id" : "harmonyhub",
+	"name" : "Harmony Hub",
+	"description" : "Plugin pour controller votre Harmony Hub",
+	"licence" : "AGPL",
+	"author" : "Ludovic SARAKHA",
+	"require" : "2.4",
+	"category" : "multimedia",
+	"hasDependency" : true
+}
