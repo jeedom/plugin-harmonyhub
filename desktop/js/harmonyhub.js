@@ -40,7 +40,7 @@ function addCmdToTable(_cmd) {
     tr += '</td>'; 
 	tr += '<td>';
 	if (_cmd.logicalId != 'refresh'){
-    tr += '<input type="checkbox" class="cmdAttr bootstrapSwitch" data-l1key="isVisible" data-label-text="{{Afficher}}" data-size="mini" checked/> ';
+    tr += '<span><label class="checkbox-inline"><input type="checkbox" class="cmdAttr checkbox-inline" data-l1key="isVisible" checked/>{{Historiser}}</label></span> ';
     }
 	tr += '</td>';
 	tr += '<td>';
