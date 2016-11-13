@@ -46,7 +46,7 @@ foreach ($eqLogics as $eqLogic) {
   </legend>
   <?php
 if (count($eqLogics) == 0) {
-	echo "<br/><br/><br/><center><span style='color:#767676;font-size:1.2em;font-weight: bold;'>{{Vous n'avez pas encore de thermostat Netatmo, aller sur Général -> Plugin et cliquez sur synchroniser pour commencer}}</span></center>";
+	echo "<br/><br/><br/><center><span style='color:#767676;font-size:1.2em;font-weight: bold;'>{{Vous n'avez pas encore de télécommande Harmony, aller sur Général -> Plugin et cliquez sur synchroniser pour commencer}}</span></center>";
 } else {
 	?>
    <div class="eqLogicThumbnailContainer">
