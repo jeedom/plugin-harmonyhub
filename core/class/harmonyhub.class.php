@@ -94,7 +94,7 @@ class harmonyhub extends eqLogic {
 		$email = config::byKey('username', 'harmonyhub', 0);
 		$pass = config::byKey('password', 'harmonyhub', 0);
 		$ip = config::byKey('ip', 'harmonyhub', 0);
-		$cmd = '/usr/bin/python ' .dirname(__FILE__) . '/../../3rdparty/PyHarmony/harmony/__main__.py --email '. $email .' --password "'. $pass . '" --harmony_ip '.$ip.' show_config';
+		$cmd = '/usr/bin/python ' .dirname(__FILE__) . '/../../3rdparty/PyHarmony/harmony/__main__.py --email '. $email .' --password "'. $pass . '" --harmony_ip '.$ip.' --harmony_port 5222 show_config';
 		log::add('harmonyhub_update','alert',"########Recherche de la config en cours########");
 		$config=str_replace('\\','\\\\',trim(shell_exec($cmd)));
 		$result_json=json_decode($config,true);
