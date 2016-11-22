@@ -217,66 +217,7 @@ std::string base64_decode(std::string const& encoded_string) {
 //  Returns a base64-encoded string containing a 48-byte Login Token in the third parameter
 int harmonyWebServiceLogin(std::string strUserEmail, std::string strPassword, std::string& strAuthorizationToken )
 {
-    if(strUserEmail.length() == 0 || strPassword.length() == 0)
-    {
-        errorString = "harmonyWebServiceLogin : Empty email or password provided";
-        return 1;
-    } 
-
-
-    // Build JSON request
-    std::string strJSONText = "{\"email\":\"";
-    strJSONText.append(strUserEmail.c_str());
-    strJSONText.append("\",\"password\":\"");
-    strJSONText.append(strPassword.c_str());
-    strJSONText.append("\"}");
-
-    std::string strHttpPayloadText;
-
-    csocket authcsocket;
-    authcsocket.connect("svcs.myharmony.com", 80);
-
-    if (authcsocket.getState() != csocket::CONNECTED)
-    {
-        errorString = "harmonyWebServiceLogin : Unable to connect to Logitech server";
-        return 1;
-    }
-
-    char contentLength[32];
-    sprintf( contentLength, "%d", strJSONText.length() );
-
-    std::string strHttpRequestText;
-
-    strHttpRequestText = "POST ";
-    strHttpRequestText.append(LOGITECH_AUTH_URL);
-    strHttpRequestText.append(" HTTP/1.1\r\nHost: ");
-    strHttpRequestText.append(LOGITECH_AUTH_HOSTNAME);
-    strHttpRequestText.append("\r\nAccept-Encoding: identity\r\nContent-Length: ");
-    strHttpRequestText.append(contentLength);
-    strHttpRequestText.append("\r\ncontent-type: application/json;charset=utf-8\r\n\r\n");
-
-    authcsocket.write(strHttpRequestText.c_str(), strHttpRequestText.size());
-    authcsocket.write(strJSONText.c_str(), strJSONText.length());
-
-    memset(databuffer, 0, 1000000);
-    authcsocket.read(databuffer, 1000000, false);
-    strHttpPayloadText = databuffer;/* <- Expect: 0x00def280 "HTTP/1.1 200 OK Server: nginx/1.2.4 Date: Wed, 05 Feb 2014 17:52:13 GMT Content-Type: application/json; charset=utf-8 Content-Length: 127 Connection: keep-alive Cache-Control: private X-AspNet-Version: 4.0.30319 X-Powered-By: ASP.NET  {"GetUserAuthTokenResult":{"AccountId":0,"UserAuthToken":"KsRE6VVA3xrhtbqFbh0jWn8YTiweDeB\/b94Qeqf3ofWGM79zLSr62XQh8geJxw\/V"}}"*/
-
-    // Parse the login authorization token from the response
-    std::string strAuthTokenTag = "UserAuthToken\":\"";
-    int pos = (int)strHttpPayloadText.find(strAuthTokenTag);
-    if(pos == std::string::npos)
-    {
-        errorString = "harmonyWebServiceLogin : Logitech web service response does not contain a login authorization token";
-        return 1;  
-    }
-
-    strAuthorizationToken = strHttpPayloadText.substr(pos + strAuthTokenTag.length());
-    pos = (int)strAuthorizationToken.find("\"}}");
-    strAuthorizationToken = strAuthorizationToken.substr(0, pos);
-
-    // Remove forward slashes
-    strAuthorizationToken.erase(std::remove(strAuthorizationToken.begin(), strAuthorizationToken.end(), '\\'), strAuthorizationToken.end());
+    strAuthorizationToken = "foo";
     return 0;
 }
 
@@ -365,8 +306,7 @@ int swapAuthorizationToken(csocket* authorizationcsocket, std::string& strAuthor
     // GENERATE A LOGIN ID REQUEST USING THE HARMONY ID AND LOGIN AUTHORIZATION TOKEN 
     sendData = "<iq type=\"get\" id=\"";
     sendData.append(CONNECTION_ID);
-    sendData.append("\"><oa xmlns=\"connect.logitech.com\" mime=\"vnd.logitech.connect/vnd.logitech.pair\">token=");
-    sendData.append(strAuthorizationToken.c_str());
+    sendData.append("\"><oa xmlns=\"connect.logitech.com\" mime=\"vnd.logitech.connect/vnd.logitech.pair\">method=pair");
     sendData.append(":name=foo#iOS6.0.1#iPhone</oa></iq>");
 
     std::string strIdentityTokenTag = "identity=";

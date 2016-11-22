@@ -1,18 +1,18 @@
-"""Client class for connecting to the Logitech Harmony."""
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+"""Client class for connecting to Logitech Harmony devices."""
 
 import json
-import logging
 import time
-
 import sleekxmpp
 from sleekxmpp.xmlstream import ET
+import logging
 
-
-LOGGER = logging.getLogger(__name__)
-
+logger = logging.getLogger(__name__)
 
 class HarmonyClient(sleekxmpp.ClientXMPP):
-    """An XMPP client for connecting to the Logitech Harmony."""
+    """An XMPP client for connecting to the Logitech Harmony devices."""
 
     def __init__(self, auth_token):
         user = '%s@connect.logitech.com/gatorade.' % auth_token
@@ -28,7 +28,7 @@ class HarmonyClient(sleekxmpp.ClientXMPP):
         """Retrieves the Harmony device configuration.
 
         Returns:
-          A nested dictionary containing activities, devices, etc.
+            A nested dictionary containing activities, devices, etc.
         """
         iq_cmd = self.Iq()
         iq_cmd['type'] = 'get'
@@ -37,7 +37,20 @@ class HarmonyClient(sleekxmpp.ClientXMPP):
         action_cmd.attrib['mime'] = (
             'vnd.logitech.harmony/vnd.logitech.harmony.engine?config')
         iq_cmd.set_payload(action_cmd)
-        result = iq_cmd.send(block=True)
+        retries = 3
+        attempt = 0
+
+        for _ in range(retries):
+            try:
+                result = iq_cmd.send(block=True)
+                break
+            except Exception:
+                logger.critical('XMPP timeout, reattempting')
+                attempt += 1
+                pass
+        if attempt == 3:
+            raise ValueError('XMPP timeout with hub')
+
         payload = result.get_payload()
         assert len(payload) == 1
         action_cmd = payload[0]
@@ -46,10 +59,10 @@ class HarmonyClient(sleekxmpp.ClientXMPP):
         return json.loads(device_list)
 
     def get_current_activity(self):
-        """Retrieves the current activity.
+        """Retrieves the current activity ID.
 
         Returns:
-          A int with the activity ID.
+            A int with the current activity ID.
         """
         iq_cmd = self.Iq()
         iq_cmd['type'] = 'get'
@@ -58,7 +71,11 @@ class HarmonyClient(sleekxmpp.ClientXMPP):
         action_cmd.attrib['mime'] = (
             'vnd.logitech.harmony/vnd.logitech.harmony.engine?getCurrentActivity')
         iq_cmd.set_payload(action_cmd)
-        result = iq_cmd.send(block=True)
+        try:
+            result = iq_cmd.send(block=True)
+        except Exception:
+            logger.info('XMPP timeout, reattempting')
+            result = iq_cmd.send(block=True)
         payload = result.get_payload()
         assert len(payload) == 1
         action_cmd = payload[0]
@@ -73,7 +90,7 @@ class HarmonyClient(sleekxmpp.ClientXMPP):
             activity_id: An int or string identifying the activity to start
 
         Returns:
-          A nested dictionary containing activities, devices, etc.
+            True if activity started, otherwise False
         """
         iq_cmd = self.Iq()
         iq_cmd['type'] = 'get'
@@ -83,11 +100,18 @@ class HarmonyClient(sleekxmpp.ClientXMPP):
         cmd = 'activityId=' + str(activity_id) + ':timestamp=0'
         action_cmd.text = cmd
         iq_cmd.set_payload(action_cmd)
-        result = iq_cmd.send(block=True)
+        try:
+            result = iq_cmd.send(block=True)
+        except Exception:
+            logger.info('XMPP timeout, reattempting')
+            result = iq_cmd.send(block=True)
         payload = result.get_payload()
         assert len(payload) == 1
         action_cmd = payload[0]
-        return action_cmd.text
+        if action_cmd.text == None:
+            return True
+        else:
+            return False
 
     def sync(self):
         """Syncs the harmony hub with the web service.
@@ -98,12 +122,23 @@ class HarmonyClient(sleekxmpp.ClientXMPP):
         action_cmd.attrib['xmlns'] = 'connect.logitech.com'
         action_cmd.attrib['mime'] = ('setup.sync')
         iq_cmd.set_payload(action_cmd)
-        result = iq_cmd.send(block=True)
+        try:
+            result = iq_cmd.send(block=True)
+        except Exception:
+            logger.info('XMPP timeout, reattempting')
+            result = iq_cmd.send(block=True)
         payload = result.get_payload()
         assert len(payload) == 1
 
-    def send_command(self, device_id, command):
+    def send_command(self, device, command):
         """Send a simple command to the Harmony Hub.
+
+        Args:
+            device_id (str): Device ID from Harmony Hub configuration to control
+            command (str): Command from Harmony Hub configuration to control
+
+        Returns:
+            None if successful
         """
         iq_cmd = self.Iq()
         iq_cmd['type'] = 'get'
@@ -112,45 +147,46 @@ class HarmonyClient(sleekxmpp.ClientXMPP):
         action_cmd.attrib['xmlns'] = 'connect.logitech.com'
         action_cmd.attrib['mime'] = (
             'vnd.logitech.harmony/vnd.logitech.harmony.engine?holdAction')
-        action_cmd.text = 'action={"type"::"IRCommand","deviceId"::"'+str(device_id)+'","command"::"'+command+'"}:status=press'
+        action_cmd.text = 'action={"type"::"IRCommand","deviceId"::"' + device + '","command"::"' + command + '"}:status=press'
         iq_cmd.set_payload(action_cmd)
         result = iq_cmd.send(block=False)
-        # FIXME: This is an ugly hack, we need to follow the actual
-        # protocol for sending a command, since block=True does not
-        # work.
-        time.sleep(0.5)
-        return True
 
-    def turn_off(self):
+        action_cmd.attrib['mime'] = (
+            'vnd.logitech.harmony/vnd.logitech.harmony.engine?holdAction')
+        action_cmd.text = 'action={"type"::"IRCommand","deviceId"::"' + device + '","command"::"' + command + '"}:status=release'
+        iq_cmd.set_payload(action_cmd)
+        result = iq_cmd.send(block=False)
+        return result
+
+    def power_off(self):
         """Turns the system off if it's on, otherwise it does nothing.
 
         Returns:
-          True.
+            True
         """
         activity = self.get_current_activity()
-        print activity
         if activity != -1:
-            print "OFF"
-            self.start_activity(-1)
-        return True
+            if self.start_activity(-1):
+                return True
+            else:
+                return False
+
 
 def create_and_connect_client(ip_address, port, token):
     """Creates a Harmony client and initializes session.
 
     Args:
-      ip_address: IP Address of the Harmony device.
-      port: Port that the Harmony device is listening on.
-      token: A string containing a session token.
+        ip_address (str): Harmony device IP address
+        port (str): Harmony device port
+        token (str): Valid session token
 
     Returns:
-      An instance of HarmonyClient that is connected.
+        A connected HarmonyClient instance
     """
     client = HarmonyClient(token)
     client.connect(address=(ip_address, port),
                    use_tls=False, use_ssl=False)
     client.process(block=False)
-
     while not client.sessionstarted:
         time.sleep(0.1)
-
     return client
