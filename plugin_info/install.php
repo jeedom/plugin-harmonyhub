@@ -21,6 +21,6 @@ function harmonyhub_update() {
 	foreach (eqLogic::byType('harmonyhub') as $harmonyhub) {
         $harmonyhub->save();
     }
-	log::add('harmonyhub','error','Message de Harmony : Logitech ayant fait des changements. Il vous faut relancer les dépendances. Puis Refaire la détection de vos périphériques');
+	log::add('harmonyhub','alert','Message de Harmony : Logitech ayant fait des changements. Il vous faut relancer les dépendances. Puis Refaire la détection de vos périphériques');
 }
 ?>

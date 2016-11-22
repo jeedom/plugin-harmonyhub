@@ -27,6 +27,12 @@ if (!isConnect()) {
 <label></label>
 <fieldset>
 <div class="form-group">
+    <label class="col-lg-2 control-label">{{ATTENTION}}</label>
+    <div class="alert alert-danger col-lg-4">
+        <span>Logitech ayant fait des changements. Il vous faut relancer les dépendances. Puis Refaire la détection de vos périphériques</span>
+    </div>
+</div>
+<div class="form-group">
     <label class="col-lg-2 control-label">{{Email du compte : }}</label>
     <div class="col-lg-2">
 		<input id="harmonyhub_api" class="configKey form-control" data-l1key="username" style="margin-top:-5px" placeholder="Email"/>
