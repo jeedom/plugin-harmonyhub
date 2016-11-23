@@ -50,7 +50,7 @@
     },
     "plugins/harmonyhub/plugin_info/configuration.php": {
         "Dépendances : ": "Dépendances :",
-        "Droits Sudo : ": "Droits Sudo :",
+        "Droits Sudo : ": "Права Sudo :",
         "Email du compte : ": "Email du compte :",
         "Mot de passe : ": "Mot de passe :",
         "Adresse IP du Hub : ": "Adresse IP du Hub :",
@@ -146,7 +146,7 @@
         "Htpc": "Htpc",
         "Wii-U": "Wii-U",
         "Télévision": "Télévision",
-        "NOK": "NOK",
+        "NOK": "Неактивен",
         "Vérifiez que vous avez les droits Sudo et allez sur la page du plugin et cliquez sur le bouton \"Créer/Maj config\"": "Vérifiez que vous avez les droits Sudo et allez sur la page du plugin et cliquez sur le bouton \"Créer/Maj config\"",
         "Roku": "Roku"
     },
