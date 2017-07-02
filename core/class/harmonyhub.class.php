@@ -85,9 +85,7 @@ class harmonyhub extends eqLogic {
 	}
 	
 	public static function start() {
-		foreach (eqLogic::byType('harmonyhub') as $harmonyhub) {
-            $harmonyhub->configharmonyhub();
-       }
+		self::configharmonyhub();
 	}
 	
 	public static function configharmonyhub() {
