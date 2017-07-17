@@ -80,19 +80,21 @@ function getdevicelist(_ip) {
             return;
         }
         var options = '';
-		for (var i in data.result[0].device) {
-			if (data.result[0].device[i].id ==  data.result[1]){
-				options += '<option value="'+data.result[0].device[i].id+'" selected>'+data.result[0].device[i].label+'</option>';
-			} else {
-				options += '<option value="'+data.result[0].device[i].id+'">'+data.result[0].device[i].label+'</option>';
+		if (data.result[0] != null) {
+			for (var i in data.result[0].device) {
+				if (data.result[0].device[i].id ==  data.result[1]){
+					options += '<option value="'+data.result[0].device[i].id+'" selected>'+data.result[0].device[i].label+'</option>';
+				} else {
+					options += '<option value="'+data.result[0].device[i].id+'">'+data.result[0].device[i].label+'</option>';
+				}
 			}
-        }
-		if (data.result[1] == 'activity'){
-			options += '<option value="activity" selected>Activité</option>';
-		} else {
-			options += '<option value="activity">Activité</option>';
+			if (data.result[1] == 'activity'){
+				options += '<option value="activity" selected>Activité</option>';
+			} else {
+				options += '<option value="activity">Activité</option>';
+			}
+			$(".dispositifid").html(options);
 		}
-		 $(".dispositifid").html(options);
     }
 });
 }
