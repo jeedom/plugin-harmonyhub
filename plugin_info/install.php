@@ -22,7 +22,6 @@ function harmonyhub_update() {
 		if ($harmonyhub->getConfiguration('hubIp','') == '') {
 			$harmonyhub->setConfiguration('hubIp',config::byKey('ip', 'harmonyhub', 0));
 		}
-        $harmonyhub->save();
     }
 	log::add('harmonyhub','alert','Message de Harmony : Absolument refaire la création du fichier de config après cette maj avant de faire autre chose');
 }
