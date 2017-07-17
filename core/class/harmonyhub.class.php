@@ -115,6 +115,12 @@ class harmonyhub extends eqLogic {
 		}
 	}
 	
+	
+	public function getImage() {
+		$file = $this->getConfiguration('icone','plugins/harmonyhub/plugin_info/harmonyhub_icon.png');
+		return $file;
+	}
+	
 	public function preUpdate() {
 		$result_json = array();
 		$data_path = dirname(__FILE__) . '/../../data';
