@@ -28,6 +28,10 @@ try {
 		harmonyhub::configharmonyhub();
 		ajax::success();
 	}
+	
+	if (init('action') == 'getdevicelist') {
+		ajax::success(harmonyhub::getdevicelist(init('ip'), init('id')));
+	}
 
     throw new Exception(__('Aucune methode correspondante à : ', __FILE__) . init('action'));
     /*     * *********Catch exeption*************** */

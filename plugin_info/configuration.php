@@ -25,32 +25,15 @@ if (!isConnect()) {
 ?>
 <form class="form-horizontal">
 <label></label>
-<fieldset>
+<fieldset>    
 <div class="form-group">
-    <label class="col-lg-2 control-label">{{ATTENTION}}</label>
-    <div class="alert alert-danger col-lg-4">
-        <span>Logitech ayant fait des changements. Il vous faut relancer les dépendances. Puis Refaire la détection de vos périphériques</span>
-    </div>
-</div>
-<div class="form-group">
-    <label class="col-lg-2 control-label">{{Email du compte : }}</label>
-    <div class="col-lg-2">
-		<input id="harmonyhub_api" class="configKey form-control" data-l1key="username" style="margin-top:-5px" placeholder="Email"/>
-    </div>
-	<label class="col-lg-2 control-label">{{Mot de passe : }}</label>
-    <div class="col-lg-2">
-		<input id="harmonyhub_api" type="password" class="configKey form-control" data-l1key="password" style="margin-top:-5px" placeholder="Mot de passe"/>
-    </div>
-</div>
-    
-<div class="form-group">
-    <label class="col-lg-2 control-label">{{Adresse IP du Hub : }}</label>
+    <label class="col-lg-4 control-label">{{Adresse IP du Hub (plusieurs Ips possibles séparées par |) : }}</label>
     <div class="col-lg-2">
 		<input id="harmonyhub_api" class="configKey form-control" data-l1key="ip" style="margin-top:-5px" placeholder="Adresse ip"/>
     </div>
 </div>
 <div class="form-group">
-<label class="col-lg-2 control-label">{{Créer/MAJ la config :}}</label>
+<label class="col-lg-4 control-label">{{Créer/MAJ les configs :}}</label>
 			<div class="col-lg-2">
 				<a class="btn btn-warning" id="bt_update"><i class="fa fa-check"></i> {{Lancer}}</a>
 			</div>
@@ -59,7 +42,7 @@ if (!isConnect()) {
 </form>
 <script>
 $('#bt_update').on('click',function(){
-		bootbox.confirm('{{Etes-vous sûr de vouloir installer/mettre à jour votre fichier de config ? }}', function (result) {
+		bootbox.confirm('{{Etes-vous sûr de vouloir installer/mettre à jour vos fichiers de config ? }}', function (result) {
 			if (result) {
 				$('#md_modal').dialog({title: "{{Installation / Mise à jour ! Cela peut prendre plus d'une minute. Veuillez patienter jusqu\'à l\'apparition du message de fin}}"});
 				$('#md_modal').load('index.php?v=d&plugin=harmonyhub&modal=config.harmonyhub').dialog('open');

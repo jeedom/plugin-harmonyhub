@@ -158,18 +158,46 @@ class HarmonyClient(sleekxmpp.ClientXMPP):
         result = iq_cmd.send(block=False)
         return result
 
+    def change_channel(self, channel):
+        """Changes a channel.
+        Args:
+            channel: Channel number
+        Returns:
+          An HTTP 200 response (hopefully)
+        """
+        iq_cmd = self.Iq()
+        iq_cmd['type'] = 'get'
+        action_cmd = ET.Element('oa')
+        action_cmd.attrib['xmlns'] = 'connect.logitech.com'
+        action_cmd.attrib['mime'] = ('harmony.engine?changeChannel')
+        cmd = 'channel=' + str(channel) + ':timestamp=0'
+        action_cmd.text = cmd
+        iq_cmd.set_payload(action_cmd)
+        try:
+            result = iq_cmd.send(block=True)
+        except Exception:
+            logger.info('XMPP timeout, reattempting')
+            result = iq_cmd.send(block=True)
+        payload = result.get_payload()
+        assert len(payload) == 1
+        action_cmd = payload[0]
+        if action_cmd.text == None:
+            return True
+        else:
+            return False
+
+
     def power_off(self):
         """Turns the system off if it's on, otherwise it does nothing.
 
         Returns:
-            True
+            True if the system becomes or is off
         """
         activity = self.get_current_activity()
         if activity != -1:
-            if self.start_activity(-1):
-                return True
-            else:
-                return False
+            return self.start_activity(-1)
+        else:
+            return True
 
 
 def create_and_connect_client(ip_address, port, token):

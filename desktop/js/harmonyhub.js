@@ -55,3 +55,44 @@ function addCmdToTable(_cmd) {
     $('#table_cmd tbody tr:last').setValues(_cmd, '.cmdAttr');
     jeedom.cmd.changeType($('#table_cmd tbody tr:last'), init(_cmd.subType));
 }
+
+ $('.eqLogicAttr[data-l1key=configuration][data-l2key=hubIp]').on('change', function () {
+	getdevicelist($(this).value());
+});
+
+function getdevicelist(_ip) {
+    $.ajax({// fonction permettant de faire de l'ajax
+        type: "POST", // methode de transmission des données au fichier php
+        url: "plugins/harmonyhub/core/ajax/harmonyhub.ajax.php", // url du fichier php
+        data: {
+            action: "getdevicelist",
+            ip: _ip,
+			id: $('.li_eqLogic.active').attr('data-eqlogic_id'),
+        },
+        dataType: 'json',
+        global: false,
+        error: function (request, status, error) {
+            handleAjaxError(request, status, error);
+        },
+        success: function (data) { // si l'appel a bien fonctionné
+        if (data.state != 'ok') {
+            $('#div_alert').showAlert({message: data.result, level: 'danger'});
+            return;
+        }
+        var options = '';
+		for (var i in data.result[0].device) {
+			if (data.result[0].device[i].id ==  data.result[1]){
+				options += '<option value="'+data.result[0].device[i].id+'" selected>'+data.result[0].device[i].label+'</option>';
+			} else {
+				options += '<option value="'+data.result[0].device[i].id+'">'+data.result[0].device[i].label+'</option>';
+			}
+        }
+		if (data.result[1] == 'activity'){
+			options += '<option value="activity" selected>Activité</option>';
+		} else {
+			options += '<option value="activity">Activité</option>';
+		}
+		 $(".dispositifid").html(options);
+    }
+});
+}

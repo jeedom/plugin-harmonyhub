@@ -19,8 +19,11 @@
 require_once dirname(__FILE__) . '/../../../core/php/core.inc.php';
 function harmonyhub_update() {
 	foreach (eqLogic::byType('harmonyhub') as $harmonyhub) {
+		if ($harmonyhub->getConfiguration('hubIp','') == '') {
+			$harmonyhub->setConfiguration('hubIp',config::byKey('ip', 'harmonyhub', 0));
+		}
         $harmonyhub->save();
     }
-	log::add('harmonyhub','alert','Message de Harmony : Logitech ayant fait des changements. Il vous faut relancer les dépendances. Puis Refaire la détection de vos périphériques');
+	log::add('harmonyhub','alert','Message de Harmony : Absolument refaire la création du fichier de config après cette maj avant de faire autre chose');
 }
 ?>

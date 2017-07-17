@@ -131,20 +131,20 @@ foreach (object::all() as $object) {
                 </div>
                 <legend><i class="fa fa-wrench"></i>  {{Configuration}}</legend>
                 <div class="form-group">
+					<label class="col-lg-2 control-label">{{Hub}}</label>
+                    <div class="col-lg-4">
+                        <select id="sel_itemhub" class="eqLogicAttr form-control hubIp" data-l1key="configuration" data-l2key="hubIp">
+                            <?php
+								foreach (explode('|',config::byKey('ip', 'harmonyhub', 0)) as $hub) {
+									echo '<option value="' . $hub . '">' . $hub . '</option>';
+                                }
+                            ?> 
+                        </select>
+                    </div>
                     <label class="col-lg-2 control-label">{{Dispositif}}</label>
                     <div class="col-lg-4">
-                        <select id="sel_item" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="dispositifid">
-                            <?php
-                            if (file_exists('/tmp/harmonyhubconfig.json')){
-                                $config=file_get_contents ( '/tmp/harmonyhubconfig.json');
-                                $result_json=json_decode($config,true);
-                                foreach ($result_json["device"] as $key => $value) {
-                                    echo '<option value="' . $value["id"] . '">' . $value["name"] . '</option>';
-                                }
-                            }
-                            ?>
-                            <option value="">{{}}</option>
-							<option value="activity">{{Activité}}</option>  
+                        <select id="sel_item" class="eqLogicAttr form-control dispositifid" data-l1key="configuration" data-l2key="dispositifid">
+                            
                         </select>
                     </div>
                 </div>
@@ -192,11 +192,12 @@ foreach (object::all() as $object) {
 								<option value="plugins/harmonyhub/core/template/images/photophore.png">{{Photophore}}</option>
 							</select>
                     		</div>
-							<div style="text-align: center">
-							<img name="icon_visu" src=""/>
-							</div>
+							
                 	</div>
 				</div>
+					<div style="text-align: center">
+							<img name="icon_visu" src=""/>
+							</div>
 		</div>
 		</div>
 		<div role="tabpanel" class="tab-pane" id="commandtab">

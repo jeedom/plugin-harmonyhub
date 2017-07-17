@@ -6,8 +6,8 @@
 import argparse
 import json
 import logging
-import auth as harmony_auth
 import client as harmony_client
+import discovery as harmony_discovery
 import sys
 import time
 
@@ -26,101 +26,73 @@ def pprint(obj):
     print(json.dumps(obj, sort_keys=True, indent=4, separators=(',', ': ')))
 
 
-def login_to_logitech(email, password, harmony_ip, harmony_port):
-    """Logs in to the Logitech service.
-
-    Args:
-        email (str):  Email address used to login to Logitech service
-        password (str): Password used to login to Logitech service
-        harmony_ip (str): Harmony hub IP address
-        harmony_port (str): Harmony hub port
-
-    Returns:
-        Session token used to log in to the Harmony device.
-    """
-    token = harmony_auth.login(email, password)
-    if not token:
-        logger.warning('Could not get token from Logitech server.')
-
-    session_token = harmony_auth.swap_auth_token(harmony_ip, harmony_port, token)
-    if not session_token:
-        logger.warning('Could not swap login token for session token.')
-
-    return session_token
-
-
-def get_client(email, password, harmony_ip, harmony_port):
+def get_client(ip, port):
     """Connect to the Harmony and return a Client instance.
 
     Args:
-        email (str):  Email address used to login to Logitech service
-        password (str): Password used to login to Logitech service
         harmony_ip (str): Harmony hub IP address
         harmony_port (str): Harmony hub port
 
     Returns:
         object: Authenticated client instance.
     """
-    token = login_to_logitech(email, password, harmony_ip, harmony_port)
-    client = harmony_client.create_and_connect_client(harmony_ip, harmony_port, token)
+    token = "unused" 
+    client = harmony_client.create_and_connect_client(ip, port, token)
     return client
 
 
 # Functions for use when module is imported
 
-def ha_get_token(username, password):
-    token = harmony_auth.login(username, password)
+
+def ha_get_token(ip, port):
+    token = "unused" 
     return token
 
 
-def ha_get_client(token, harmony_ip, harmony_port):
+def ha_get_client(token, ip, port):
     """Connect to the Harmony and return a Client instance.
 
     Args:
-        email (str):  Email address used to login to Logitech service
-        password (str): Password used to login to Logitech service
-        harmony_ip (str): Harmony hub IP address
-        harmony_port (str): Harmony hub port
+        ip (str): Harmony hub IP address
+        port (str): Harmony hub port
+        token (str): Session token obtained from hub
 
     Returns:
         object: Authenticated client instance.
     """
-    client = harmony_client.create_and_connect_client(harmony_ip, harmony_port, token)
+    client = harmony_client.create_and_connect_client(ip, port, token)
     return client
 
 
-def ha_get_config(token, harmony_ip, harmony_port):
+def ha_get_config(token, ip, port):
     """Connects to the Harmony and generates a dictionary containing all activites and commands programmed to hub.
 
     Args:
         email (str):  Email address used to login to Logitech service
         password (str): Password used to login to Logitech service
-        harmony_ip (str): Harmony hub IP address
-        harmony_port (str): Harmony hub port
+        ip (str): Harmony hub IP address
+        port (str): Harmony hub port
 
     Returns:
         Dictionary containing Harmony device configuration
     """
-    client = ha_get_client(token, harmony_ip, harmony_port)
+    client = ha_get_client(token, ip, port)
     config = client.get_config()
     client.disconnect(send_close=True)
     return config
 
 
-def ha_get_config_file(config, path):
-    """Connects to the Harmony and generates a text file containing all activites and commands programmed to hub.
+def ha_write_config_file(config, path):
+    """Connects to the Harmony huband generates a text file containing all activities and commands programmed to hub.
 
     Args:
-        email (str):  Email address used to login to Logitech service
-        password (str): Password used to login to Logitech service
-        harmony_ip (str): Harmony hub IP address
-        harmony_port (str): Harmony hub port
-        path (str): Full path to file that function will write activity and command information
+        config (dict): Dictionary object containing configuration information obtained from function ha_get_config
+        path (str): Full path to output file
 
     Returns:
         True
     """
-    with open(path, 'w+') as file_out:
+    with open(path, 'w+', encoding='utf-8') as file_out:
         file_out.write('Activities\n')
         for activity in config['activity']:
             file_out.write('  ' + activity['id'] + ' - ' + activity['label'] + '\n')
@@ -138,15 +110,11 @@ def ha_get_activities(config):
     """Connects to the Harmony hub and returns configured activities.
 
     Args:
-        email (str):  Email address used to login to Logitech service
-        password (str): Password used to login to Logitech service
-        harmony_ip (str): Harmony hub IP address
-        harmony_port (str): Harmony hub port
+        config (dict): Dictionary object containing configuration information obtained from function ha_get_config
 
     Returns:
         Dictionary containing activity label and ID number.
     """
-    #config = ha_get_config(email, password, harmony_ip, harmony_port)
     activities = {}
     for activity in config['activity']:
         activities[activity['label']] = activity['id']
@@ -157,19 +125,19 @@ def ha_get_activities(config):
         return activities
 
 
-def ha_get_current_activity(token, config, harmony_ip, harmony_port):
+def ha_get_current_activity(token, config, ip, port):
     """Returns Harmony hub's current activity.
 
     Args:
-        email (str):  Email address used to login to Logitech service
-        password (str): Password used to login to Logitech service
-        harmony_ip (str): Harmony hub IP address
-        harmony_port (str): Harmony hub port
+        token (str): Session token obtained from hub
+        config (dict): Dictionary object containing configuration information obtained from function ha_get_config
+        ip (str): Harmony hub IP address
+        port (str): Harmony hub port
 
     Returns:
         String containing hub's current activity.
     """
-    client = ha_get_client(token, harmony_ip, harmony_port)
+    client = ha_get_client(token, ip, port)
     current_activity_id = client.get_current_activity()
     client.disconnect(send_close=True)
     activity = [x for x in config['activity'] if int(x['id']) == current_activity_id][0]
@@ -180,24 +148,24 @@ def ha_get_current_activity(token, config, harmony_ip, harmony_port):
         return 'Unknown'
 
 
-def ha_start_activity(token, harmony_ip, harmony_port, config, new_activity):
+def ha_start_activity(token, ip, port, config, activity):
     """Connects to Harmony Hub and starts an activity
 
     Args:
-        email (str):  Email address used to login to Logitech service
-        password (str): Password used to login to Logitech service
-        harmony_ip (str): Harmony hub IP address
-        harmony_port (str): Harmony hub port
-        new_actvivity (str): Activity ID or label to start
+        token (str): Session token obtained from hub
+        ip (str): Harmony hub IP address
+        port (str): Harmony hub port
+        config (dict): Dictionary object containing configuration information obtained from function ha_get_config
+        activity (str): Activity ID or label to start
 
     Returns:
         True if activity started, otherwise False
     """
-    client = ha_get_client(token, harmony_ip, harmony_port)
+    client = ha_get_client(token, ip, port)
     status = False
 
-    if (new_activity.isdigit()) or (new_activity == '-1'):
-        status = client.start_activity(new_activity)
+    if (activity.isdigit()) or (activity == '-1'):
+        status = client.start_activity(activity)
         client.disconnect(send_close=True)
         if status:
             return True
@@ -205,37 +173,38 @@ def ha_start_activity(token, harmony_ip, harmony_port, config, new_activity):
             logger.info('Activity start failed')
             return False
 
+    # provided activity string needs to be translated to activity ID from config
     else:
         activities = config['activity']
         labels_and_ids = dict([(a['label'], a['id']) for a in activities])
         matching = [label for label in list(labels_and_ids.keys())
-                    if new_activity.lower() in label.lower()]
+                    if activity.lower() in label.lower()]
         if len(matching) == 1:
             activity = matching[0]
             logger.info('Found activity named %s (id %s)' % (activity, labels_and_ids[activity]))
             status = client.start_activity(labels_and_ids[activity])
+
     client.disconnect(send_close=True)
     if status:
         return True
     else:
-        logger.error('Unable to find matching activity, start failed %s' % (' '.join(new_activity)))
+        logger.error('Unable to find matching activity, start failed %s' % (' '.join(activity)))
         return False
 
 
-def ha_power_off(token, harmony_ip, harmony_port):
+def ha_power_off(token, ip, port):
     """Power off Harmony Hub.
 
     Args:
-        email (str):  Email address used to login to Logitech service
-        password (str): Password used to login to Logitech service
-        harmony_ip (str): Harmony hub IP address
-        harmony_port (str): Harmony hub port
+        token (str): Session token obtained from hub
+        ip (str): Harmony hub IP address
+        port (str): Harmony hub port
 
     Returns:
         True if PowerOff activity started, otherwise False
 
     """
-    client = ha_get_client(token, harmony_ip, harmony_port)
+    client = ha_get_client(token, ip, port)
     status = client.power_off()
     client.disconnect(send_close=True)
     if status:
@@ -245,79 +214,107 @@ def ha_power_off(token, harmony_ip, harmony_port):
         return False
 
 
-def ha_send_command(token, harmony_ip, harmony_port, device, command):
+def ha_send_command(token, ip, port, device, command, repeat_num=1, delay_secs=0.4):
     """Connects to the Harmony and send a simple command.
 
     Args:
-        email (str):  Email address used to login to Logitech service
-        password (str): Password used to login to Logitech service
-        harmony_ip (str): Harmony hub IP address
-        harmony_port (str): Harmony hub port
-        device_id (str): Device ID from Harmony Hub configuration to control
-        new_command (str): Command from Harmony Hub configuration to control
+        token (str): Session token obtained from hub
+        ip (str): Harmony hub IP address
+        port (str): Harmony hub port
+        device (str): Device ID from Harmony Hub configuration to control
+        command (str): Command from Harmony Hub configuration to control
+        repeat_num (int) : Number of times to repeat the command. Defaults to 1
+        delay_secs (float): Delay between sending repeated commands. Not used if only sending a single command. Defaults to 0.4 seconds
 
     Returns:
         Completion status
     """
-    client = ha_get_client(token, harmony_ip, harmony_port)
-    client.send_command(device, command)
+    client = ha_get_client(token, ip, port)
+    for i in range(repeat_num):
+        client.send_command(device, command)
+        time.sleep(delay_secs)
+
+    time.sleep(1)
+    client.disconnect(send_close=True)
+    return 0
+
+def ha_send_commands(token, ip, port, device, commands, repeat_num=1, delay_secs=0.4):
+    """Connects to the Harmony and sends multiple simple commands.
+
+    Args:
+        token (str): Session token obtained from hub
+        ip (str): Harmony hub IP address
+        port (str): Harmony hub port
+        device (str): Device ID from Harmony Hub configuration to control
+        commands (list of str): List of commands from Harmony Hub configuration to send
+        repeat_num (int) : Number of times to repeat the list of commands. Defaults to 1
+        delay_secs (float): Delay between sending commands. Defaults to 0.4 seconds
+
+    Returns:
+        Completion status
+    """
+    client = ha_get_client(token, ip, port)
+    for i in range(repeat_num):
+        for command in commands:
+            client.send_command(device, command)
+            time.sleep(delay_secs)
+
     time.sleep(1)
     client.disconnect(send_close=True)
     return 0
 
 
-def ha_sync(token, harmony_ip, harmony_port):
+def ha_sync(token, ip, port):
     """Syncs Harmony hub to web service.
     Args:
-        email (str):  Email address used to login to Logitech service
-        password (str): Password used to login to Logitech service
-        harmony_ip (str): Harmony hub IP address
-        harmony_port (str): Harmony hub port
+        token (str): Session token obtained from hub
+        ip (str): Harmony hub IP address
+        port (str): Harmony hub port
 
     Returns:
         Completion status
     """
-    client = ha_get_client(token, harmony_ip, harmony_port)
+    client = ha_get_client(token, ip, port)
     client.sync()
     client.disconnect(send_close=True)
     return 0
 
+def ha_change_channel(token, ip, port, channel):
+    client = ha_get_client(token, ip, port)
+    status = client.change_channel(channel)
+    client.disconnect(send_close=True)
+    if status:
+        return True
+    else:
+        logger.error('Unable to change the channel')
+        return False
+
+def ha_discover(scan_attempts, scan_interval):
+    """Discovers hubs on local network.
+    Args:
+        scan_attempts (int): Number of times to scan the network
+        scan_interval (int): Seconds between running each network scan
+
+    Returns:
+        List of config info for any hubs found
+    """
+    hubs = harmony_discovery.discover(scan_attempts, scan_interval)
+    return hubs
+
 
 # Functions for use on command line
 def show_config(args):
-    """Connects to the Harmony and prints its configuration."""
-    client = get_client(args.email, args.password, args.harmony_ip, args.harmony_port)
-    config=client.get_config()
-    retjson='{"device" : [{'
-    for device in config['device']:
-        listused=[]
-        retjson+='"name" :"'+device['label']+'","id" :"'+device['id']+'","commands":['
-        for group in device['controlGroup']:
-            for command in group['function']:
-                cmdname=command['label']
-                if cmdname in listused:
-                    for x in range (0,10):
-                        if cmdname+str(x) not in listused:
-                            cmdname=cmdname+str(x)
-                            break
-                        else:
-                            continue
-                retjson+='"'+cmdname+'@$@'+json.loads(command['action'])['command']+'",'
-                listused.append(cmdname)
-            retjson=retjson[:-1]+','
-        if retjson[-1:]=='[':
-            retjson=retjson+']},{'
-        else:
-            retjson=retjson[:-1]+']},{'
-    retjson=retjson[:-2]+'],"activity":[{'
-    for activity in config['activity']:
-        retjson+='"name" :"'+activity['label']+'","id" :"'+activity['id']+'"},{'
-    retjson=retjson[:-2]+']}'
-    print retjson
-    #print(config)
-    client.disconnect(send_close=True)
-    return 0
+    """Connects to the Harmony and return current configuration.
 
+    Args:
+        args (argparse): Argparse object containing required variables from command line
+
+    """
+
+    client = get_client(args.harmony_ip, args.harmony_port)
+    config = client.get_config()
+    client.disconnect(send_close=True)
+    print(json.dumps(config))
 
 def show_current_activity(args):
     """Returns Harmony hub's current activity.
@@ -326,7 +323,7 @@ def show_current_activity(args):
         args (argparse): Argparse object containing required variables from command line
 
     """
-    client = get_client(args.email, args.password, args.harmony_ip, args.harmony_port)
+    client = get_client(args.harmony_ip, args.harmony_port)
     config = client.get_config()
     current_activity_id = client.get_current_activity()
     client.disconnect(send_close=True)
@@ -345,7 +342,7 @@ def start_activity(args):
         args (argparse): Argparse object containing required variables from command line
 
     """
-    client = get_client(args.email, args.password, args.harmony_ip, args.harmony_port)
+    client = get_client(args.harmony_ip, args.harmony_port)
     status = False
 
     if (args.activity.isdigit()) or (args.activity == '-1'):
@@ -379,7 +376,7 @@ def power_off(args):
         args (argparse): Argparse object containing required variables from command line
 
     """
-    client = get_client(args.email, args.password, args.harmony_ip, args.harmony_port)
+    client = get_client(args.harmony_ip, args.harmony_port)
     status = client.power_off()
     client.disconnect(send_close=True)
     if status:
@@ -395,10 +392,19 @@ def send_command(args):
         args (argparse): Argparse object containing required variables from command line
 
     """
-    client = get_client(args.email, args.password, args.harmony_ip, args.harmony_port)
-    client.send_command(args.device_id, args.command)
+
+    client = get_client(args.harmony_ip, args.harmony_port)
+    for i in range(args.repeat_num):
+        client.send_command(args.device_id, args.command)
+        time.sleep(args.delay_secs)
+
     client.disconnect(send_close=True)
     print('Command Sent')
+
+
+def discover(args):
+    hubs = harmony_discovery.discover()
+    pprint(hubs)
 
 
 def sync(args):
@@ -409,7 +415,7 @@ def sync(args):
     Returns:
         Completion status
     """
-    client = get_client(args.email, args.password, args.harmony_ip, args.harmony_port)
+    client = get_client(args.harmony_ip, args.harmony_port)
     client.sync()
     client.disconnect(send_close=True)
     print('Sync complete')
@@ -420,23 +426,19 @@ def main():
     parser = argparse.ArgumentParser(description='Pyharmony - Harmony device control',
                                      formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 
-    required_flags = parser.add_argument_group('required arguments')
+    required_flags = parser.add_mutually_exclusive_group(required=True)
 
     # Required flags go here.
-    required_flags.add_argument('--email',
-                                required=True,
-                                help=('Logitech username in the form of an email address.'))
-    required_flags.add_argument('--password',
-                                required=True,
-                                help='Logitech password.')
     required_flags.add_argument('--harmony_ip',
-                                required=True,
                                 help='IP Address of the Harmony device.')
+    required_flags.add_argument('--discover',
+                                action='store_true',
+                                help='Scan for Harmony devices.')
 
     # Flags with default values go here.
     loglevels = dict((logging.getLevelName(level), level) for level in [10, 20, 30, 40, 50])
     parser.add_argument('--harmony_port',
-                        required=True,
+                        required=False,
                         default=5222,
                         type=int,
                         help=('Network port that the Harmony is listening on.'))
@@ -466,6 +468,8 @@ def main():
     command_parser = subparsers.add_parser('send_command', help='Send a simple command.')
     command_parser.add_argument('--device_id', help='Specify the device id to which we will send the command.')
     command_parser.add_argument('--command', help='IR Command to send to the device.')
+    command_parser.add_argument('--repeat_num', type=int, default=1, help='Number of times to repeat the command. Defaults to 1')
+    command_parser.add_argument('--delay_secs', type=float, default=0.4, help='Delay between sending repeated commands. Not used if only sending a single command. Defaults to 0.4 seconds')
     command_parser.set_defaults(func=send_command)
 
     args = parser.parse_args()
@@ -474,7 +478,13 @@ def main():
         level=loglevels[args.loglevel],
         format='%(levelname)s:\t%(name)s\t%(message)s')
 
-    sys.exit(args.func(args))
+    harmony_client.logger.setLevel(loglevels[args.loglevel])
+    harmony_discovery.logger.setLevel(loglevels[args.loglevel])
+
+    if args.discover:
+        sys.exit(discover(args))
+    else:
+        sys.exit(args.func(args))
 
 
 if __name__ == '__main__':

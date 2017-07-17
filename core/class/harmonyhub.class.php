@@ -22,53 +22,24 @@ require_once dirname(__FILE__) . '/../../../../core/php/core.inc.php';
 
 class harmonyhub extends eqLogic {
     
-    public static function health() {
-        $return = array();
-        $dep=false;
-        $config=false;
-        $filename = realpath(dirname(__FILE__) . '/../../3rdparty/Harmonyhubcontrol/HarmonyHubControl');
-        if (file_exists($filename)) {
-            $dep=true;
-        }
-        if (file_exists('/tmp/harmonyhubconfig.json')) {
-            $config=true;
-        }
-        $return[] = array(
-            'test' => __('Dépendances', __FILE__),
-            'result' => ($dep) ? __('OK', __FILE__) : __('NOK', __FILE__),
-            'advice' => ($dep) ? '' : __('Vérifiez que vous avez les droits Sudo et allez sur la page du plugin et cliquez sur le bouton "Installer Dépendances"', __FILE__),
-            'state' => $dep,
-        );
-        $return[] = array(
-            'test' => __('Fichier de config', __FILE__),
-            'result' => ($config) ? __('OK', __FILE__) : __('NOK', __FILE__),
-            'advice' => ($config) ? '' : __('Vérifiez que vous avez les droits Sudo et allez sur la page du plugin et cliquez sur le bouton "Créer/Maj config"', __FILE__),
-            'state' => $config,
-        );
-        return $return;
-    }
-	
 	public static function dependancy_info() {
 		$return = array();
 		$return['log'] = 'harmonyhub_update';
-		$return['progress_file'] = '/tmp/dependancy_harmonyhub_in_progress';
-		$filename = realpath(dirname(__FILE__) . '/../../3rdparty/Harmonyhubcontrol/HarmonyHubControl');
-		if (file_exists($filename)) {
-			$return['state'] = 'ok';
-		} else {
-			$return['state'] = 'nok';
-		}
+		$return['progress_file'] = jeedom::getTmpFolder('harmonyhub') . '/dependance';
+		$cmd = "pip list | grep requests";
+        exec($cmd, $output, $return_var);
+		$return['state'] = 'nok';
+		if (array_key_exists(0,$output)) {
+            if ($output[0] != "") {
+                $return['state'] = 'ok';
+            }
+        }
 		return $return;
 	}
 
 	public static function dependancy_install() {
-		if (file_exists('/tmp/dependancy_harmonyhub_in_progress')) {
-			return;
-		}
-		log::remove('harmonyhub_update');
-		$cmd = 'sudo /bin/bash ' .dirname(__FILE__) . '/../../3rdparty/install.sh';
-		$cmd .= ' >> ' . log::getPathToLog('harmonyhub_update') . ' 2>&1 &';
-		exec($cmd);
+		log::remove(__CLASS__ . '_update');
+		return array('script' => dirname(__FILE__) . '/../../resources/install_#stype#.sh ' . jeedom::getTmpFolder('harmonyhub') . '/dependance', 'log' => log::getPathToLog(__CLASS__ . '_update'));
 	}
     
 	
@@ -84,73 +55,76 @@ class harmonyhub extends eqLogic {
 		}
 	}
 	
-	public static function start() {
-		self::configharmonyhub();
+	public static function getdevicelist($_ip,$_id = '') {
+		$result_json = array();
+		$data_path = dirname(__FILE__) . '/../../data';
+		if (!file_exists($data_path)) {
+			exec('mkdir ' . $data_path . ' && chmod 775 -R ' . $data_path . ' && chown -R www-data:www-data ' . $data_path);
+		}
+		$file= $data_path . '/' . str_replace('.','',$_ip);
+		if (file_exists($file)){
+			$config=file_get_contents($file);
+			$result_json=json_decode($config,true);
+		}
+		$selected ='';
+		if ($_id != ''){
+			$eqLogic =  eqLogic::byId($_id);
+			$selected = $eqLogic->getConfiguration('dispositifid','');
+		}
+		return [$result_json,$selected];
 	}
 	
 	public static function configharmonyhub() {
-		$email = config::byKey('username', 'harmonyhub', 0);
-		$pass = config::byKey('password', 'harmonyhub', 0);
-		$ip = config::byKey('ip', 'harmonyhub', 0);
-		$cmd = '/usr/bin/python ' .dirname(__FILE__) . '/../../3rdparty/PyHarmony/harmony/__main__.py --email '. $email .' --password "'. $pass . '" --harmony_ip '.$ip.' --harmony_port 5222 show_config';
-		log::add('harmonyhub_update','alert',"########Recherche de la config en cours########");
-		$config=str_replace('\\','\\\\',trim(shell_exec($cmd)));
-		$result_json=json_decode($config,true);
-		log::add('harmonyhub_update','alert','######### Dispositifs trouvés |');
-		foreach ($result_json["device"] as $key => $value) {
-			log::add('harmonyhub_update','alert',$value["name"].' | ');
+		log::remove('harmonyhub_update');
+		$ips = explode('|',config::byKey('ip', 'harmonyhub', 0));
+		foreach ($ips as $ip) {
+			$cmd = 'sudo /usr/bin/python ' .dirname(__FILE__) . '/../../3rdparty/PyHarmony/harmony/__main__.py --harmony_ip '.$ip.' show_config';
+			log::add('harmonyhub_update','alert',"########Recherche de la config en cours########");
+			$config=trim(shell_exec($cmd));
+			$result_json=json_decode($config,true);
+			log::add('harmonyhub_update','alert','######### Dispositifs trouvés ' . $ip);
+			foreach ($result_json['device'] as $device) {
+				log::add('harmonyhub_update','alert',$device["label"].' | ');
+			}
+			log::add('harmonyhub_update','alert','######### Activités trouvées ' . $ip);
+			foreach ($result_json["activity"] as $activity) {
+				log::add('harmonyhub_update','alert',$activity["label"].' | ');
+			}
+			$data_path = dirname(__FILE__) . '/../../data';
+			if (!file_exists($data_path)) {
+				exec('mkdir ' . $data_path . ' && chmod 775 -R ' . $data_path . ' && chown -R www-data:www-data ' . $data_path);
+			}
+			$file= $data_path . '/' . str_replace('.','',$ip);
+			file_put_contents($file, $config);
+			log::add('harmonyhub_update','alert',"#### Fin de la recherche " . $ip);
+			log::add('harmonyhub','debug','Sortie console : ' .$config);
 		}
-		log::add('harmonyhub_update','alert','######### Activités trouvées |');
-		foreach ($result_json["activity"] as $key => $value) {
-			log::add('harmonyhub_update','alert',$value["name"].' | ');
-		}
-		$file='/tmp/harmonyhubconfig.json';
-		file_put_contents($file, $config);
-		log::add('harmonyhub_update','alert',"#### Fin de la recherche####");
-		log::add('harmonyhub','debug','Sortie console : ' .$config);
-		
 	}
 	
 	public function getactivityInfo() {
-		$harmony_path = realpath(dirname(__FILE__) . '/../../3rdparty/Harmonyhubcontrol/');
-		$email = config::byKey('username', 'harmonyhub', 0);
-		$pass = config::byKey('password', 'harmonyhub', 0);
-		$ip = config::byKey('ip', 'harmonyhub', 0);
-		$cmd='./HarmonyHubControl ' .$email.' "' .$pass . '" ' . $ip . ' get_current_activity_id_raw 2>&1';
-		log::add('harmonyhub','debug','Execution de :'. $cmd);
-		chdir($harmony_path);
-		$activityid=trim(shell_exec($cmd));
-		$config=file_get_contents ( '/tmp/harmonyhubconfig.json');
-		$result_json=json_decode($config,true);
-		$activityname='N/A';
-		foreach ($result_json["activity"] as $value) {
-			$listid=$value['id'];
-			if ($listid==$activityid){
-				$activityname=$value['name'];
+		$ip = $this->getConfiguration('hubIp','');
+		if ($ip != ''){
+			$ip = config::byKey('ip', 'harmonyhub', 0);
+			$cmd = 'sudo /usr/bin/python ' .dirname(__FILE__) . '/../../3rdparty/PyHarmony/harmony/__main__.py --harmony_ip '.$ip.' show_current_activity';
+			log::add('harmonyhub','debug','Execution de :'. $cmd);
+			$activityid=trim(shell_exec($cmd));
+			foreach ($this->getCmd('info') as $cmd) {
+				$cmd->event($activityid);
 			}
+			return $activityid;
 		}
-        $cmd_activity_info = $this->getCmd(null, 'activityinfo');
-        if (is_object($cmd_activity_info)) {
-            try {
-                if ($cmd_activity_info->execCmd(null,2)==$activityname){
-                    return $activityname;
-                }
-            } catch (Exception $e) {
-                log::add('harmonyhub','debug','Première création de l\'équipement activité');
-            }
-        }
-		log::add('harmonyhub','debug','L\'activité id est : ' .$activityid.' et son nom est ' . $activityname);
-		foreach ($this->getCmd('info') as $cmd) {
-			$cmd->event($activityname);
-			$this->refreshWidget();
-		}
-		return $activityname;
 	}
 	
 	public function preUpdate() {
-		$config=file_get_contents ( '/tmp/harmonyhubconfig.json');
-		$result_json=json_decode($config,true);
+		$result_json = array();
+		$data_path = dirname(__FILE__) . '/../../data';
+		$file= $data_path . '/' . str_replace('.','',$this->getConfiguration('hubIp'));
+		if (file_exists($file)){
+			$config=file_get_contents($file);
+			$result_json=json_decode($config,true);
+		}
 		if ($this->getConfiguration('dispositifid')=='activity'){
+			$list = array();
 			foreach ($this->getCmd(null, null) as $actual){
 				foreach ($result_json["activity"] as $value) {
 					$action=$value['id'];
@@ -161,16 +135,17 @@ class harmonyhub extends eqLogic {
 				}
 			}
 		} else {
+			$list = array();
 			foreach ($this->getCmd(null, null) as $actual){
-				foreach ($result_json["device"] as $key => $value) {
-					if ($value["id"]==$this->getConfiguration('dispositifid')){
-						$devicejson=$value;
+				foreach ($result_json["device"] as $device) {
+					if ($device["id"]==$this->getConfiguration('dispositifid')){
+						foreach ($device["controlGroup"] as $controlGroup) {
+							foreach ($controlGroup["function"] as $function) {
+								$action=$function["name"];
+								$list[] = $action;
+							}
+						}
 					}
-				}
-				foreach ($devicejson["commands"] as $value) {
-					$command=explode("@$@", $value);
-					$action=$command[1];
-					$list[] = $action;
 				}
 				if (!in_array($actual->getLogicalId(),$list)){
 					$actual->remove();
@@ -182,7 +157,7 @@ class harmonyhub extends eqLogic {
 			$this->setConfiguration('dispoid', 'Pas d\'id');
 			$this->setConfiguration('disponame', 'Activité');
 			foreach ($result_json["activity"] as $value) {
-				$name=$value['name'];
+				$name= $value['label'];
 				$action=$value['id'];
 				$harmonyhubCmd = $this->getCmd(null, $action);
 				if (!is_object($harmonyhubCmd)) {
@@ -225,33 +200,29 @@ class harmonyhub extends eqLogic {
 			$harmonyhubCmd->save();
 			$this->getactivityInfo();
 		} else {
-			foreach ($result_json["device"] as $key => $value) {
-				if ($value["id"]==$this->getConfiguration('dispositifid')){
-					$devicejson=$value;
-				}
-			}
-			$this->setConfiguration('dispoid', $devicejson["id"]);
-			$this->setConfiguration('disponame', $devicejson["name"]);
-			
-			foreach ($devicejson["commands"] as $value) {
-				$command=explode("@$@", $value);
-				$name=$command[0];
-				if ($name=='#'){
-					$name='Diese';
-				}
-				$action=$command[1];
-				$harmonyhubCmd = $this->getCmd(null, $action);
-				if (!is_object($harmonyhubCmd)) {
-					$harmonyhubCmd = new harmonyhubCmd();
-				    $harmonyhubCmd->setName(__($name, __FILE__));
-					$harmonyhubCmd->setLogicalId($action);
-					$harmonyhubCmd->setEqLogic_id($this->getId());
-					$harmonyhubCmd->setConfiguration('parameters', $action);
-					$harmonyhubCmd->setConfiguration('type', 'device');
-					$harmonyhubCmd->setType('action');
-					$harmonyhubCmd->setSubType('other');
-					$harmonyhubCmd->setIsVisible(0);
-					$harmonyhubCmd->save();
+			foreach ($result_json["device"] as $device) {
+				if ($device["id"]==$this->getConfiguration('dispositifid')){
+					$this->setConfiguration('dispoid', $device["id"]);
+					$this->setConfiguration('disponame', $device["label"]);
+					foreach ($device["controlGroup"] as $controlGroup) {
+						foreach ($controlGroup["function"] as $function) {
+							$action=$function["name"];
+							$name=$function["label"];
+							$harmonyhubCmd = $this->getCmd(null, $action);
+							if (!is_object($harmonyhubCmd)) {
+								$harmonyhubCmd = new harmonyhubCmd();
+								$harmonyhubCmd->setName(__($name, __FILE__));
+								$harmonyhubCmd->setLogicalId($action);
+								$harmonyhubCmd->setEqLogic_id($this->getId());
+								$harmonyhubCmd->setConfiguration('parameters', $action);
+								$harmonyhubCmd->setConfiguration('type', 'device');
+								$harmonyhubCmd->setType('action');
+								$harmonyhubCmd->setSubType('other');
+								$harmonyhubCmd->setIsVisible(0);
+								$harmonyhubCmd->save();
+							}
+						}
+					}
 				}
 			}
 		}
@@ -269,9 +240,7 @@ class harmonyhubCmd extends cmd {
 	public function execute($_options =null) {
 		$harmonyhub = $this->getEqLogic();
         $harmony_path = realpath(dirname(__FILE__) . '/../../3rdparty/Harmonyhubcontrol/');
-		$email = config::byKey('username', 'harmonyhub', 0);
-		$pass = config::byKey('password', 'harmonyhub', 0);
-		$ip = config::byKey('ip', 'harmonyhub', 0);
+		$ip = $harmonyhub->getConfiguration('hubIp');
 		$device = $harmonyhub->getConfiguration('dispoid');
         $logical = $this->getLogicalId();
         $refreshactivity = 0;
@@ -279,19 +248,12 @@ class harmonyhubCmd extends cmd {
 			$action=$this->getConfiguration('parameters');
 			$type=$this->getConfiguration('type');
 			if ($type=='activity'){
-				$cmd='./HarmonyHubControl ' .$email.' "' .$pass . '" ' . $ip . ' start_activity "'.$action.'"';
-                $refreshactivity = 1;
+				$cmd = 'sudo /usr/bin/python ' .dirname(__FILE__) . '/../../3rdparty/PyHarmony/harmony/__main__.py --harmony_ip '.$ip.' start_activity --activity ' . $action;
 			} else {
-				$cmd='./HarmonyHubControl ' .$email.' "' .$pass . '" ' . $ip . ' issue_device_command '.$device.' "'.$action.'"';
+				$cmd = 'sudo /usr/bin/python ' .dirname(__FILE__) . '/../../3rdparty/PyHarmony/harmony/__main__.py --harmony_ip '.$ip.' send_command  --device_id ' . $device . ' --command ' . $action;
 			}
-			chdir($harmony_path);
 			exec($cmd);
-			log::add('harmonyhub','debug','Execution de : ' .$cmd . ' depuis : ' .$harmony_path);
-            /*if ($refreshactivity == 1) {
-                log::add('harmonyhub','debug','Mise à jour de l\'activité');
-                sleep(3);
-                $harmonyhub->getactivityInfo();
-            }*/
+			log::add('harmonyhub','debug','Execution de : ' .$cmd);
 		}
         else {
 			$activityname=$harmonyhub->getactivityInfo();
