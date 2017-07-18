@@ -10,7 +10,7 @@
         "Ajouter": "Add",
         "Général": "Main",
         "Nom du dispositif": "Device name",
-        "Nom de l'équipement harmonyhub": "Harmonyhub name",
+        "Nom de l'équipement harmonyhub": "Harmonyhub device name",
         "Objet parent": "Parent object",
         "Aucun": "None",
         "Catégorie": "Category",
@@ -22,11 +22,11 @@
         "Activer la récupération des activités toutes les minutes": "Enable recovery activities every minute",
         "Informations": "Information",
         "Nom dispositif": "Device name",
-        "Id dispositif": "device id",
+        "Id dispositif": "Device ID",
         "Visuel du dispositif": "Visual device",
         "Icône du dispositif": "Device icon",
         "Télévision": "TV",
-        "Climatisation": "Air conditionning",
+        "Climatisation": "Air conditioning",
         "Ventilateur": "Fan",
         "Ampli A/V": "Ampli A/V",
         "Lampe": "Lamp\n\n",
@@ -45,22 +45,22 @@
         "Action": "Action"
     },
     "plugins/harmonyhub/desktop/js/harmonyhub.js": {
-        "Afficher": "Show",
+        "Afficher": "Display",
         "Tester": "Test"
     },
     "plugins/harmonyhub/plugin_info/configuration.php": {
-        "Dépendances : ": "Dependencies :",
-        "Droits Sudo : ": "Sudo rights :",
-        "Email du compte : ": "Account email :",
-        "Mot de passe : ": "Password :",
-        "Adresse IP du Hub : ": "Ip address :",
-        "Installer les dépendances :": "Install dependencies :",
+        "Dépendances : ": "Dependencies:",
+        "Droits Sudo : ": "Sudo rights:",
+        "Email du compte : ": "Account email:",
+        "Mot de passe : ": "Password:",
+        "Adresse IP du Hub : ": "IP address:",
+        "Installer les dépendances :": "Install dependencies:",
         "Lancer": "Run",
-        "Créer/MAJ la config :": "Create/Update Config :",
+        "Créer/MAJ la config :": "Create/Update setup:",
         "Etes-vous sûr de vouloir installer les dépendances ": "Are you sure you want to install the dependencies",
         "Installation": "Installation",
-        "Etes-vous sûr de vouloir installer/mettre à jour votre fichier de config ? ": "Are you sure you want to create/update your config file ?",
-        "Installation / Mise à jour ! Cela peut prendre plus d'une minute. Veuillez patienter jusqu\\'à l\\'apparition du message de fin": "Install / Update! It may take more than a minute. Please wait until\\ ' the\\' appearance of the end of message"
+        "Etes-vous sûr de vouloir installer/mettre à jour votre fichier de config ? ": "Are you sure you want to create/update your setup file ?",
+        "Installation / Mise à jour ! Cela peut prendre plus d'une minute. Veuillez patienter jusqu\\'à l\\'apparition du message de fin": "Install / Update! It may take more than a minute. Please wait until\\ ' the\\' end message is displayed"
     },
     "plugins/harmonyhub/core/class/harmonyhub.class.php": {
         "Power Off": "Power Off",
@@ -147,7 +147,7 @@
         "Wii-U": "Wii-U",
         "Télévision": "TV",
         "NOK": "NOK",
-        "Vérifiez que vous avez les droits Sudo et allez sur la page du plugin et cliquez sur le bouton \"Créer/Maj config\"": "Make sure you have the rights Sudo and go to the plugin page and click the \"Create / Shift config\"",
+        "Vérifiez que vous avez les droits Sudo et allez sur la page du plugin et cliquez sur le bouton \"Créer/Maj config\"": "Make sure you have the Sudo rights then go to the plugin page and click the \"Create / Shift config\" button",
         "Roku": "Roku"
     },
     "plugins/harmonyhub/desktop/modal/config.harmonyhub.php": {
