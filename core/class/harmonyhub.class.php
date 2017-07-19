@@ -213,7 +213,7 @@ class harmonyhub extends eqLogic {
 					foreach ($device["controlGroup"] as $controlGroup) {
 						foreach ($controlGroup["function"] as $function) {
 							$action=$function["name"];
-							$name=$function["label"];
+							$name=str_replace('#','sharp',$function["label"]);
 							$harmonyhubCmd = $this->getCmd(null, $action);
 							if (!is_object($harmonyhubCmd)) {
 								$harmonyhubCmd = new harmonyhubCmd();

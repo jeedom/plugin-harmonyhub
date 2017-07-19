@@ -214,6 +214,10 @@ def create_and_connect_client(ip_address, port, token):
     client.connect(address=(ip_address, port),
                    use_tls=False, use_ssl=False)
     client.process(block=False)
+    i=0
     while not client.sessionstarted:
         time.sleep(0.1)
+        i = i +1
+        if i >50:
+            break
     return client
