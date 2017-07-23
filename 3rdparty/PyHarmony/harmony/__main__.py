@@ -9,6 +9,8 @@ import client as harmony_client
 import discovery as harmony_discovery
 import sys
 import time
+import thread
+import os
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.ERROR)
@@ -484,7 +486,13 @@ def main():
         sys.exit(discover(args))
     else:
         sys.exit(args.func(args))
+    time.sleep(10)
+    os._exit(0)
 
+def timeout(name):
+    time.sleep(15)
+    os._exit(0)
 
 if __name__ == '__main__':
+    thread.start_new_thread( timeout, ('timeout',))
     main()

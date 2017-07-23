@@ -250,7 +250,7 @@ class harmonyhubCmd extends cmd {
 		$device = $harmonyhub->getConfiguration('dispoid');
         $logical = $this->getLogicalId();
         $refreshactivity = 0;
-		if ($this->type == 'action' && $logical != 'refreshactivity') {
+		if ($this->type == 'action' && $logical != 'refresh') {
 			$action=$this->getConfiguration('parameters');
 			$type=$this->getConfiguration('type');
 			if ($type=='activity'){
