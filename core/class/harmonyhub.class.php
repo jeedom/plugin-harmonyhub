@@ -108,6 +108,9 @@ class harmonyhub extends eqLogic {
 			$cmd = 'sudo /usr/bin/python ' .dirname(__FILE__) . '/../../3rdparty/PyHarmony/harmony/__main__.py --harmony_ip '.$ip.' show_current_activity';
 			log::add('harmonyhub','debug','Execution de :'. $cmd);
 			$activityid=trim(shell_exec($cmd));
+			if ($activityid == ''){
+				$activityid = 'Hors Ligne';
+			}
 			foreach ($this->getCmd('info') as $cmd) {
 				$cmd->event($activityid);
 			}
