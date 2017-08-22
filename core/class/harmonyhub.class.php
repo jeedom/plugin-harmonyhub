@@ -251,6 +251,9 @@ class harmonyhubCmd extends cmd {
         $refreshactivity = 0;
 		if ($this->type == 'action' && $logical != 'refresh') {
 			$action=$this->getConfiguration('parameters');
+			if (strlen($action)>6 && strtolower(substr($action,0,6)) == 'number'){
+				$action = substr($action,6);
+			}
 			$type=$this->getConfiguration('type');
 			if ($type=='activity'){
 				$cmd = 'sudo /usr/bin/python ' .dirname(__FILE__) . '/../../3rdparty/PyHarmony/harmony/__main__.py --harmony_ip '.$ip.' start_activity --activity ' . $action;

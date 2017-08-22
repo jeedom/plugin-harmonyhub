@@ -18,11 +18,5 @@
 
 require_once dirname(__FILE__) . '/../../../core/php/core.inc.php';
 function harmonyhub_update() {
-	foreach (eqLogic::byType('harmonyhub') as $harmonyhub) {
-		if ($harmonyhub->getConfiguration('hubIp','') == '') {
-			$harmonyhub->setConfiguration('hubIp',config::byKey('ip', 'harmonyhub', 0));
-		}
-    }
-	log::add('harmonyhub','alert','Message de Harmony : Absolument refaire la création du fichier de config après cette maj avant de faire autre chose');
 }
 ?>
