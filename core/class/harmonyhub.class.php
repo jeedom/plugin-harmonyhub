@@ -46,11 +46,8 @@ class harmonyhub extends eqLogic {
 	public static function cron() {
 		$eqLogics = eqLogic::byType('harmonyhub');
 		foreach($eqLogics as $harmonyhub) {
-			if ($harmonyhub->getIsEnable() == 1 && $harmonyhub->getConfiguration('disponame')=='Activité' && $harmonyhub->getConfiguration('cronenabled')==1) {
-				foreach ($harmonyhub->getCmd('info') as $cmd) {
-					//log::add('harmonyhub', 'debug', 'Pull Cron pour harmonyhub' );
-					$activityname= $harmonyhub->getactivityInfo();
-				}
+			if ($harmonyhub->getIsEnable() == 1 && $harmonyhub->getConfiguration('disponame')=='Activité' && $harmonyhub->getConfiguration('cronenabled')== 1) {
+				$activityname= $harmonyhub->getactivityInfo();
 			}
 		}
 	}
@@ -104,7 +101,6 @@ class harmonyhub extends eqLogic {
 	public function getactivityInfo() {
 		$ip = $this->getConfiguration('hubIp','');
 		if ($ip != ''){
-			$ip = config::byKey('ip', 'harmonyhub', 0);
 			$cmd = 'sudo /usr/bin/python ' .dirname(__FILE__) . '/../../3rdparty/PyHarmony/harmony/__main__.py --harmony_ip '.$ip.' show_current_activity';
 			log::add('harmonyhub','debug','Execution de :'. $cmd);
 			$activityid=trim(shell_exec($cmd));
@@ -114,7 +110,7 @@ class harmonyhub extends eqLogic {
 			foreach ($this->getCmd('info') as $cmd) {
 				$cmd->event($activityid);
 			}
-			return $activityid;
+			return;
 		}
 	}
 	
