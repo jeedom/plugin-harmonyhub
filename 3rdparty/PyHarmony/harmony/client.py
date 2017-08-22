@@ -212,7 +212,7 @@ def create_and_connect_client(ip_address, port, token):
     """
     client = HarmonyClient(token)
     client.connect(address=(ip_address, port),
-                   use_tls=False, use_ssl=False)
+                   use_tls=False, use_ssl=False,reattempt=False)
     client.process(block=False)
     i=0
     while not client.sessionstarted:
