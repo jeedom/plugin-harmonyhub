@@ -23,7 +23,7 @@
         "Informations": "Information",
         "Nom dispositif": "Gerätename",
         "Id dispositif": "Geräte ID",
-        "Visuel du dispositif": "Visuel du dispositif",
+        "Visuel du dispositif": "Visualisierung des Gerätes",
         "Icône du dispositif": "Gerätesymbol",
         "Télévision": "Fernseher",
         "Climatisation": "Klimaanlage",
@@ -56,11 +56,11 @@
         "Adresse IP du Hub : ": "Hub IP Adresse :",
         "Installer les dépendances :": "Installieren von Abhängigkeiten :",
         "Lancer": "Einführung",
-        "Créer/MAJ la config :": "Créer/MAJ la config :",
+        "Créer/MAJ la config :": "config Erstellen/Verschieben :",
         "Etes-vous sûr de vouloir installer les dépendances ": "Sind sie sicher, dass sie die Abhängigkeiten installieren möchten",
         "Installation": "Installation",
         "Etes-vous sûr de vouloir installer/mettre à jour votre fichier de config ? ": "Sind Sie sicher, dass Sie ihre Config-Datei installieren/aktualisieren möchten?",
-        "Installation / Mise à jour ! Cela peut prendre plus d'une minute. Veuillez patienter jusqu\\'à l\\'apparition du message de fin": "Installation / Mise à jour ! Cela peut prendre plus d'une minute. Veuillez patienter jusqu\\'à l\\'apparition du message de fin"
+        "Installation / Mise à jour ! Cela peut prendre plus d'une minute. Veuillez patienter jusqu\\'à l\\'apparition du message de fin": "Installation / Aktualisierung! Es kann mehr als eine Minute dauern. Bitte warten Sie, bis die Endmeldung erscheint"
     },
     "plugins/harmonyhub/core/class/harmonyhub.class.php": {
         "Power Off": "Ausschalten",
@@ -147,7 +147,7 @@
         "Wii-U": "Wii-U",
         "Télévision": "Fernseher",
         "NOK": "NOK",
-        "Vérifiez que vous avez les droits Sudo et allez sur la page du plugin et cliquez sur le bouton \"Créer/Maj config\"": "Vérifiez que vous avez les droits Sudo et allez sur la page du plugin et cliquez sur le bouton \"Créer/Maj config\"",
+        "Vérifiez que vous avez les droits Sudo et allez sur la page du plugin et cliquez sur le bouton \"Créer/Maj config\"": "Überprüfen Sie, ob Sie Sudo-Rechte haben und gehen Sie auf die Plugin-Seite und klicken Sie auf die Schaltfläche \"config Erstellen/Verschieben\"",
         "Roku": "Roku"
     },
     "plugins/harmonyhub/desktop/modal/config.harmonyhub.php": {
