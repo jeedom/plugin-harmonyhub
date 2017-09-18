@@ -1,6 +1,6 @@
 ==== Vos dispositifs/Activités :
 
-.. Création
+.. Einrichtung
 
 Afin de créer vos premiers équipemments, il faut vous rendre dans le menu plugin:
 
