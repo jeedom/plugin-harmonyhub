@@ -256,9 +256,9 @@ class harmonyhubCmd extends cmd {
 			}
 			$type=$this->getConfiguration('type');
 			if ($type=='activity'){
-				$cmd = 'sudo /usr/bin/python ' .dirname(__FILE__) . '/../../3rdparty/PyHarmony/harmony/__main__.py --harmony_ip '.$ip.' start_activity --activity ' . $action;
+				$cmd = 'sudo /usr/bin/python ' .dirname(__FILE__) . '/../../3rdparty/PyHarmony/harmony/__main__.py --harmony_ip '.$ip.' start_activity --activity "' . $action . '"';
 			} else {
-				$cmd = 'sudo /usr/bin/python ' .dirname(__FILE__) . '/../../3rdparty/PyHarmony/harmony/__main__.py --harmony_ip '.$ip.' send_command  --device_id ' . $device . ' --command ' . $action;
+				$cmd = 'sudo /usr/bin/python ' .dirname(__FILE__) . '/../../3rdparty/PyHarmony/harmony/__main__.py --harmony_ip '.$ip.' send_command  --device_id ' . $device . ' --command "' . $action . '"';
 			}
 			exec($cmd);
 			log::add('harmonyhub','debug','Execution de : ' .$cmd);
