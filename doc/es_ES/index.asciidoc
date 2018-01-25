@@ -1,6 +1,6 @@
 == Harmony Hub
 
-=== Description
+=== Descripción
 Ce plugin permet de controller et de récupérer tous les dispositifs de son Harmony Hub.
 
 {nbsp} +
