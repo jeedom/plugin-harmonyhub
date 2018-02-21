@@ -1,5 +1,0 @@
-[panel,primary]
-.J'ai cliqué sur visible mais ma tuile est vide
---
-Avez vous affiché des commandes.
---

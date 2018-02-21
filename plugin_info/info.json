@@ -6,5 +6,7 @@
 	"author" : "Ludovic SARAKHA",
 	"require" : "3.0",
 	"category" : "multimedia",
-	"hasDependency" : true
+        "hasDependency" : true,
+        "changelog" : "https://jeedom.github.io/plugin-harmonyhub/#language#/changelog",
+        "documentation" : "https://jeedom.github.io/plugin-harmonyhub/#language#/"
 }
