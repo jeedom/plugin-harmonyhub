@@ -1,7 +1,7 @@
 Harmony Hub 
 ===========
 
-Description 
+Beschreibung 
 -----------
 
 Ce plugin permet de controller et de récupérer tous les dispositifs de
