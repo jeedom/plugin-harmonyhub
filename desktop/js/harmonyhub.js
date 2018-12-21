@@ -81,11 +81,12 @@ function getdevicelist(_ip) {
         }
         var options = '';
 		if (data.result[0] != null) {
-			for (var i in data.result[0].device) {
-				if (data.result[0].device[i].id ==  data.result[1]){
-					options += '<option value="'+data.result[0].device[i].id+'" selected>'+data.result[0].device[i].label+'</option>';
+			console.log(data.result[0].Devices);
+			for (var i in data.result[0].Devices) {
+				if (data.result[0].Devices[i].id ==  data.result[1]){
+					options += '<option value="'+data.result[0].Devices[i].id+'" selected>'+i+'</option>';
 				} else {
-					options += '<option value="'+data.result[0].device[i].id+'">'+data.result[0].device[i].label+'</option>';
+					options += '<option value="'+data.result[0].Devices[i].id+'">'+i+'</option>';
 				}
 			}
 			if (data.result[1] == 'activity'){
