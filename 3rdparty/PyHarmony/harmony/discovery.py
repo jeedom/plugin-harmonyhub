@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 # Python port of JavaScript Harmony discovery here:
@@ -18,7 +19,11 @@ class Discovery:
 
     def listen(self, hubs, listen_socket):
         while True:
-            client_connection, client_address = listen_socket.accept()
+            try:
+                client_connection, client_address = listen_socket.accept()
+            except (OSError) as err:
+                logger.debug("Listen socket closed {0}".format(err))
+                return
             request = client_connection.recv(1024)
             if request:
                 hub = self.deserialize_response(
@@ -79,10 +84,12 @@ class Discovery:
                 logger.error('Error pinging network: %s', e)
 
             time.sleep(scan_interval)
-
+        
         # Close the socket
         ping_sock.close()
-
+        listen_socket.shutdown(socket.SHUT_RDWR)
+        listen_socket.close()
+        
         logger.info('Completed scan, %s hub(s) found.', len(hubs))
         return [hubs[h] for h in hubs]
 
