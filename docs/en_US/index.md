@@ -22,7 +22,7 @@ Configuration
 
 ### Configuration du plugin Harmony Hub : 
 
-a.  Installation/Création
+a. Installation/Creation
 
 Afin d’utiliser le plugin, vous devez le télécharger, l’installer et
 l’activer comme tout plugin Jeedom.
