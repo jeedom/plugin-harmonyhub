@@ -18,6 +18,6 @@
 
 require_once dirname(__FILE__) . '/../../../core/php/core.inc.php';
 function harmonyhub_update() {
-	message::add('harmonyhub', 'Merci pour la mise à jour de ce plugin. Cette mise à jour est une maj en urgence liée à la mise à jour de Logitech qui supprime l\'api. Le but dépanner pour les vacances de Noel. Pensez à relancer vos dépendances');
+	message::add('harmonyhub', 'Cette mise à jour est une maj en liée à la mise à jour de Logitech qui réactives le XMMP. Il vous faudra recréer le fichier de conf et surtout activer dans l\'application Harmony le mode développeur activant le XMMP');
 }
 ?>
