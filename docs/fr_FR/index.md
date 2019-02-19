@@ -115,6 +115,10 @@ proposer vous créer votre simili télécommande.
 
 …​
 
+Depuis le 19-02-2019 il faut activer une option développeur dans l'application Harmony
+
+Voir ce lien de Logitech :
+https://community.logitech.com/s/question/0D55A00008OsX3CSAV/update-to-accessing-harmony-hubs-local-api-via-xmpp
 FAQ 
 ---
 
