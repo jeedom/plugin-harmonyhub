@@ -67,7 +67,7 @@ function getdevicelist(_ip) {
         data: {
             action: "getdevicelist",
             ip: _ip,
-			id: $('.li_eqLogic.active').attr('data-eqlogic_id'),
+			id: $('.eqLogicAttr[data-l1key=id]').value(),
         },
         dataType: 'json',
         global: false,
