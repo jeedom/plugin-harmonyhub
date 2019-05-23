@@ -45,6 +45,7 @@ if (count($eqLogics) == 0) {
                         $path = 'plugins/harmonyhub/core/template/images/harmonyhub_icon.png';
                     }
                     echo '<img src="'.$path.'"/>';
+					echo '<br/>';
                    echo '<span>' . $eqLogic->getHumanName(true, true) . '</span>';
                     echo '</div>';
                 }
