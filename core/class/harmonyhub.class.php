@@ -26,7 +26,7 @@ class harmonyhub extends eqLogic {
 		$return = array();
 		$return['log'] = 'harmonyhub_update';
 		$return['progress_file'] = jeedom::getTmpFolder('harmonyhub') . '/dependance';
-		$cmd = "pip list | grep requests";
+		$cmd = "pip3 list | grep requests";
         exec($cmd, $output, $return_var);
 		$return['state'] = 'nok';
 		if (array_key_exists(0,$output)) {
