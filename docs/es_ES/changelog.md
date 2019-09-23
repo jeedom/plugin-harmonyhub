@@ -1,3 +1,6 @@
+07-06-2019
+Bugfix sur dépendances NOK alors que OK
+
 23-05-2019
  Mise en place de la page équipement pour futur Jeedom
 
