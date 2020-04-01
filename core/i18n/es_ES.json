@@ -1,87 +1,88 @@
 {
-    "plugin_info\/configuration.php": {
-        "Adresse IP du Hub (plusieurs Ips possibles séparées par |) : ": "Dirección IP del concentrador (varios Ips posibles separados por |):",
-        "Créer\/MAJ les configs :": "Crear \/ actualizar configuraciones:",
-        "Lancer": "Lanzamiento",
-        "Etes-vous sûr de vouloir installer\/mettre à jour vos fichiers de config ? ": "¿Está seguro de que desea instalar \/ actualizar sus archivos de configuración?",
-        "Installation \/ Mise à jour ! Cela peut prendre plus d'une minute. Veuillez patienter jusqu\\'à l\\'apparition du message de fin": "Instalación \/ Actualización ! Esto puede tardar mas de un minuto. Por favor, espere hasta que aparece el mensaje de fin"
+    "plugins\/harmonyhub\/plugin_info\/configuration.php": {
+        "Adresse IP du Hub (plusieurs Ips possibles séparées par |) : ": "",
+        "Créer\/MAJ les configs :": "",
+        "Lancer": "Iniciar",
+        "Etes-vous sûr de vouloir installer\/mettre à jour vos fichiers de config ? ": "",
+        "Installation \/ Mise à jour ! Cela peut prendre plus d'une minute. Veuillez patienter jusqu\\'à l\\'apparition du message de fin": ""
     },
-    "desktop\/modal\/config.harmonyhub.php": {
-        "401 - Accès non autorisé": "401 - Acceso no autorizado",
-        "Pause": "Pausa",
-        "Rechercher": "Buscar"
-    },
-    "desktop\/modal\/health.php": {
-        "Image": "imagen",
-        "Dispositifs": "características",
-        "ID": "identificación",
-        "Statut": "estatus",
+    "plugins\/harmonyhub\/desktop\/modal\/health.php": {
+        "Image": "Imagen",
+        "Dispositifs": "",
+        "ID": "Identificación",
+        "Statut": "Estado",
         "Dernière communication": "Última comunicación",
         "Date création": "Fecha de creación",
-        "OK": "bueno",
-        "NOK": "NOK"
+        "OK": "Bueno",
+        "NOK": ""
     },
-    "desktop\/modal\/update.harmonyhub.php": {
+    "plugins\/harmonyhub\/desktop\/modal\/config.harmonyhub.php": {
         "401 - Accès non autorisé": "401 - Acceso no autorizado",
         "Pause": "Pausa",
         "Rechercher": "Buscar"
     },
-    "desktop\/js\/harmonyhub.js": {
-        "Santé Harmony": "Salud de la armonía",
-        "Afficher": "Mostrar",
-        "Tester": "Probar"
-    },
-    "desktop\/php\/harmonyhub.php": {
+    "plugins\/harmonyhub\/desktop\/modal\/update.harmonyhub.php": {
         "401 - Accès non autorisé": "401 - Acceso no autorizado",
-        "Gestion": "administración",
+        "Pause": "Pausa",
+        "Rechercher": "Buscar"
+    },
+    "plugins\/harmonyhub\/desktop\/php\/harmonyhub.php": {
+        "401 - Accès non autorisé": "401 - Acceso no autorizado",
+        "Gestion": "Gestión",
         "Ajouter": "Añadir",
         "Configuration": "Configuración",
-        "Santé": "salud",
-        "Mes Dispositifs": "Mis dispositivos",
-        "Vous n'avez pas encore de télécommande Harmony, aller sur Général -> Plugin et cliquez sur synchroniser pour commencer": "Todavía no tiene un control remoto Harmony, vaya a General -&gt; Complemento y haga clic en sincronizar para comenzar",
+        "Santé": "Salud",
+        "Mes Dispositifs": "",
+        "Vous n'avez pas encore de télécommande Harmony, aller sur Général -> Plugin et cliquez sur synchroniser pour commencer": "",
         "Sauvegarder": "Guardar",
         "Supprimer": "Borrar",
         "Configuration avancée": "Configuración avanzada",
-        "Equipement": "equipo",
-        "Commandes": "comandos",
+        "Equipement": "Dispositivos",
+        "Commandes": "Comandos",
         "Nom de l'équipement": "Nombre del equipo",
         "Objet parent": "Objeto padre",
-        "Aucun": "Ninguno",
+        "Aucun": "Ninguna",
         "Catégorie": "Categoría",
         "Activer": "Activar",
-        "Visible": "visible",
-        "Hub": "cubo",
-        "Dispositif": "Dispositivo",
-        "Activer la récupération des activités toutes les minutes": "Activar la recuperación de las actividades cada minuto",
+        "Visible": "Visible",
+        "Hub": "",
+        "Dispositif": "",
+        "Activer la récupération des activités toutes les minutes": "",
         "Informations": "Información",
-        "Nom dispositif": "Nombre dispositivo",
-        "Id dispositif": "Id dispositivo",
-        "Visuel du dispositif": "Visual del dispositivo",
-        "Icône du dispositif": "Icono del dispositivo",
+        "Nom dispositif": "",
+        "Id dispositif": "",
+        "Visuel du dispositif": "",
+        "Icône du dispositif": "",
         "": "",
-        "Télévision": "Televisión",
+        "Télévision": "",
         "Climatisation": "Climatización",
-        "Ventilateur": "Ventilador",
-        "Ampli A\/V": "Amplificador A\/V",
-        "Lampe": "Lámpara",
-        "Htpc": "HTPC",
-        "Lampe sur pied": "Lámpara de pie",
-        "Console de jeux": "Consola de juegos",
-        "Box TV": "Caja de TV",
-        "Bandeau Leds": "Tira Leds",
-        "Activité": "Actividad",
-        "Photophore": "Fotóforo",
+        "Ventilateur": "",
+        "Ampli A\/V": "",
+        "Lampe": "",
+        "Htpc": "",
+        "Lampe sur pied": "",
+        "Console de jeux": "",
+        "Box TV": "",
+        "Bandeau Leds": "",
+        "Activité": "",
+        "Photophore": "",
         "Nom": "Nombre",
         "Commande": "Comando",
         "Options": "Opciones",
         "Action": "Acción"
     },
-    "core\/ajax\/harmonyhub.ajax.php": {
+    "plugins\/harmonyhub\/desktop\/js\/harmonyhub.js": {
+        "Santé Harmony": "",
+        "Afficher": "Mostrar",
+        "Tester": "Probar"
+    },
+    "plugins\/harmonyhub\/core\/ajax\/harmonyhub.ajax.php": {
         "401 - Accès non autorisé": "401 - Acceso no autorizado",
         "Aucune methode correspondante à : ": "Ningún método correspondiente a:"
     },
-    "core\/class\/harmonyhub.class.php": {
-        "Pause": "Pausa",
-        "Rechercher": "Buscar"
+    "plugins\/harmonyhub\/core\/class\/harmonyhub.class.php": {
+        "$name": "",
+        "Activité Courante": "",
+        "Refresh Activity": ""
     }
 }

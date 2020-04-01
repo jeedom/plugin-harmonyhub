@@ -1,17 +1,12 @@
 {
-    "plugin_info\/configuration.php": {
+    "plugins\/harmonyhub\/plugin_info\/configuration.php": {
         "Adresse IP du Hub (plusieurs Ips possibles séparées par |) : ": "Adresse IP du Hub (plusieurs Ips possibles séparées par |) : ",
         "Créer\/MAJ les configs :": "Créer\/MAJ les configs :",
         "Lancer": "Lancer",
         "Etes-vous sûr de vouloir installer\/mettre à jour vos fichiers de config ? ": "Etes-vous sûr de vouloir installer\/mettre à jour vos fichiers de config ? ",
         "Installation \/ Mise à jour ! Cela peut prendre plus d'une minute. Veuillez patienter jusqu\\'à l\\'apparition du message de fin": "Installation \/ Mise à jour ! Cela peut prendre plus d'une minute. Veuillez patienter jusqu\\'à l\\'apparition du message de fin"
     },
-    "desktop\/modal\/config.harmonyhub.php": {
-        "401 - Accès non autorisé": "401 - Accès non autorisé",
-        "Pause": "Pause",
-        "Rechercher": "Rechercher"
-    },
-    "desktop\/modal\/health.php": {
+    "plugins\/harmonyhub\/desktop\/modal\/health.php": {
         "Image": "Image",
         "Dispositifs": "Dispositifs",
         "ID": "ID",
@@ -21,17 +16,17 @@
         "OK": "OK",
         "NOK": "NOK"
     },
-    "desktop\/modal\/update.harmonyhub.php": {
+    "plugins\/harmonyhub\/desktop\/modal\/config.harmonyhub.php": {
         "401 - Accès non autorisé": "401 - Accès non autorisé",
         "Pause": "Pause",
         "Rechercher": "Rechercher"
     },
-    "desktop\/js\/harmonyhub.js": {
-        "Santé Harmony": "Santé Harmony",
-        "Afficher": "Afficher",
-        "Tester": "Tester"
+    "plugins\/harmonyhub\/desktop\/modal\/update.harmonyhub.php": {
+        "401 - Accès non autorisé": "401 - Accès non autorisé",
+        "Pause": "Pause",
+        "Rechercher": "Rechercher"
     },
-    "desktop\/php\/harmonyhub.php": {
+    "plugins\/harmonyhub\/desktop\/php\/harmonyhub.php": {
         "401 - Accès non autorisé": "401 - Accès non autorisé",
         "Gestion": "Gestion",
         "Ajouter": "Ajouter",
@@ -76,11 +71,16 @@
         "Options": "Options",
         "Action": "Action"
     },
-    "core\/ajax\/harmonyhub.ajax.php": {
+    "plugins\/harmonyhub\/desktop\/js\/harmonyhub.js": {
+        "Santé Harmony": "Santé Harmony",
+        "Afficher": "Afficher",
+        "Tester": "Tester"
+    },
+    "plugins\/harmonyhub\/core\/ajax\/harmonyhub.ajax.php": {
         "401 - Accès non autorisé": "401 - Accès non autorisé",
         "Aucune methode correspondante à : ": "Aucune methode correspondante à : "
     },
-    "core\/class\/harmonyhub.class.php": {
+    "plugins\/harmonyhub\/core\/class\/harmonyhub.class.php": {
         "$name": "$name",
         "Activité Courante": "Activité Courante",
         "Refresh Activity": "Refresh Activity"

@@ -1,87 +1,88 @@
 {
-    "plugin_info\/configuration.php": {
-        "Adresse IP du Hub (plusieurs Ips possibles séparées par |) : ": "Adresse IP du Hub (plusieurs Ips possibles séparées par |) : ",
-        "Créer\/MAJ les configs :": "Créer\/MAJ les configs :",
+    "plugins\/harmonyhub\/plugin_info\/configuration.php": {
+        "Adresse IP du Hub (plusieurs Ips possibles séparées par |) : ": "",
+        "Créer\/MAJ les configs :": "",
         "Lancer": "Başlat",
-        "Etes-vous sûr de vouloir installer\/mettre à jour vos fichiers de config ? ": "Etes-vous sûr de vouloir installer\/mettre à jour vos fichiers de config ? ",
-        "Installation \/ Mise à jour ! Cela peut prendre plus d'une minute. Veuillez patienter jusqu\\'à l\\'apparition du message de fin": "Kurulum \/ Güncelleme ! Bir dakikadan fazla sürebilir. Son mesajının gösterilmesine kadar bekleyin"
+        "Etes-vous sûr de vouloir installer\/mettre à jour vos fichiers de config ? ": "",
+        "Installation \/ Mise à jour ! Cela peut prendre plus d'une minute. Veuillez patienter jusqu\\'à l\\'apparition du message de fin": ""
     },
-    "desktop\/modal\/config.harmonyhub.php": {
-        "401 - Accès non autorisé": "401 - Accès non autorisé",
+    "plugins\/harmonyhub\/desktop\/modal\/health.php": {
+        "Image": "Fotoğraf",
+        "Dispositifs": "",
+        "ID": "Kimlik",
+        "Statut": "Statü",
+        "Dernière communication": "",
+        "Date création": "",
+        "OK": "Tamam",
+        "NOK": ""
+    },
+    "plugins\/harmonyhub\/desktop\/modal\/config.harmonyhub.php": {
+        "401 - Accès non autorisé": "401 - Yetkisiz erişim",
         "Pause": "Durdur",
         "Rechercher": "Arayın"
     },
-    "desktop\/modal\/health.php": {
-        "Image": "Image",
-        "Dispositifs": "Dispositifs",
-        "ID": "ID",
-        "Statut": "Statut",
-        "Dernière communication": "Dernière communication",
-        "Date création": "Date création",
-        "OK": "OK",
-        "NOK": "NOK"
-    },
-    "desktop\/modal\/update.harmonyhub.php": {
-        "401 - Accès non autorisé": "401 - Accès non autorisé",
+    "plugins\/harmonyhub\/desktop\/modal\/update.harmonyhub.php": {
+        "401 - Accès non autorisé": "401 - Yetkisiz erişim",
         "Pause": "Durdur",
         "Rechercher": "Arayın"
     },
-    "desktop\/js\/harmonyhub.js": {
-        "Santé Harmony": "Santé Harmony",
-        "Afficher": "Göster",
-        "Tester": "Dene"
-    },
-    "desktop\/php\/harmonyhub.php": {
-        "401 - Accès non autorisé": "401 - Accès non autorisé",
-        "Gestion": "Gestion",
+    "plugins\/harmonyhub\/desktop\/php\/harmonyhub.php": {
+        "401 - Accès non autorisé": "401 - Yetkisiz erişim",
+        "Gestion": "Idare",
         "Ajouter": "Ekle",
         "Configuration": "Ayar",
-        "Santé": "Santé",
-        "Mes Dispositifs": "Cihazlarım ",
-        "Vous n'avez pas encore de télécommande Harmony, aller sur Général -> Plugin et cliquez sur synchroniser pour commencer": "Vous n'avez pas encore de télécommande Harmony, aller sur Général -> Plugin et cliquez sur synchroniser pour commencer",
+        "Santé": "Sağlık",
+        "Mes Dispositifs": "",
+        "Vous n'avez pas encore de télécommande Harmony, aller sur Général -> Plugin et cliquez sur synchroniser pour commencer": "",
         "Sauvegarder": "Kaydet",
         "Supprimer": "Sil",
-        "Configuration avancée": "Configuration avancée",
-        "Equipement": "Equipement",
-        "Commandes": "Commandes",
-        "Nom de l'équipement": "Nom de l'équipement",
+        "Configuration avancée": "Gelişmiş ayarlar",
+        "Equipement": "Cihaz",
+        "Commandes": "Komutalar",
+        "Nom de l'équipement": "Ekipman ismi",
         "Objet parent": "Üst nesne",
         "Aucun": "Hiçbir",
         "Catégorie": "Kategori",
-        "Activer": "Etkinleştirmek",
+        "Activer": "Etkinleştir",
         "Visible": "Görülebilir",
-        "Hub": "Hub",
-        "Dispositif": "Cihaz",
-        "Activer la récupération des activités toutes les minutes": "Aktivitelerin her dakika toplanmasını aktifleştirin",
+        "Hub": "",
+        "Dispositif": "",
+        "Activer la récupération des activités toutes les minutes": "",
         "Informations": "Bilgiler",
-        "Nom dispositif": "Cihaz ismi",
-        "Id dispositif": "Cihaz id",
-        "Visuel du dispositif": "Cihazın görüntüsü",
-        "Icône du dispositif": "Cihaz ikonu",
+        "Nom dispositif": "",
+        "Id dispositif": "",
+        "Visuel du dispositif": "",
+        "Icône du dispositif": "",
         "": "",
-        "Télévision": "Televizyon",
+        "Télévision": "",
         "Climatisation": "Klima",
-        "Ventilateur": "Vantilatör",
-        "Ampli A\/V": "Ampli O\/V",
-        "Lampe": "Lamba",
-        "Htpc": "Htpc",
-        "Lampe sur pied": "Ayak üzerinde lamba",
-        "Console de jeux": "Oyun makinası",
-        "Box TV": "Box TV",
-        "Bandeau Leds": "Led bando",
-        "Activité": "Aktivite",
-        "Photophore": "tealight",
+        "Ventilateur": "",
+        "Ampli A\/V": "",
+        "Lampe": "",
+        "Htpc": "",
+        "Lampe sur pied": "",
+        "Console de jeux": "",
+        "Box TV": "",
+        "Bandeau Leds": "",
+        "Activité": "",
+        "Photophore": "",
         "Nom": "İsim",
         "Commande": "Komuta",
         "Options": "Opsiyonlar",
-        "Action": "Etki"
+        "Action": "Eylem"
     },
-    "core\/ajax\/harmonyhub.ajax.php": {
-        "401 - Accès non autorisé": "401 - Accès non autorisé",
-        "Aucune methode correspondante à : ": "Aucune methode correspondante à : "
+    "plugins\/harmonyhub\/desktop\/js\/harmonyhub.js": {
+        "Santé Harmony": "",
+        "Afficher": "Göster",
+        "Tester": "Test et"
     },
-    "core\/class\/harmonyhub.class.php": {
-        "Pause": "Durdur",
-        "Rechercher": "Arayın"
+    "plugins\/harmonyhub\/core\/ajax\/harmonyhub.ajax.php": {
+        "401 - Accès non autorisé": "401 - Yetkisiz erişim",
+        "Aucune methode correspondante à : ": "Aşağıdakilere karşılık gelen bir yöntem yok:"
+    },
+    "plugins\/harmonyhub\/core\/class\/harmonyhub.class.php": {
+        "$name": "",
+        "Activité Courante": "",
+        "Refresh Activity": ""
     }
 }

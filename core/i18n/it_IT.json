@@ -1,87 +1,88 @@
 {
-    "plugin_info\/configuration.php": {
-        "Adresse IP du Hub (plusieurs Ips possibles séparées par |) : ": "Adresse IP du Hub (plusieurs Ips possibles séparées par |) : ",
-        "Créer\/MAJ les configs :": "Créer\/MAJ les configs :",
+    "plugins\/harmonyhub\/plugin_info\/configuration.php": {
+        "Adresse IP du Hub (plusieurs Ips possibles séparées par |) : ": "",
+        "Créer\/MAJ les configs :": "",
         "Lancer": "Avvia",
-        "Etes-vous sûr de vouloir installer\/mettre à jour vos fichiers de config ? ": "Etes-vous sûr de vouloir installer\/mettre à jour vos fichiers de config ? ",
-        "Installation \/ Mise à jour ! Cela peut prendre plus d'une minute. Veuillez patienter jusqu\\'à l\\'apparition du message de fin": "Installare \/ Update! Si può richiedere più di un minuto. Si prega di attendere fino a quando l'aspetto \\ 's \\' s della fine del messaggio"
+        "Etes-vous sûr de vouloir installer\/mettre à jour vos fichiers de config ? ": "",
+        "Installation \/ Mise à jour ! Cela peut prendre plus d'une minute. Veuillez patienter jusqu\\'à l\\'apparition du message de fin": ""
     },
-    "desktop\/modal\/config.harmonyhub.php": {
-        "401 - Accès non autorisé": "401 - Accès non autorisé",
+    "plugins\/harmonyhub\/desktop\/modal\/health.php": {
+        "Image": "Immagine",
+        "Dispositifs": "",
+        "ID": "",
+        "Statut": "Stato",
+        "Dernière communication": "",
+        "Date création": "",
+        "OK": "Bene",
+        "NOK": ""
+    },
+    "plugins\/harmonyhub\/desktop\/modal\/config.harmonyhub.php": {
+        "401 - Accès non autorisé": "401 - Accesso non autorizzato",
         "Pause": "Pausa",
-        "Rechercher": "Cerca"
+        "Rechercher": "Ricercare"
     },
-    "desktop\/modal\/health.php": {
-        "Image": "Image",
-        "Dispositifs": "Dispositifs",
-        "ID": "ID",
-        "Statut": "Statut",
-        "Dernière communication": "Dernière communication",
-        "Date création": "Date création",
-        "OK": "OK",
-        "NOK": "NOK"
-    },
-    "desktop\/modal\/update.harmonyhub.php": {
-        "401 - Accès non autorisé": "401 - Accès non autorisé",
+    "plugins\/harmonyhub\/desktop\/modal\/update.harmonyhub.php": {
+        "401 - Accès non autorisé": "401 - Accesso non autorizzato",
         "Pause": "Pausa",
-        "Rechercher": "Cerca"
+        "Rechercher": "Ricercare"
     },
-    "desktop\/js\/harmonyhub.js": {
-        "Santé Harmony": "Santé Harmony",
-        "Afficher": "Mostra",
-        "Tester": "Prova"
-    },
-    "desktop\/php\/harmonyhub.php": {
-        "401 - Accès non autorisé": "401 - Accès non autorisé",
-        "Gestion": "Gestion",
+    "plugins\/harmonyhub\/desktop\/php\/harmonyhub.php": {
+        "401 - Accès non autorisé": "401 - Accesso non autorizzato",
+        "Gestion": "Gestione",
         "Ajouter": "Aggiungi",
         "Configuration": "Configurazione",
-        "Santé": "Santé",
-        "Mes Dispositifs": "i miei dispositivi",
-        "Vous n'avez pas encore de télécommande Harmony, aller sur Général -> Plugin et cliquez sur synchroniser pour commencer": "Vous n'avez pas encore de télécommande Harmony, aller sur Général -> Plugin et cliquez sur synchroniser pour commencer",
+        "Santé": "Salute",
+        "Mes Dispositifs": "",
+        "Vous n'avez pas encore de télécommande Harmony, aller sur Général -> Plugin et cliquez sur synchroniser pour commencer": "",
         "Sauvegarder": "Salva",
-        "Supprimer": "Elimina",
-        "Configuration avancée": "Configuration avancée",
-        "Equipement": "Equipement",
-        "Commandes": "Commandes",
-        "Nom de l'équipement": "Nom de l'équipement",
+        "Supprimer": "Rimuovere",
+        "Configuration avancée": "Configurazione avanzata",
+        "Equipement": "Dispositivo",
+        "Commandes": "Comandi",
+        "Nom de l'équipement": "Nome dispositivo",
         "Objet parent": "Oggetto padre",
         "Aucun": "Nessuno",
         "Catégorie": "Categoria",
-        "Activer": "Attiva",
+        "Activer": "Attivare",
         "Visible": "Visibile",
-        "Hub": "Hub",
-        "Dispositif": "dispositivo",
-        "Activer la récupération des activités toutes les minutes": "Abilita attività di recupero ogni minuto",
+        "Hub": "",
+        "Dispositif": "",
+        "Activer la récupération des activités toutes les minutes": "",
         "Informations": "Informazioni",
-        "Nom dispositif": "Nome dispositivo",
-        "Id dispositif": "dispositivo id",
-        "Visuel du dispositif": "dispositivo visivo",
-        "Icône du dispositif": "icona del dispositivo",
+        "Nom dispositif": "",
+        "Id dispositif": "",
+        "Visuel du dispositif": "",
+        "Icône du dispositif": "",
         "": "",
-        "Télévision": "TV",
-        "Climatisation": "aria condizionata",
-        "Ventilateur": "ventilatore",
-        "Ampli A\/V": "amplificatore A \/ V",
-        "Lampe": "lampada",
-        "Htpc": "HTPC",
-        "Lampe sur pied": "lampada da terra",
-        "Console de jeux": "game console",
-        "Box TV": "TV Box",
-        "Bandeau Leds": "fascia LED",
-        "Activité": "attività",
-        "Photophore": "tealight",
+        "Télévision": "",
+        "Climatisation": "",
+        "Ventilateur": "",
+        "Ampli A\/V": "",
+        "Lampe": "",
+        "Htpc": "",
+        "Lampe sur pied": "",
+        "Console de jeux": "",
+        "Box TV": "",
+        "Bandeau Leds": "",
+        "Activité": "",
+        "Photophore": "",
         "Nom": "Nome",
         "Commande": "Comando",
         "Options": "Opzioni",
         "Action": "Azione"
     },
-    "core\/ajax\/harmonyhub.ajax.php": {
-        "401 - Accès non autorisé": "401 - Accès non autorisé",
-        "Aucune methode correspondante à : ": "Aucune methode correspondante à : "
+    "plugins\/harmonyhub\/desktop\/js\/harmonyhub.js": {
+        "Santé Harmony": "",
+        "Afficher": "Mostra",
+        "Tester": "Prova"
     },
-    "core\/class\/harmonyhub.class.php": {
-        "Pause": "Pausa",
-        "Rechercher": "Cerca"
+    "plugins\/harmonyhub\/core\/ajax\/harmonyhub.ajax.php": {
+        "401 - Accès non autorisé": "401 - Accesso non autorizzato",
+        "Aucune methode correspondante à : ": "Nessun metodo corrispondente a:"
+    },
+    "plugins\/harmonyhub\/core\/class\/harmonyhub.class.php": {
+        "$name": "",
+        "Activité Courante": "",
+        "Refresh Activity": ""
     }
 }

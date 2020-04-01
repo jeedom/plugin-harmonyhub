@@ -1,88 +1,88 @@
 {
-    "plugin_info\/configuration.php": {
-        "Adresse IP du Hub (plusieurs Ips possibles séparées par |) : ": "Hub IP address (several possible Ips separated by |):",
-        "Créer\/MAJ les configs :": "Create \/ update configs:",
+    "plugins\/harmonyhub\/plugin_info\/configuration.php": {
+        "Adresse IP du Hub (plusieurs Ips possibles séparées par |) : ": "",
+        "Créer\/MAJ les configs :": "",
         "Lancer": "Run",
-        "Etes-vous sûr de vouloir installer\/mettre à jour vos fichiers de config ? ": "Are you sure you want to install \/ update your config files?",
-        "Installation \/ Mise à jour ! Cela peut prendre plus d'une minute. Veuillez patienter jusqu\\'à l\\'apparition du message de fin": "Install \/ Update! It may take more than a minute. Please wait until\\ ' the\\' end message is displayed"
+        "Etes-vous sûr de vouloir installer\/mettre à jour vos fichiers de config ? ": "",
+        "Installation \/ Mise à jour ! Cela peut prendre plus d'une minute. Veuillez patienter jusqu\\'à l\\'apparition du message de fin": ""
     },
-    "desktop\/modal\/config.harmonyhub.php": {
-        "401 - Accès non autorisé": "401 - Unauthorized access",
-        "Pause": "Pause",
-        "Rechercher": "Search"
-    },
-    "desktop\/modal\/health.php": {
+    "plugins\/harmonyhub\/desktop\/modal\/health.php": {
         "Image": "Picture",
-        "Dispositifs": "features",
-        "ID": "ID",
+        "Dispositifs": "",
+        "ID": "Id",
         "Statut": "Status",
         "Dernière communication": "Last communication",
         "Date création": "Creation Date",
-        "OK": "okay",
-        "NOK": "NOK"
+        "OK": "Okay",
+        "NOK": "NOk"
     },
-    "desktop\/modal\/update.harmonyhub.php": {
+    "plugins\/harmonyhub\/desktop\/modal\/config.harmonyhub.php": {
         "401 - Accès non autorisé": "401 - Unauthorized access",
         "Pause": "Pause",
         "Rechercher": "Search"
     },
-    "desktop\/js\/harmonyhub.js": {
-        "Santé Harmony": "Harmony Health",
-        "Afficher": "Display",
-        "Tester": "Test"
+    "plugins\/harmonyhub\/desktop\/modal\/update.harmonyhub.php": {
+        "401 - Accès non autorisé": "401 - Unauthorized access",
+        "Pause": "Pause",
+        "Rechercher": "Search"
     },
-    "desktop\/php\/harmonyhub.php": {
+    "plugins\/harmonyhub\/desktop\/php\/harmonyhub.php": {
         "401 - Accès non autorisé": "401 - Unauthorized access",
         "Gestion": "Management",
         "Ajouter": "Add",
         "Configuration": "Setup",
         "Santé": "Health",
-        "Mes Dispositifs": "My devices",
-        "Vous n'avez pas encore de télécommande Harmony, aller sur Général -> Plugin et cliquez sur synchroniser pour commencer": "You don&#39;t have a Harmony remote yet, go to General -&gt; Plugin and click on synchronize to start",
+        "Mes Dispositifs": "",
+        "Vous n'avez pas encore de télécommande Harmony, aller sur Général -> Plugin et cliquez sur synchroniser pour commencer": "",
         "Sauvegarder": "Save",
         "Supprimer": "Delete",
         "Configuration avancée": "Advanced configuration",
-        "Equipement": "Equipment",
-        "Commandes": "Orders",
+        "Equipement": "Device",
+        "Commandes": "Commands",
         "Nom de l'équipement": "Name of equipment",
         "Objet parent": "Parent object",
         "Aucun": "None",
         "Catégorie": "Category",
-        "Activer": "Enabled",
+        "Activer": "Activate",
         "Visible": "Visible",
-        "Hub": "Hub",
-        "Dispositif": "Device",
-        "Activer la récupération des activités toutes les minutes": "Enable recovery activities every minute",
+        "Hub": "",
+        "Dispositif": "",
+        "Activer la récupération des activités toutes les minutes": "",
         "Informations": "Information",
-        "Nom dispositif": "Device name",
-        "Id dispositif": "Device ID",
-        "Visuel du dispositif": "Visual device",
-        "Icône du dispositif": "Device icon",
+        "Nom dispositif": "",
+        "Id dispositif": "",
+        "Visuel du dispositif": "",
+        "Icône du dispositif": "",
         "": "",
-        "Télévision": "TV",
+        "Télévision": "",
         "Climatisation": "Air conditioning",
-        "Ventilateur": "Fan",
-        "Ampli A\/V": "A \/ V amplifier",
-        "Lampe": "Lamp\n\n",
-        "Htpc": "Htpc",
-        "Lampe sur pied": "Floor lamp",
-        "Console de jeux": "Game console",
-        "Box TV": "TV box",
-        "Bandeau Leds": "LED strip",
-        "Activité": "Activity",
-        "Photophore": "tealight",
+        "Ventilateur": "",
+        "Ampli A\/V": "",
+        "Lampe": "",
+        "Htpc": "",
+        "Lampe sur pied": "",
+        "Console de jeux": "",
+        "Box TV": "",
+        "Bandeau Leds": "",
+        "Activité": "",
+        "Photophore": "",
         "Nom": "Name",
         "Commande": "Command",
-        "Options": "options",
+        "Options": "Options",
         "Action": "Action"
     },
-    "core\/ajax\/harmonyhub.ajax.php": {
+    "plugins\/harmonyhub\/desktop\/js\/harmonyhub.js": {
+        "Santé Harmony": "",
+        "Afficher": "Pin up",
+        "Tester": "Test"
+    },
+    "plugins\/harmonyhub\/core\/ajax\/harmonyhub.ajax.php": {
         "401 - Accès non autorisé": "401 - Unauthorized access",
         "Aucune methode correspondante à : ": "No method corresponding to:"
     },
-    "core\/class\/harmonyhub.class.php": {
-        "$name": "$Name",
-        "Activité Courante": "Current Activity",
-        "Refresh Activity": "Refresh Activity"
+    "plugins\/harmonyhub\/core\/class\/harmonyhub.class.php": {
+        "$name": "",
+        "Activité Courante": "",
+        "Refresh Activity": ""
     }
 }
