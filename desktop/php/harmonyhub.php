@@ -161,7 +161,7 @@ foreach (jeeObject::all() as $object) {
                     		<label class="col-md-4 control-label">{{Icône du dispositif}}</label>
                     		<div class="col-md-4">
                         	<select id="sel_item2" class="form-control eqLogicAttr" data-l1key="configuration" data-l2key="icone" onchange="document.icon_visu.src=this.value;">
-								<option value="">{{}}</option>
+								<option value=""> </option>
 								<option value="plugins/harmonyhub/core/template/images/tv.png">{{Télévision}}</option>
 								<option value="plugins/harmonyhub/core/template/images/clim.png">{{Climatisation}}</option>
 								<option value="plugins/harmonyhub/core/template/images/ventilateur.png">{{Ventilateur}}</option>
