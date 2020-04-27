@@ -11,8 +11,8 @@
         "Dispositifs": "",
         "ID": "",
         "Statut": "Estado",
-        "Dernière communication": "",
-        "Date création": "",
+        "Dernière communication": "última mensagem",
+        "Date création": "Data de criação",
         "OK": "Ok",
         "NOK": ""
     },
@@ -53,7 +53,6 @@
         "Id dispositif": "",
         "Visuel du dispositif": "",
         "Icône du dispositif": "",
-        "": "",
         "Télévision": "",
         "Climatisation": "",
         "Ventilateur": "",

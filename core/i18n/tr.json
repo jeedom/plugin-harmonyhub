@@ -11,8 +11,8 @@
         "Dispositifs": "",
         "ID": "Kimlik",
         "Statut": "Statü",
-        "Dernière communication": "",
-        "Date création": "",
+        "Dernière communication": "Son konuşma",
+        "Date création": "Oluşturma tarihi",
         "OK": "Tamam",
         "NOK": ""
     },
@@ -53,7 +53,6 @@
         "Id dispositif": "",
         "Visuel du dispositif": "",
         "Icône du dispositif": "",
-        "": "",
         "Télévision": "",
         "Climatisation": "Klima",
         "Ventilateur": "",

@@ -12,7 +12,7 @@
         "ID": "",
         "Statut": "ステータス",
         "Dernière communication": "最後の通信",
-        "Date création": "",
+        "Date création": "作成日",
         "OK": "[OK]を",
         "NOK": ""
     },
@@ -53,7 +53,6 @@
         "Id dispositif": "",
         "Visuel du dispositif": "",
         "Icône du dispositif": "",
-        "": "",
         "Télévision": "",
         "Climatisation": "",
         "Ventilateur": "",

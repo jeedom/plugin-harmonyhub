@@ -11,8 +11,8 @@
         "Dispositifs": "",
         "ID": "",
         "Statut": "Status",
-        "Dernière communication": "",
-        "Date création": "",
+        "Dernière communication": "Pesan terakhir",
+        "Date création": "Tanggal pembuatan",
         "OK": "OK",
         "NOK": ""
     },
@@ -53,7 +53,6 @@
         "Id dispositif": "",
         "Visuel du dispositif": "",
         "Icône du dispositif": "",
-        "": "",
         "Télévision": "",
         "Climatisation": "",
         "Ventilateur": "",
