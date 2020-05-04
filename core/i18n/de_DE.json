@@ -1,20 +1,20 @@
 {
     "plugins\/harmonyhub\/plugin_info\/configuration.php": {
-        "Adresse IP du Hub (plusieurs Ips possibles séparées par |) : ": "",
-        "Créer\/MAJ les configs :": "",
+        "Adresse IP du Hub (plusieurs Ips possibles séparées par |) : ": "Hub-IP-Adresse (mehrere mögliche Ips durch | getrennt):",
+        "Créer\/MAJ les configs :": "Konfigurationen erstellen \/ aktualisieren:",
         "Lancer": "Start",
-        "Etes-vous sûr de vouloir installer\/mettre à jour vos fichiers de config ? ": "",
-        "Installation \/ Mise à jour ! Cela peut prendre plus d'une minute. Veuillez patienter jusqu\\'à l\\'apparition du message de fin": ""
+        "Etes-vous sûr de vouloir installer\/mettre à jour vos fichiers de config ? ": "Möchten Sie Ihre Konfigurationsdateien wirklich installieren \/ aktualisieren?",
+        "Installation \/ Mise à jour ! Cela peut prendre plus d'une minute. Veuillez patienter jusqu\\'à l\\'apparition du message de fin": "Installation \/ Update! Es kann länger als eine Minute dauern. Bitte warten Sie, bis die Endmeldung angezeigt wird"
     },
     "plugins\/harmonyhub\/desktop\/modal\/health.php": {
         "Image": "Bild",
-        "Dispositifs": "",
+        "Dispositifs": "Geräte",
         "ID": "Identifikation",
         "Statut": "Status",
         "Dernière communication": "Letzte Mitteilung",
         "Date création": "Erstellungsdatum",
         "OK": "OK",
-        "NOK": ""
+        "NOK": "NOK"
     },
     "plugins\/harmonyhub\/desktop\/modal\/config.harmonyhub.php": {
         "401 - Accès non autorisé": "401 - Nicht autorisierter Zugriff",
@@ -32,8 +32,8 @@
         "Ajouter": "Hinzufügen",
         "Configuration": "Konfiguration",
         "Santé": "Gesundheit",
-        "Mes Dispositifs": "",
-        "Vous n'avez pas encore de télécommande Harmony, aller sur Général -> Plugin et cliquez sur synchroniser pour commencer": "",
+        "Mes Dispositifs": "Meine Geräte",
+        "Vous n'avez pas encore de télécommande Harmony, aller sur Général -> Plugin et cliquez sur synchroniser pour commencer": "Sie haben noch keine Harmony-Fernbedienung. Gehen Sie zu Allgemein -> Plugin und klicken Sie zum Starten auf Synchronisieren",
         "Sauvegarder": "Speichern",
         "Supprimer": "Löschen",
         "Configuration avancée": "Erweiterte Konfiguration",
@@ -45,33 +45,33 @@
         "Catégorie": "Kategorie",
         "Activer": "Aktivieren",
         "Visible": "Sichtbar",
-        "Hub": "",
-        "Dispositif": "",
-        "Activer la récupération des activités toutes les minutes": "",
+        "Hub": "Hub",
+        "Dispositif": "Gerät",
+        "Activer la récupération des activités toutes les minutes": "Aktivieren Sie den Aktivitätsabruf jede Minute",
         "Informations": "Information",
-        "Nom dispositif": "",
-        "Id dispositif": "",
-        "Visuel du dispositif": "",
-        "Icône du dispositif": "",
-        "Télévision": "",
+        "Nom dispositif": "Gerätename",
+        "Id dispositif": "Geräte-ID",
+        "Visuel du dispositif": "Visual des Geräts",
+        "Icône du dispositif": "Gerätesymbol",
+        "Télévision": "Fernsehen",
         "Climatisation": "Klimaanlage",
-        "Ventilateur": "",
-        "Ampli A\/V": "",
-        "Lampe": "",
-        "Htpc": "",
-        "Lampe sur pied": "",
-        "Console de jeux": "",
-        "Box TV": "",
-        "Bandeau Leds": "",
-        "Activité": "",
-        "Photophore": "",
+        "Ventilateur": "Lüfter",
+        "Ampli A\/V": "A \/ V-Verstärker",
+        "Lampe": "Lampe",
+        "Htpc": "Htpc",
+        "Lampe sur pied": "Stehlampe",
+        "Console de jeux": "Spielekonsole",
+        "Box TV": "TV-Box",
+        "Bandeau Leds": "LED-Streifen",
+        "Activité": "Aktivität",
+        "Photophore": "Teelichthalter",
         "Nom": "Name",
         "Commande": "Befehl",
         "Options": "Optionen",
         "Action": "Aktion"
     },
     "plugins\/harmonyhub\/desktop\/js\/harmonyhub.js": {
-        "Santé Harmony": "",
+        "Santé Harmony": "Harmonie Gesundheit",
         "Afficher": "Anzeige",
         "Tester": "Test"
     },
@@ -80,8 +80,8 @@
         "Aucune methode correspondante à : ": "Keine Methode entsprechend:"
     },
     "plugins\/harmonyhub\/core\/class\/harmonyhub.class.php": {
-        "$name": "",
-        "Activité Courante": "",
-        "Refresh Activity": ""
+        "$name": "$ name",
+        "Activité Courante": "Aktuelle Aktivität",
+        "Refresh Activity": "Aktivität aktualisieren"
     }
 }
