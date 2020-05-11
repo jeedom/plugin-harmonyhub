@@ -1,5 +1,6 @@
 {
     "changelog.md": {
+        "Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte": "Como recordatorio si no hay información sobre la actualización, significa que solo se refiere a la actualización de documentación, traducción o texto",
         "20-09-2019": "20\/09\/2019",
         "Adaptation V4": "Adaptación V4",
         "07-06-2019": "07-06-2019",
@@ -14,7 +15,14 @@
         "Nous ne savions pas quand Logitech allait remettre le support du XMMP": "No sabíamos cuándo iba a lanzar Logitech el soporte para XMMP",
         "Mais coup sur coup il y a eu une réaction": "Pero golpe tras golpe hubo una reacción",
         "21-12-2018": "2018-12-21",
-        "Correction en urgence lié à la maj de Logitech (provisoire pour dépanner, pensez à relancer les dépendances)": "Corrección de emergencia relacionada con la mayoría de Logitech (temporal para solucionar problemas, recuerde relanzar las dependencias)"
+        "Correction en urgence lié à la maj de Logitech (provisoire pour dépanner, pensez à relancer les dépendances)": "Corrección de emergencia relacionada con la mayoría de Logitech (temporal para solucionar problemas, recuerde relanzar las dependencias)",
+        " IMPORTANT.": " Importante.",
+        " IMPORTANT?": " Importante?",
+        "IMPORTANT ": "Importante ",
+        "[IMPORTANT": "[Importante",
+        "IMPORTANT]": "Importante]",
+        "*IMPORTANT": "*Importante",
+        "IMPORTANT*": "Importante*"
     },
     "index.md": {
         "Harmony Hub": "Harmony Hub",
