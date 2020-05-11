@@ -3,7 +3,7 @@
         "Adresse IP du Hub (plusieurs Ips possibles séparées par |) : ": "Hub IP address (several possible IP separated by |):",
         "Créer\/MAJ les configs :": "Create \/ update configs:",
         "Lancer": "Run",
-        "Etes-vous sûr de vouloir installer\/mettre à jour vos fichiers de config ? ": "\n\nAre you sure you want to install \/ update your config files?",
+        "Etes-vous sûr de vouloir installer\/mettre à jour vos fichiers de config ? ": "Are you sure you want to install \/ update your config files?",
         "Installation \/ Mise à jour ! Cela peut prendre plus d'une minute. Veuillez patienter jusqu\\'à l\\'apparition du message de fin": "Installation \/ Update! It may take more than a minute. Please wait until the end message appears"
     },
     "plugins\/harmonyhub\/desktop\/modal\/health.php": {

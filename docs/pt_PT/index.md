@@ -13,7 +13,7 @@ o Harmony Hub.
 
 Este plugin para recuperar suas atividades e dispositivos. E então de
 poder adicionar automaticamente todos os comandos associados ao
-para poder controlá-los através de cenários, virtuais, painel, etc..
+para poder controlá-los através de cenários, virtuais, painel, etc.
 
 Configuração 
 -------------

@@ -18,7 +18,7 @@ to be able to control them via scenarios, virtuals, dashboard etc….
 Setup 
 -------------
 
-### Setup of the Harmony Hub plugin : 
+### Configuration of the Harmony Hub plugin : 
 
 at. Installation / Creation
 

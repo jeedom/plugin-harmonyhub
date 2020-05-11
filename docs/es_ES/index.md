@@ -13,7 +13,7 @@ su Harmony Hub.
 
 Este complemento para recuperar tus actividades y dispositivos. Y luego de
 poder agregar automáticamente todos los comandos asociados a
-para poder controlarlos a través de escenarios, virtuales, paneles, etc..
+para poder controlarlos a través de escenarios, virtuales, paneles, etc.
 
 Configuración 
 -------------
@@ -25,7 +25,7 @@ a. Instalación / Creación
 Para usar el complemento, debe descargar, instalar y
 activarlo como cualquier complemento de Jeedom.
 
-Después de eso, deberá comenzar la instalación de las dependencias. :
+Después de eso, deberá comenzar la instalación de las dependencias :
 
 
 ![dep harmony](../images/dep_harmony.jpg)
@@ -75,7 +75,7 @@ visible su equipo.
 El menú desplegable le permite elegir :
 
 -   Actividades : Equipo que reúne todas sus actividades, así como
-    el apagado general. Y una información de la actividad actual..
+    el apagado general. Y una información de la actividad actual.
 
 -   Uno de sus dispositivos : Equipamiento que reúne a todos
     comandos para un dispositivo dado.
