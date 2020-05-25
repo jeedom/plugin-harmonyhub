@@ -19,7 +19,7 @@
 # 2019-02-19
 
 Dieses Update ist ein wichtiger Bestandteil des Updates von Logitech, mit dem XMMP reaktiviert wird. Sie müssen die conf-Datei neu erstellen und insbesondere in der Harmony-Anwendung den Entwicklermodus aktivieren, der das XMMP aktiviert
-Zur Information: Diese Verschiebung erfolgt am selben Tag wie der Logitech-Patch. Genau wie die Problemumgehung vom 21-12-2018, die es vielen Menschen ermöglichte, repariert zu werden, da sie für alle funktionierte, die sich auf der Debian-Strecke befanden (besser als nichts). Wir wussten nicht, wann Logitech die Unterstützung für XMMP veröffentlichen würde. Aber Schlag auf Schlag gab es eine Reaktion.
+Zur Information: Diese Verschiebung erfolgt am selben Tag wie der Logitech-Patch. Genau wie die Problemumgehung vom 21-12-2018, die es vielen Menschen ermöglichte, repariert zu werden, da sie für alle Personen funktionierte, die sich unter Debian-Dehnung befanden (besser als nichts)). Wir wussten nicht, wann Logitech die Unterstützung für XMMP veröffentlichen würde. Aber Schlag auf Schlag gab es eine Reaktion.
 
 # 2018-12-21
 
