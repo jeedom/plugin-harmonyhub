@@ -8,5 +8,7 @@
     "category": "multimedia",
     "hasDependency": true,
     "changelog": "https:\/\/doc.jeedom.com\/#language#\/plugins\/multimedia\/harmonyhub\/changelog",
-    "documentation": "https:\/\/doc.jeedom.com\/#language#\/plugins\/multimedia\/harmonyhub\/"
+    "documentation": "https:\/\/doc.jeedom.com\/#language#\/plugins\/multimedia\/harmonyhub\/",
+    "language" : ["fr_FR","en_US","de_DE","sp_SP"],
+    "compatibility" : ["miniplus","smart","rpi","docker","diy","mobile","v4"]
 }
