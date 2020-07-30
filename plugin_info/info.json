@@ -1,7 +1,13 @@
 {
     "id": "harmonyhub",
     "name": "Harmony Hub",
-    "description": "Plugin pour controller votre Harmony Hub",
+    "description": {
+        "fr_FR": "Plugin pour controller votre Harmony Hub",
+        "en_US": "Plugin to control your Harmony Hub",
+        "es_ES": "Plugin para controlar tu Harmony Hub",
+        "de_DE": "Plugin zur Steuerung Ihres Harmony Hub",
+        "pt_PT": "Plug-in para controlar o seu Harmony Hub"
+    },
     "licence": "AGPL",
     "author": "Ludovic SARAKHA",
     "require": "3.0",
@@ -9,6 +15,20 @@
     "hasDependency": true,
     "changelog": "https:\/\/doc.jeedom.com\/#language#\/plugins\/multimedia\/harmonyhub\/changelog",
     "documentation": "https:\/\/doc.jeedom.com\/#language#\/plugins\/multimedia\/harmonyhub\/",
-    "language" : ["fr_FR","en_US","de_DE","sp_SP"],
-    "compatibility" : ["miniplus","smart","rpi","docker","diy","mobile","v4"]
+    "language": [
+        "fr_FR",
+        "en_US",
+        "es_ES",
+        "de_DE",
+        "pt_PT"
+    ],
+    "compatibility": [
+        "miniplus",
+        "smart",
+        "rpi",
+        "docker",
+        "diy",
+        "mobile",
+        "v4"
+    ]
 }
