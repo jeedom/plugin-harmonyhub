@@ -83,5 +83,8 @@
         "$name": "$ name",
         "Activité Courante": "Atividade Atual",
         "Refresh Activity": "Atualizar atividade"
+    },
+    "info.json": {
+        "Plugin pour controller votre Harmony Hub": "Plug-in para controlar o seu Harmony Hub"
     }
 }

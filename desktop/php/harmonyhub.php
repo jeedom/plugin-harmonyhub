@@ -28,6 +28,12 @@ $eqLogics = eqLogic::byType('harmonyhub');
 </div>
   <legend><i class="icon techno-home115"></i>  {{Mes Dispositifs}}
   </legend>
+  <div class="input-group" style="margin:5px;">
+		<input class="form-control" placeholder="{{Rechercher}}" id="in_searchEqlogic"/>
+		<div class="input-group-btn">
+			<a id="bt_resetSearch" class="btn roundedRight" style="width:30px"><i class="fas fa-times"></i></a>
+		</div>
+	</div>
   <?php
 if (count($eqLogics) == 0) {
 	echo "<br/><br/><br/><center><span style='color:#767676;font-size:1.2em;font-weight: bold;'>{{Vous n'avez pas encore de télécommande Harmony, aller sur Général -> Plugin et cliquez sur synchroniser pour commencer}}</span></center>";
@@ -46,7 +52,7 @@ if (count($eqLogics) == 0) {
                     }
                     echo '<img src="'.$path.'"/>';
 					echo '<br/>';
-                   echo '<span>' . $eqLogic->getHumanName(true, true) . '</span>';
+                   echo '<span class="name">' . $eqLogic->getHumanName(true, true) . '</span>';
                     echo '</div>';
                 }
                 ?>
@@ -56,9 +62,15 @@ if (count($eqLogics) == 0) {
 </div> 
 
     <div class="col-lg-12 eqLogic" style="display: none;">
-         <a class="btn btn-success eqLogicAction pull-right" data-action="save"><i class="fa fa-check-circle"></i> {{Sauvegarder}}</a>
-    <a class="btn btn-danger eqLogicAction pull-right" data-action="remove"><i class="fa fa-minus-circle"></i> {{Supprimer}}</a>
-  <a class="btn btn-default eqLogicAction pull-right" data-action="configure"><i class="fa fa-cogs"></i> {{Configuration avancée}}</a>
+         <div class="input-group pull-right" style="display:inline-flex;">
+			<span class="input-group-btn">
+				<a class="btn btn-sm btn-default eqLogicAction roundedLeft" data-action="configure"><i class="fa fa-cogs"></i><span class="hidden-xs"> {{Configuration avancée}}</span>
+				</a><a class="btn btn-sm btn-default eqLogicAction" data-action="copy"><i class="fas fa-copy"></i><span class="hidden-xs">  {{Dupliquer}}</span>
+				</a><a class="btn btn-sm btn-success eqLogicAction" data-action="save"><i class="fas fa-check-circle"></i> {{Sauvegarder}}
+				</a><a class="btn btn-sm btn-danger eqLogicAction roundedRight" data-action="remove"><i class="fas fa-minus-circle"></i> {{Supprimer}}
+				</a>
+			</span>
+		</div>
 
     <ul class="nav nav-tabs" role="tablist">
         <li role="presentation"><a href="#" class="eqLogicAction" aria-controls="home" role="tab" data-toggle="tab" data-action="returnToThumbnailDisplay"><i class="fa fa-arrow-circle-left"></i></a></li>
@@ -69,20 +81,20 @@ if (count($eqLogics) == 0) {
     <div class="tab-content" style="height:calc(100% - 50px);overflow:auto;overflow-x: hidden;">
         <div role="tabpanel" class="tab-pane active" id="eqlogictab">
 		<div class="row">
-            <div class="col-sm-6">
+            <div class="col-lg-7">
 		<form class="form-horizontal">
             <fieldset>
                 <div class="form-group">
-                        <label class="col-lg-3 control-label">{{Nom de l'équipement}}</label>
-                        <div class="col-lg-4">
+                        <label class="col-sm-3 control-label">{{Nom de l'équipement}}</label>
+                        <div class="col-sm-7">
                             <input type="text" class="eqLogicAttr form-control" data-l1key="id" style="display : none;" />
                             <input type="text" class="eqLogicAttr form-control" data-l1key="name" placeholder="{{Nom de l'équipement}}"/>
                         </div>
 
                     </div>
                     <div class="form-group">
-                        <label class="col-lg-3 control-label" >{{Objet parent}}</label>
-                        <div class="col-lg-4">
+                        <label class="col-sm-3 control-label" >{{Objet parent}}</label>
+                        <div class="col-sm-7">
                             <select id="sel_object" class="eqLogicAttr form-control" data-l1key="object_id">
                                 <option value="">{{Aucun}}</option>
                                 <?php
@@ -94,8 +106,8 @@ foreach (jeeObject::all() as $object) {
                        </div>
                    </div>
                 <div class="form-group">
-                    <label class="col-lg-2 control-label">{{Catégorie}}</label>
-                    <div class="col-lg-9">
+                    <label class="col-sm-3 control-label">{{Catégorie}}</label>
+                    <div class="col-sm-9">
                         <?php
                         foreach (jeedom::getConfiguration('eqLogic:category') as $key => $value) {
                             echo '<label class="checkbox-inline">';
@@ -107,16 +119,16 @@ foreach (jeeObject::all() as $object) {
                     </div>
                 </div>
                <div class="form-group">
-                    <label class="col-sm-2 control-label"></label>
-                    <div class="col-sm-10">
+                    <label class="col-sm-3 control-label"></label>
+                    <div class="col-sm-7">
                         <label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="isEnable" checked/>{{Activer}}</label>
                         <label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="isVisible" checked/>{{Visible}}</label>
                     </div>
                 </div>
                 <legend><i class="fa fa-wrench"></i>  {{Configuration}}</legend>
                 <div class="form-group">
-					<label class="col-lg-2 control-label">{{Hub}}</label>
-                    <div class="col-lg-4">
+					<label class="col-sm-3 control-label">{{Hub}}</label>
+                    <div class="col-sm-7">
                         <select id="sel_itemhub" class="eqLogicAttr form-control hubIp" data-l1key="configuration" data-l2key="hubIp">
                             <?php
 								foreach (explode('|',config::byKey('ip', 'harmonyhub', 0)) as $hub) {
@@ -125,8 +137,8 @@ foreach (jeeObject::all() as $object) {
                             ?> 
                         </select>
                     </div>
-                    <label class="col-lg-2 control-label">{{Dispositif}}</label>
-                    <div class="col-lg-4">
+                    <label class="col-sm-3 control-label">{{Dispositif}}</label>
+                    <div class="col-sm-7">
                         <select id="sel_item" class="eqLogicAttr form-control dispositifid" data-l1key="configuration" data-l2key="dispositifid">
                             
                         </select>
@@ -134,8 +146,8 @@ foreach (jeeObject::all() as $object) {
                 </div>
 				<div class="cron">
 				<div class="form-group">
-				<label class="col-lg-4 control-label" >{{Activer la récupération des activités toutes les minutes}}</label>
-                    <div class="col-lg-1">
+				<label class="col-sm-3 control-label" >{{Activer la récupération des activités toutes les minutes}}</label>
+                    <div class="col-sm-7">
 						<input type="checkbox" class="eqLogicAttr" data-l1key="configuration" data-l2key="cronenabled" checked/>
                     </div>
 				</div>
@@ -143,19 +155,19 @@ foreach (jeeObject::all() as $object) {
 			<legend><i class="fa fa-info"></i>  {{Informations}}</legend>
                 
 			<div class="form-group">
-                    		<label class="col-lg-3 control-label">{{Nom dispositif}}</label>
-                    		<div class="col-lg-3">
+                    		<label class="col-sm-3 control-label">{{Nom dispositif}}</label>
+                    		<div class="col-sm-7">
                         	<input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="disponame" readonly/>
                     		</div>
-							<label class="col-lg-3 control-label">{{Id dispositif}}</label>
-                    		<div class="col-lg-3">
+							<label class="col-sm-3 control-label">{{Id dispositif}}</label>
+                    		<div class="col-sm-7">
                         	<input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="dispoid" readonly/>
                     		</div>
             </div>
 			</fieldset>
 		</form>
 		</div>
-		 <div class="col-sm-6">
+		 <div class="col-lg-5">
 		<legend><i class="fa fa-camera"></i>   {{Visuel du dispositif}}</legend>
                 	<div class="form-group">
                     		<label class="col-md-4 control-label">{{Icône du dispositif}}</label>
