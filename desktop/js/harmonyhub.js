@@ -14,6 +14,12 @@
  * You should have received a copy of the GNU General Public License
  * along with Jeedom. If not, see <http://www.gnu.org/licenses/>.
  */
+ 
+  $('#bt_resetSearch').off('click').on('click', function () {
+     $('#in_searchEqlogic').val('')
+     $('#in_searchEqlogic').keyup();
+ })
+ 
   $('#bt_healthharmony').on('click', function () {
     $('#md_modal').dialog({title: "{{Santé Harmony}}"});
     $('#md_modal').load('index.php?v=d&plugin=harmonyhub&modal=health').dialog('open');
