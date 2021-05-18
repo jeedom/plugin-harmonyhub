@@ -1,236 +1,246 @@
 <?php
 if (!isConnect('admin')) {
-    throw new Exception('{{401 - Accès non autorisé}}');
+  throw new Exception('{{401 - Accès non autorisé}}');
 }
-sendVarToJS('eqType', 'harmonyhub');
-$eqLogics = eqLogic::byType('harmonyhub');
+$plugin = plugin::byId('template');
+sendVarToJS('eqType', $plugin->getId());
+$eqLogics = eqLogic::byType($plugin->getId());
 ?>
 
 <div class="row row-overflow">
- <div class="col-lg-12 eqLogicThumbnailDisplay">
-   <legend><i class="fa fa-cog"></i>  {{Gestion}}</legend>
-   <div class="eqLogicThumbnailContainer">
-   <div class="cursor eqLogicAction logoPrimary" data-action="add" >
-      <i class="fa fa-plus-circle"></i>
-	<br/>
-    <span><center>{{Ajouter}}</center></span>
-  </div>
-  <div class="cursor eqLogicAction logoSecondary" data-action="gotoPluginConf">
-      <i class="fa fa-wrench"></i>
-	<br/>
-    <span><center>{{Configuration}}</center></span>
-  </div>
-  <div class="cursor logoSecondary" id="bt_healthharmony">
-    <i class="fa fa-medkit"></i>
-	<br/>
-  <span><center>{{Santé}}</center></span>
-</div>
-</div>
-  <legend><i class="icon techno-home115"></i>  {{Mes Dispositifs}}
-  </legend>
-  <div class="input-group" style="margin:5px;">
-		<input class="form-control" placeholder="{{Rechercher}}" id="in_searchEqlogic"/>
-		<div class="input-group-btn">
-			<a id="bt_resetSearch" class="btn roundedRight" style="width:30px"><i class="fas fa-times"></i></a>
-		</div>
-	</div>
-  <?php
-if (count($eqLogics) == 0) {
-	echo "<br/><br/><br/><center><span style='color:#767676;font-size:1.2em;font-weight: bold;'>{{Vous n'avez pas encore de télécommande Harmony, aller sur Général -> Plugin et cliquez sur synchroniser pour commencer}}</span></center>";
-} else {
-	?>
-   <div class="eqLogicThumbnailContainer">
+  <div class="col-lg-12 eqLogicThumbnailDisplay">
+    <legend><i class="fas fa-cog"></i>  {{Gestion}}</legend>
+    <div class="eqLogicThumbnailContainer">
+      <div class="cursor eqLogicAction logoPrimary" data-action="add" >
+        <i class="fas fa-plus-circle"></i>
+        <br/>
+        <span><center>{{Ajouter}}</center></span>
+      </div>
+      <div class="cursor eqLogicAction logoSecondary" data-action="gotoPluginConf">
+        <i class="fas fa-wrench"></i>
+        <br/>
+        <span><center>{{Configuration}}</center></span>
+      </div>
+      <div class="cursor logoSecondary" id="bt_healthharmony">
+        <i class="fas fa-medkit"></i>
+        <br/>
+        <span><center>{{Santé}}</center></span>
+      </div>
+    </div>
+    <legend><i class="icon techno-tv6"></i>  {{Mes Dispositifs}}</legend>
     <?php
-				foreach ($eqLogics as $eqLogic) {
-					$opacity = ($eqLogic->getIsEnable()) ? '' : 'disableCard';
-                    echo '<div class="eqLogicDisplayCard cursor '.$opacity.'" data-eqLogic_id="' . $eqLogic->getId() . '">';
-                    $file = $eqLogic->getConfiguration('icone');
-                    if (file_exists($file)) {
-                        $path = $eqLogic->getConfiguration('icone');
-                    } else {
-                        $path = 'plugins/harmonyhub/core/template/images/harmonyhub_icon.png';
-                    }
-                    echo '<img src="'.$path.'"/>';
-					echo '<br/>';
-                   echo '<span class="name">' . $eqLogic->getHumanName(true, true) . '</span>';
-                    echo '</div>';
-                }
-                ?>
- </div>
- <?php }
-?>
-</div> 
+    if (count($eqLogics) == 0) {
+      echo '<br/><div class="text-center" style="font-size:1.2em;font-weight:bold;">{{Aucune télécommande Harmony n\'a été trouvée, cliquer sur "Ajouter" pour commencer}}</div>';
+    } else {
+      // Champ de recherche
+      echo '<div class="input-group" style="margin:5px;">';
+      echo '<input class="form-control roundedLeft" placeholder="{{Rechercher}}" id="in_searchEqlogic"/>';
+      echo '<div class="input-group-btn">';
+      echo '<a id="bt_resetSearch" class="btn roundedRight" style="width:30px"><i class="fas fa-times"></i></a>';
+      echo '</div>';
+      echo '</div>';
+      echo '<div class="eqLogicThumbnailContainer">';
+      foreach ($eqLogics as $eqLogic) {
+        $opacity = ($eqLogic->getIsEnable()) ? '' : 'disableCard';
+        echo '<div class="eqLogicDisplayCard cursor '.$opacity.'" data-eqLogic_id="' . $eqLogic->getId() . '">';
+        $file = $eqLogic->getConfiguration('icone');
+        if (file_exists($file)) {
+          $path = $eqLogic->getConfiguration('icone');
+        } else {
+          $path = $plugin->getPathImgIcon();
+        }
+        echo '<img src="'.$path.'"/>';
+        echo '<br>';
+        echo '<span class="name">' . $eqLogic->getHumanName(true, true) . '</span>';
+        echo '</div>';
+      }
+      echo '</div>';
+    }
+    ?>
+  </div>
 
-    <div class="col-lg-12 eqLogic" style="display: none;">
-         <div class="input-group pull-right" style="display:inline-flex;">
-			<span class="input-group-btn">
-				<a class="btn btn-sm btn-default eqLogicAction roundedLeft" data-action="configure"><i class="fa fa-cogs"></i><span class="hidden-xs"> {{Configuration avancée}}</span>
-				</a><a class="btn btn-sm btn-default eqLogicAction" data-action="copy"><i class="fas fa-copy"></i><span class="hidden-xs">  {{Dupliquer}}</span>
-				</a><a class="btn btn-sm btn-success eqLogicAction" data-action="save"><i class="fas fa-check-circle"></i> {{Sauvegarder}}
-				</a><a class="btn btn-sm btn-danger eqLogicAction roundedRight" data-action="remove"><i class="fas fa-minus-circle"></i> {{Supprimer}}
-				</a>
-			</span>
-		</div>
+  <div class="col-lg-12 eqLogic" style="display: none;">
+    <div class="input-group pull-right" style="display:inline-flex;">
+      <span class="input-group-btn">
+        <a class="btn btn-sm btn-default eqLogicAction roundedLeft" data-action="configure"><i class="fas fa-cogs"></i><span class="hidden-xs"> {{Configuration avancée}}</span>
+        </a><a class="btn btn-sm btn-default eqLogicAction" data-action="copy"><i class="fas fa-copy"></i><span class="hidden-xs">  {{Dupliquer}}</span>
+        </a><a class="btn btn-sm btn-success eqLogicAction" data-action="save"><i class="fas fa-check-circle"></i> {{Sauvegarder}}
+        </a><a class="btn btn-sm btn-danger eqLogicAction roundedRight" data-action="remove"><i class="fas fa-minus-circle"></i> {{Supprimer}}
+        </a>
+      </span>
+    </div>
 
     <ul class="nav nav-tabs" role="tablist">
-        <li role="presentation"><a href="#" class="eqLogicAction" aria-controls="home" role="tab" data-toggle="tab" data-action="returnToThumbnailDisplay"><i class="fa fa-arrow-circle-left"></i></a></li>
-        <li role="presentation" class="active"><a href="#eqlogictab" aria-controls="home" role="tab" data-toggle="tab"><i class="fa fa-tachometer"></i> {{Equipement}}</a></li>
-        <li role="presentation"><a href="#commandtab" aria-controls="profile" role="tab" data-toggle="tab"><i class="fa fa-list-alt"></i> {{Commandes}}</a></li>
+      <li role="presentation"><a href="#" class="eqLogicAction" aria-controls="home" role="tab" data-toggle="tab" data-action="returnToThumbnailDisplay"><i class="fas fa-arrow-circle-left"></i></a></li>
+      <li role="presentation" class="active"><a href="#eqlogictab" aria-controls="home" role="tab" data-toggle="tab"><i class="fas fa-tachometer-alt"></i> {{Equipement}}</a></li>
+      <li role="presentation"><a href="#commandtab" aria-controls="profile" role="tab" data-toggle="tab"><i class="fas fa-list"></i> {{Commandes}}</a></li>
     </ul>
 
-    <div class="tab-content" style="height:calc(100% - 50px);overflow:auto;overflow-x: hidden;">
-        <div role="tabpanel" class="tab-pane active" id="eqlogictab">
-		<div class="row">
-            <div class="col-lg-7">
-		<form class="form-horizontal">
-            <fieldset>
-                <div class="form-group">
-                        <label class="col-sm-3 control-label">{{Nom de l'équipement}}</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="eqLogicAttr form-control" data-l1key="id" style="display : none;" />
-                            <input type="text" class="eqLogicAttr form-control" data-l1key="name" placeholder="{{Nom de l'équipement}}"/>
-                        </div>
+    <div class="tab-content">
+      <div role="tabpanel" class="tab-pane active" id="eqlogictab">
+        <form class="form-horizontal">
+          <fieldset>
+            <div class="col-lg-6">
+              <legend><i class="fas fa-wrench"></i> {{Paramètres généraux}}</legend>
+              <div class="form-group">
+                <label class="col-sm-3 control-label">{{Nom de l'équipement}}</label>
+                <div class="col-sm-7">
+                  <input type="text" class="eqLogicAttr form-control" data-l1key="id" style="display : none;" />
+                  <input type="text" class="eqLogicAttr form-control" data-l1key="name" placeholder="{{Nom de l'équipement}}"/>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-3 control-label" >{{Objet parent}}</label>
+                <div class="col-sm-7">
+                  <select id="sel_object" class="eqLogicAttr form-control" data-l1key="object_id">
+                    <option value="">{{Aucun}}</option>
+                    <?php
+                    $options = '';
+                    foreach ((jeeObject::buildTree(null, false)) as $object) {
+                      $options .= '<option value="' . $object->getId() . '">' . str_repeat('&nbsp;&nbsp;', $object->getConfiguration('parentNumber')) . $object->getName() . '</option>';
+                    }
+                    echo $options;
+                    ?>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-3 control-label">{{Catégorie}}</label>
+                <div class="col-sm-7">
+                  <?php
+                  foreach (jeedom::getConfiguration('eqLogic:category') as $key => $value) {
+                    echo '<label class="checkbox-inline">';
+                    echo '<input type="checkbox" class="eqLogicAttr" data-l1key="category" data-l2key="' . $key . '" />' . $value['name'];
+                    echo '</label>';
+                  }
+                  ?>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-3 control-label">{{Options}}</label>
+                <div class="col-sm-7">
+                  <label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="isEnable" checked/>{{Activer}}</label>
+                  <label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="isVisible" checked/>{{Visible}}</label>
+                </div>
+              </div>
 
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label" >{{Objet parent}}</label>
-                        <div class="col-sm-7">
-                            <select id="sel_object" class="eqLogicAttr form-control" data-l1key="object_id">
-                                <option value="">{{Aucun}}</option>
-                                <?php
-											$options = '';
-											foreach ((jeeObject::buildTree(null, false)) as $object) {
-											$options .= '<option value="' . $object->getId() . '">' . str_repeat('&nbsp;&nbsp;', $object->getConfiguration('parentNumber')) . $object->getName() . '</option>';
-											}
-											echo $options;
-											?>
-                           </select>
-                       </div>
-                   </div>
-                <div class="form-group">
-                    <label class="col-sm-3 control-label">{{Catégorie}}</label>
-                    <div class="col-sm-9">
-                        <?php
-                        foreach (jeedom::getConfiguration('eqLogic:category') as $key => $value) {
-                            echo '<label class="checkbox-inline">';
-                            echo '<input type="checkbox" class="eqLogicAttr" data-l1key="category" data-l2key="' . $key . '" />' . $value['name'];
-                            echo '</label>';
-                        }
-                        ?>
-
-                    </div>
+              <legend><i class="fas fa-cogs"></i> {{Paramètres spécifiques}}</legend>
+              <div class="form-group">
+                <label class="col-sm-3 control-label">{{Hub}}
+                  <sup><i class="fas fa-question-circle tooltips" title="{{Sélectionner le Hub Harmony parmis les adresses IP renseignées dans la configuration du plugin}}"></i></sup>
+                </label>
+                <div class="col-sm-7">
+                  <select id="sel_itemhub" class="eqLogicAttr form-control hubIp" data-l1key="configuration" data-l2key="hubIp">
+                    <?php
+                    foreach (explode('|',config::byKey('ip', 'harmonyhub', 0)) as $hub) {
+                      echo '<option value="' . $hub . '">' . $hub . '</option>';
+                    }
+                    ?>
+                  </select>
                 </div>
-               <div class="form-group">
-                    <label class="col-sm-3 control-label"></label>
-                    <div class="col-sm-7">
-                        <label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="isEnable" checked/>{{Activer}}</label>
-                        <label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="isVisible" checked/>{{Visible}}</label>
-                    </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-3 control-label">{{Type de dispositif}}
+                  <sup><i class="fas fa-question-circle tooltips" title="{{Sélectionner le type de dispositif parmis ceux découverts dans le fichier de configuration du Hub}}"></i></sup>
+                </label>
+                <div class="col-sm-7">
+                  <select id="sel_item" class="eqLogicAttr form-control dispositifid" data-l1key="configuration" data-l2key="dispositifid">
+                  </select>
                 </div>
-                <legend><i class="fa fa-wrench"></i>  {{Configuration}}</legend>
-                <div class="form-group">
-					<label class="col-sm-3 control-label">{{Hub}}</label>
-                    <div class="col-sm-7">
-                        <select id="sel_itemhub" class="eqLogicAttr form-control hubIp" data-l1key="configuration" data-l2key="hubIp">
-                            <?php
-								foreach (explode('|',config::byKey('ip', 'harmonyhub', 0)) as $hub) {
-									echo '<option value="' . $hub . '">' . $hub . '</option>';
-                                }
-                            ?> 
-                        </select>
-                    </div>
-                    <label class="col-sm-3 control-label">{{Dispositif}}</label>
-                    <div class="col-sm-7">
-                        <select id="sel_item" class="eqLogicAttr form-control dispositifid" data-l1key="configuration" data-l2key="dispositifid">
-                            
-                        </select>
-                    </div>
+              </div>
+              <div class="form-group cron">
+                <label class="col-sm-3 control-label" >{{Récupération des activités chaque minute}}
+                  <sup><i class="fas fa-question-circle tooltips" title="{{Cocher la case pour activer la récupération des activités toutes les minutes}}"></i></sup>
+                </label>
+                <div class="col-sm-7">
+                  <input type="checkbox" class="eqLogicAttr" data-l1key="configuration" data-l2key="cronenabled" checked/>
                 </div>
-				<div class="cron">
-				<div class="form-group">
-				<label class="col-sm-3 control-label" >{{Activer la récupération des activités toutes les minutes}}</label>
-                    <div class="col-sm-7">
-						<input type="checkbox" class="eqLogicAttr" data-l1key="configuration" data-l2key="cronenabled" checked/>
-                    </div>
-				</div>
-				</div>
-			<legend><i class="fa fa-info"></i>  {{Informations}}</legend>
-                
-			<div class="form-group">
-                    		<label class="col-sm-3 control-label">{{Nom dispositif}}</label>
-                    		<div class="col-sm-7">
-                        	<input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="disponame" readonly/>
-                    		</div>
-							<label class="col-sm-3 control-label">{{Id dispositif}}</label>
-                    		<div class="col-sm-7">
-                        	<input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="dispoid" readonly/>
-                    		</div>
+              </div>
             </div>
-			</fieldset>
-		</form>
-		</div>
-		 <div class="col-lg-5">
-		<legend><i class="fa fa-camera"></i>   {{Visuel du dispositif}}</legend>
-                	<div class="form-group">
-                    		<label class="col-md-4 control-label">{{Icône du dispositif}}</label>
-                    		<div class="col-md-4">
-                        	<select id="sel_item2" class="form-control eqLogicAttr" data-l1key="configuration" data-l2key="icone" onchange="document.icon_visu.src=this.value;">
-								<option value=""> </option>
-								<option value="plugins/harmonyhub/core/template/images/tv.png">{{Télévision}}</option>
-								<option value="plugins/harmonyhub/core/template/images/clim.png">{{Climatisation}}</option>
-								<option value="plugins/harmonyhub/core/template/images/ventilateur.png">{{Ventilateur}}</option>
-								<option value="plugins/harmonyhub/core/template/images/amplis.png">{{Ampli A/V}}</option>
-								<option value="plugins/harmonyhub/core/template/images/lampe.png">{{Lampe}}</option>
-								<option value="plugins/harmonyhub/core/template/images/htpc.png">{{Htpc}}</option>
-								<option value="plugins/harmonyhub/core/template/images/lampepied.png">{{Lampe sur pied}}</option>
-								<option value="plugins/harmonyhub/core/template/images/console.png">{{Console de jeux}}</option>
-								<option value="plugins/harmonyhub/core/template/images/boxtv.png">{{Box TV}}</option>
-								<option value="plugins/harmonyhub/core/template/images/bandeauled.png">{{Bandeau Leds}}</option>
-								<option value="plugins/harmonyhub/core/template/images/action.png">{{Activité}}</option>
-								<option value="plugins/harmonyhub/core/template/images/photophore.png">{{Photophore}}</option>
-							</select>
-                    		</div>
-							
-                	</div>
-				</div>
-					<div style="text-align: center">
-							<img name="icon_visu" src=""/>
-							</div>
-		</div>
-		</div>
-		<div role="tabpanel" class="tab-pane" id="commandtab">
-        <table id="table_cmd" class="table table-bordered table-condensed">
-            <thead>
-                <tr>
-                    <th style="width: 300px;">{{Nom}}</th><th>{{Commande}}</th><th>{{Options}}</th><th>{{Action}}</th>
-                </tr>
-            </thead>
-            <tbody>
 
-            </tbody>
+            <div class="col-lg-6">
+              <legend><i class="fas fa-info"></i>  {{Informations}}</legend>
+              <div class="form-group">
+                <label class="col-sm-3 control-label">{{Nom du dispositif}}</label>
+                <div class="col-sm-7">
+                  <input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="disponame" readonly/>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-3 control-label">{{ID du dispositif}}</label>
+                <div class="col-sm-7">
+                  <input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="dispoid" readonly/>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-3 control-label">{{Icône du dispositif}}</label>
+                <div class="col-sm-7">
+                  <select id="sel_item2" class="form-control eqLogicAttr" data-l1key="configuration" data-l2key="icone" oninput="document.icon_visu.src=this.value;">
+                    <option value=""></option>
+                    <option value="plugins/harmonyhub/core/template/images/tv.png">{{Télévision}}</option>
+                    <option value="plugins/harmonyhub/core/template/images/clim.png">{{Climatisation}}</option>
+                    <option value="plugins/harmonyhub/core/template/images/ventilateur.png">{{Ventilateur}}</option>
+                    <option value="plugins/harmonyhub/core/template/images/amplis.png">{{Ampli A/V}}</option>
+                    <option value="plugins/harmonyhub/core/template/images/lampe.png">{{Lampe}}</option>
+                    <option value="plugins/harmonyhub/core/template/images/htpc.png">{{Htpc}}</option>
+                    <option value="plugins/harmonyhub/core/template/images/lampepied.png">{{Lampe sur pied}}</option>
+                    <option value="plugins/harmonyhub/core/template/images/console.png">{{Console de jeux}}</option>
+                    <option value="plugins/harmonyhub/core/template/images/boxtv.png">{{Box TV}}</option>
+                    <option value="plugins/harmonyhub/core/template/images/bandeauled.png">{{Bandeau Leds}}</option>
+                    <option value="plugins/harmonyhub/core/template/images/action.png">{{Activité}}</option>
+                    <option value="plugins/harmonyhub/core/template/images/photophore.png">{{Photophore}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-3 control-label"></label>
+                <div class="col-sm-7">
+                  <div class="text-center">
+                    <img name="icon_visu" src="" style="max-width:160px;"/>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+        </form>
+        <hr>
+      </div>
+
+      <div role="tabpanel" class="tab-pane" id="commandtab">
+        <table id="table_cmd" class="table table-bordered table-condensed">
+          <thead>
+            <tr>
+              <th style="width: 300px;">{{Nom}}</th>
+              <th>{{Commande}}</th>
+              <th>{{Options}}</th>
+              <th>{{Action}}</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
         </table>
-</div>
-</div>
-</div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <?php include_file('desktop', 'harmonyhub', 'js', 'harmonyhub'); ?>
 <?php include_file('core', 'plugin.template', 'js'); ?>
 <script>
 $(document).ready(function() {
-    var opt = $("#sel_item option").sort(function (a,b) { return a.text.toUpperCase().localeCompare(b.text.toUpperCase()) });
-    $("#sel_item").append(opt);
+  var opt = $("#sel_item option").sort(function (a,b) { return a.text.toUpperCase().localeCompare(b.text.toUpperCase()) });
+  $("#sel_item").append(opt);
+
+  var opt = $("#sel_item2 option").sort(function (a,b) { return a.text.toUpperCase().localeCompare(b.text.toUpperCase()) });
+  $("#sel_item2").append(opt);
 });
-$(document).ready(function() {
-    var opt = $("#sel_item2 option").sort(function (a,b) { return a.text.toUpperCase().localeCompare(b.text.toUpperCase()) });
-    $("#sel_item2").append(opt);
-});
+
 $("#sel_item").change(function(){
-     var select=  $(this).val();
-       if(select=='activity'){
-           $('.cron').show();
-         } else {
-           $('.cron').hide();
-         }
-    }); 
+  var select=  $(this).val();
+  if(select=='activity'){
+    $('.cron').show();
+  } else {
+    $('.cron').hide();
+  }
+});
 </script>
