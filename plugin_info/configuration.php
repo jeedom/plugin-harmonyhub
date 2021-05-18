@@ -27,7 +27,7 @@ if (!isConnect()) {
   <fieldset>
     <div class="form-group">
       <label class="col-md-4 control-label">{{Adresse IP du Hub}}
-        <sup><i class="fas fa-question-circle tooltips" title="{{Il est possible de renseigner plusieurs adresses IP séparées par |}}"></i></sup>
+        <sup><i class="fas fa-question-circle tooltips" title="{{Il est possible de renseigner plusieurs adresses IP séparées par le symbole |}}"></i></sup>
       </label>
       <div class="col-md-4">
         <input id="harmonyhub_api" class="configKey form-control" data-l1key="ip" style="margin-top:-5px" placeholder="Adresse IP"/>
