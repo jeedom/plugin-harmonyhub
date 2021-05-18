@@ -1,20 +1,22 @@
 {
     "plugins\/harmonyhub\/plugin_info\/configuration.php": {
-        "Adresse IP du Hub (plusieurs Ips possibles séparées par |) : ": "",
-        "Créer\/MAJ les configs :": "",
-        "Lancer": "Başlat",
-        "Etes-vous sûr de vouloir installer\/mettre à jour vos fichiers de config ? ": "",
-        "Installation \/ Mise à jour ! Cela peut prendre plus d'une minute. Veuillez patienter jusqu\\'à l\\'apparition du message de fin": ""
+        "Adresse IP du Hub": "Adresse IP du Hub",
+        "Il est possible de renseigner plusieurs adresses IP séparées par le symbole |": "Il est possible de renseigner plusieurs adresses IP séparées par le symbole |",
+        "Création\/MAJ des configurations": "Création\/MAJ des configurations",
+        "Cliquer sur le bouton pour créer ou mettre à jour les fichiers de configuration du ou des hub(s) Harmony": "Cliquer sur le bouton pour créer ou mettre à jour les fichiers de configuration du ou des hub(s) Harmony",
+        "Fichiers de configuration": "Fichiers de configuration",
+        "Etes-vous sûr de vouloir installer\/mettre à jour vos fichiers de configuration ? ": "Etes-vous sûr de vouloir installer\/mettre à jour vos fichiers de configuration ?",
+        "Installation \/ Mise à jour ! Cela peut prendre plus d'une minute. Veuillez patienter jusqu\\'à l\\'apparition du message de fin": "Installation \/ Mise à jour ! Cela peut prendre plus d'une minute. Veuillez patienter jusqu\\'à l\\'apparition du message de fin"
     },
     "plugins\/harmonyhub\/desktop\/modal\/health.php": {
         "Image": "Fotoğraf",
-        "Dispositifs": "",
+        "Dispositifs": "Dispositifs",
         "ID": "Kimlik",
         "Statut": "Statü",
         "Dernière communication": "Son konuşma",
         "Date création": "Oluşturma tarihi",
         "OK": "Tamam",
-        "NOK": ""
+        "NOK": "NOK"
     },
     "plugins\/harmonyhub\/desktop\/modal\/config.harmonyhub.php": {
         "401 - Accès non autorisé": "401 - Yetkisiz erişim",
@@ -32,61 +34,65 @@
         "Ajouter": "Ekle",
         "Configuration": "Ayar",
         "Santé": "Sağlık",
-        "Mes Dispositifs": "",
+        "Mes Dispositifs": "Mes Dispositifs",
+        "Aucune télécommande Harmony n\\'a été trouvée, cliquer sur \"Ajouter\" pour commencer": "Aucune télécommande Harmony n\\'a été trouvée, cliquer sur \"Ajouter\" pour commencer",
         "Rechercher": "Arayın",
-        "Vous n'avez pas encore de télécommande Harmony, aller sur Général -> Plugin et cliquez sur synchroniser pour commencer": "",
         "Configuration avancée": "Gelişmiş ayarlar",
         "Dupliquer": "Kopyala",
         "Sauvegarder": "Kaydet",
         "Supprimer": "Sil",
         "Equipement": "Cihaz",
         "Commandes": "Komutalar",
+        "Paramètres généraux": "Paramètres généraux",
         "Nom de l'équipement": "Ekipman ismi",
         "Objet parent": "Üst nesne",
         "Aucun": "Hiçbir",
         "Catégorie": "Kategori",
+        "Options": "Opsiyonlar",
         "Activer": "Etkinleştir",
         "Visible": "Görülebilir",
-        "Hub": "",
-        "Dispositif": "",
-        "Activer la récupération des activités toutes les minutes": "",
+        "Paramètres spécifiques": "Paramètres spécifiques",
+        "Hub": "Hub",
+        "Sélectionner le Hub Harmony parmis les adresses IP renseignées dans la configuration du plugin": "Sélectionner le Hub Harmony parmis les adresses IP renseignées dans la configuration du plugin",
+        "Type de dispositif": "Type de dispositif",
+        "Sélectionner le type de dispositif parmis ceux découverts dans le fichier de configuration du Hub": "Sélectionner le type de dispositif parmis ceux découverts dans le fichier de configuration du Hub",
+        "Récupération des activités chaque minute": "Récupération des activités chaque minute",
+        "Cocher la case pour activer la récupération des activités toutes les minutes": "Cocher la case pour activer la récupération des activités toutes les minutes",
         "Informations": "Bilgiler",
-        "Nom dispositif": "",
-        "Id dispositif": "",
-        "Visuel du dispositif": "",
-        "Icône du dispositif": "",
-        "Télévision": "",
+        "Nom du dispositif": "Nom du dispositif",
+        "ID du dispositif": "ID du dispositif",
+        "Icône du dispositif": "Icône du dispositif",
+        "Télévision": "Télévision",
         "Climatisation": "Klima",
-        "Ventilateur": "",
-        "Ampli A\/V": "",
-        "Lampe": "",
-        "Htpc": "",
-        "Lampe sur pied": "",
-        "Console de jeux": "",
-        "Box TV": "",
-        "Bandeau Leds": "",
-        "Activité": "",
-        "Photophore": "",
+        "Ventilateur": "Ventilateur",
+        "Ampli A\/V": "Ampli A\/V",
+        "Lampe": "Lampe",
+        "Htpc": "Htpc",
+        "Lampe sur pied": "Lampe sur pied",
+        "Console de jeux": "Console de jeux",
+        "Box TV": "Box TV",
+        "Bandeau Leds": "Bandeau Leds",
+        "Activité": "Activité",
+        "Photophore": "Photophore",
         "Nom": "İsim",
         "Commande": "Komuta",
-        "Options": "Opsiyonlar",
         "Action": "Eylem"
     },
     "plugins\/harmonyhub\/desktop\/js\/harmonyhub.js": {
-        "Santé Harmony": "",
+        "Santé Harmony": "Santé Harmony",
         "Afficher": "Göster",
         "Tester": "Test et"
     },
     "plugins\/harmonyhub\/core\/ajax\/harmonyhub.ajax.php": {
         "401 - Accès non autorisé": "401 - Yetkisiz erişim",
-        "Aucune methode correspondante à : ": "Aşağıdakilere karşılık gelen bir yöntem yok:"
+        "Aucune méthode correspondante à : ": "Aşağıdakilere karşılık gelen bir yöntem yok:"
     },
     "plugins\/harmonyhub\/core\/class\/harmonyhub.class.php": {
-        "$name": "",
-        "Activité Courante": "",
-        "Refresh Activity": ""
+        "$name": "$name",
+        "Activité Courante": "Activité Courante",
+        "Refresh Activity": "Refresh Activity"
     },
     "info.json": {
-        "Plugin pour controller votre Harmony Hub": ""
+        "Plugin permettant de contrôler un ou plusieurs Harmony Hub.": "Plugin permettant de contrôler un ou plusieurs Harmony Hub"
     }
 }

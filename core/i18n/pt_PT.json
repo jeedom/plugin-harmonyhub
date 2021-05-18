@@ -1,9 +1,11 @@
 {
     "plugins\/harmonyhub\/plugin_info\/configuration.php": {
-        "Adresse IP du Hub (plusieurs Ips possibles séparées par |) : ": "Endereço IP do hub (vários Ips possíveis separados por |):",
-        "Créer\/MAJ les configs :": "Criar \/ atualizar configurações:",
-        "Lancer": "Lançamento",
-        "Etes-vous sûr de vouloir installer\/mettre à jour vos fichiers de config ? ": "Tem certeza de que deseja instalar \/ atualizar seus arquivos de configuração?",
+        "Adresse IP du Hub": "Endereço IP do hub",
+        "Il est possible de renseigner plusieurs adresses IP séparées par le symbole |": "É possível inserir vários endereços IP separados pelo símbolo |",
+        "Création\/MAJ des configurations": "Criação \/ atualização de configurações",
+        "Cliquer sur le bouton pour créer ou mettre à jour les fichiers de configuration du ou des hub(s) Harmony": "Clique no botão para criar ou atualizar os arquivos de configuração do (s) hub (s) Harmony",
+        "Fichiers de configuration": "Arquivos de configuração",
+        "Etes-vous sûr de vouloir installer\/mettre à jour vos fichiers de configuration ? ": "Tem certeza de que deseja instalar \/ atualizar seus arquivos de configuração?",
         "Installation \/ Mise à jour ! Cela peut prendre plus d'une minute. Veuillez patienter jusqu\\'à l\\'apparition du message de fin": "Instalação \/ Atualização! Pode demorar mais de um minuto. Aguarde até a mensagem final aparecer"
     },
     "plugins\/harmonyhub\/desktop\/modal\/health.php": {
@@ -33,27 +35,32 @@
         "Configuration": "Configuração",
         "Santé": "Saúde",
         "Mes Dispositifs": "Meus dispositivos",
+        "Aucune télécommande Harmony n\\'a été trouvée, cliquer sur \"Ajouter\" pour commencer": "Nenhum controle remoto Harmony foi encontrado, clique em \"Adicionar\" para começar",
         "Rechercher": "Pesquisa",
-        "Vous n'avez pas encore de télécommande Harmony, aller sur Général -> Plugin et cliquez sur synchroniser pour commencer": "Você ainda não possui um controle remoto Harmony, vá em Geral -> Plugin e clique em sincronizar para iniciar",
         "Configuration avancée": "Configuração avançada",
         "Dupliquer": "Duplicar",
         "Sauvegarder": "Salvar",
         "Supprimer": "Remover",
         "Equipement": "Equipamento",
         "Commandes": "Comandos",
+        "Paramètres généraux": "Configurações Gerais",
         "Nom de l'équipement": "Nome de equipamentos",
         "Objet parent": "Objeto pai",
         "Aucun": "Nemhum",
         "Catégorie": "Categoria",
+        "Options": "Opções",
         "Activer": "Ativar",
         "Visible": "Visivél",
+        "Paramètres spécifiques": "Parâmetros específicos",
         "Hub": "Cubo",
-        "Dispositif": "Dispositivo",
-        "Activer la récupération des activités toutes les minutes": "Ative a recuperação de atividades a cada minuto",
+        "Sélectionner le Hub Harmony parmis les adresses IP renseignées dans la configuration du plugin": "Selecione o Hub Harmony entre os endereços IP inseridos na configuração do plugin",
+        "Type de dispositif": "Tipo de dispositivo",
+        "Sélectionner le type de dispositif parmis ceux découverts dans le fichier de configuration du Hub": "Selecione o tipo de dispositivo entre aqueles descobertos no arquivo de configuração do hub",
+        "Récupération des activités chaque minute": "Recuperação de atividades a cada minuto",
+        "Cocher la case pour activer la récupération des activités toutes les minutes": "Marque a caixa para ativar a recuperação de atividades a cada minuto",
         "Informations": "Informação",
-        "Nom dispositif": "Nome do dispositivo",
-        "Id dispositif": "ID do dispositivo",
-        "Visuel du dispositif": "Visual do dispositivo",
+        "Nom du dispositif": "Nome do dispositivo",
+        "ID du dispositif": "Identificador do dispositivo",
         "Icône du dispositif": "Ícone do dispositivo",
         "Télévision": "Televisão",
         "Climatisation": "Ar condicionado",
@@ -69,7 +76,6 @@
         "Photophore": "Suporte Tealight",
         "Nom": "Nome",
         "Commande": "Ordem",
-        "Options": "Opções",
         "Action": "Ação"
     },
     "plugins\/harmonyhub\/desktop\/js\/harmonyhub.js": {
@@ -79,7 +85,7 @@
     },
     "plugins\/harmonyhub\/core\/ajax\/harmonyhub.ajax.php": {
         "401 - Accès non autorisé": "401 - Acesso não autorizado",
-        "Aucune methode correspondante à : ": "Aucune methode correspondante à :"
+        "Aucune méthode correspondante à : ": "Aucune methode correspondante à :"
     },
     "plugins\/harmonyhub\/core\/class\/harmonyhub.class.php": {
         "$name": "$ name",
@@ -87,6 +93,6 @@
         "Refresh Activity": "Atualizar atividade"
     },
     "info.json": {
-        "Plugin pour controller votre Harmony Hub": "Plug-in para controlar o seu Harmony Hub"
+        "Plugin permettant de contrôler un ou plusieurs Harmony Hub.": "Plugin que permite controlar um ou mais Hub Harmony"
     }
 }
