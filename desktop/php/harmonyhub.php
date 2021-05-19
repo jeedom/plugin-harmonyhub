@@ -2,7 +2,7 @@
 if (!isConnect('admin')) {
   throw new Exception('{{401 - Accès non autorisé}}');
 }
-$plugin = plugin::byId('template');
+$plugin = plugin::byId('harmonyhub');
 sendVarToJS('eqType', $plugin->getId());
 $eqLogics = eqLogic::byType($plugin->getId());
 ?>
