@@ -1,9 +1,11 @@
 {
     "plugins\/harmonyhub\/plugin_info\/configuration.php": {
-        "Adresse IP du Hub (plusieurs Ips possibles séparées par |) : ": "Hub-IP-Adresse (mehrere mögliche Ips durch | getrennt):",
-        "Créer\/MAJ les configs :": "Konfigurationen erstellen \/ aktualisieren:",
-        "Lancer": "Start",
-        "Etes-vous sûr de vouloir installer\/mettre à jour vos fichiers de config ? ": "Möchten Sie Ihre Konfigurationsdateien wirklich installieren \/ aktualisieren?",
+        "Adresse IP du Hub": "Hub-IP-Adresse",
+        "Il est possible de renseigner plusieurs adresses IP séparées par le symbole |": "Es können mehrere IP-Adressen eingegeben werden, die durch das Symbol | getrennt sind",
+        "Création\/MAJ des configurations": "Erstellung \/ Aktualisierung von Konfigurationen",
+        "Cliquer sur le bouton pour créer ou mettre à jour les fichiers de configuration du ou des hub(s) Harmony": "Klicken Sie auf die Schaltfläche, um die Konfigurationsdateien der Harmony-Hubs zu erstellen oder zu aktualisieren",
+        "Fichiers de configuration": "Konfigurationsdateien",
+        "Etes-vous sûr de vouloir installer\/mettre à jour vos fichiers de configuration ? ": "Möchten Sie Ihre Konfigurationsdateien wirklich installieren \/ aktualisieren?",
         "Installation \/ Mise à jour ! Cela peut prendre plus d'une minute. Veuillez patienter jusqu\\'à l\\'apparition du message de fin": "Installation \/ Update! Es kann länger als eine Minute dauern. Bitte warten Sie, bis die Endmeldung angezeigt wird"
     },
     "plugins\/harmonyhub\/desktop\/modal\/health.php": {
@@ -33,25 +35,32 @@
         "Configuration": "Konfiguration",
         "Santé": "Gesundheit",
         "Mes Dispositifs": "Meine Geräte",
-        "Vous n'avez pas encore de télécommande Harmony, aller sur Général -> Plugin et cliquez sur synchroniser pour commencer": "Sie haben noch keine Harmony-Fernbedienung. Gehen Sie zu Allgemein -> Plugin und klicken Sie zum Starten auf Synchronisieren",
+        "Aucune télécommande Harmony n\\'a été trouvée, cliquer sur \"Ajouter\" pour commencer": "Es wurde keine Harmony-Fernbedienung gefunden. Klicken Sie auf \"Hinzufügen\", um zu beginnen",
+        "Rechercher": "Suchen nach",
+        "Configuration avancée": "Erweiterte Konfiguration",
+        "Dupliquer": "Duplikat",
         "Sauvegarder": "Speichern",
         "Supprimer": "Löschen",
-        "Configuration avancée": "Erweiterte Konfiguration",
         "Equipement": "Gerät",
         "Commandes": "Befehle",
+        "Paramètres généraux": "Allgemeine Einstellungen",
         "Nom de l'équipement": "Name der Ausrüstung",
         "Objet parent": "Übergeordnetes Objekt",
         "Aucun": "Ohne",
         "Catégorie": "Kategorie",
+        "Options": "Optionen",
         "Activer": "Aktivieren",
         "Visible": "Sichtbar",
+        "Paramètres spécifiques": "Spezifische Parameter",
         "Hub": "Nabe",
-        "Dispositif": "Gerät",
-        "Activer la récupération des activités toutes les minutes": "Aktivieren Sie den Aktivitätsabruf jede Minute",
+        "Sélectionner le Hub Harmony parmis les adresses IP renseignées dans la configuration du plugin": "Wählen Sie den Harmony Hub unter den IP-Adressen aus, die in der Plugin-Konfiguration eingegeben wurden",
+        "Type de dispositif": "Gerätetyp",
+        "Sélectionner le type de dispositif parmis ceux découverts dans le fichier de configuration du Hub": "Wählen Sie den Gerätetyp aus, der in der Hub-Konfigurationsdatei gefunden wurde",
+        "Récupération des activités chaque minute": "Wiederherstellung der Aktivitäten jede Minute",
+        "Cocher la case pour activer la récupération des activités toutes les minutes": "Aktivieren Sie das Kontrollkästchen, um die Wiederherstellung von Aktivitäten jede Minute zu aktivieren",
         "Informations": "Information",
-        "Nom dispositif": "Gerätename",
-        "Id dispositif": "Geräte-ID",
-        "Visuel du dispositif": "Visual des Geräts",
+        "Nom du dispositif": "Gerätename",
+        "ID du dispositif": "Geräte ID",
         "Icône du dispositif": "Gerätesymbol",
         "Télévision": "Fernsehen",
         "Climatisation": "Klimaanlage",
@@ -67,7 +76,6 @@
         "Photophore": "Teelichthalter",
         "Nom": "Name",
         "Commande": "Befehl",
-        "Options": "Optionen",
         "Action": "Aktion"
     },
     "plugins\/harmonyhub\/desktop\/js\/harmonyhub.js": {
@@ -77,7 +85,7 @@
     },
     "plugins\/harmonyhub\/core\/ajax\/harmonyhub.ajax.php": {
         "401 - Accès non autorisé": "401 - Nicht autorisierter Zugriff",
-        "Aucune methode correspondante à : ": "Keine Methode entsprechend:"
+        "Aucune méthode correspondante à : ": "Keine Methode entsprechend:"
     },
     "plugins\/harmonyhub\/core\/class\/harmonyhub.class.php": {
         "$name": "$ name",
@@ -85,6 +93,6 @@
         "Refresh Activity": "Aktivität aktualisieren"
     },
     "info.json": {
-        "Plugin pour controller votre Harmony Hub": "Plugin zur Steuerung Ihres Harmony Hub"
+        "Plugin permettant de contrôler un ou plusieurs Harmony Hub.": "Plugin zur Steuerung eines oder mehrerer Harmony Hub"
     }
 }

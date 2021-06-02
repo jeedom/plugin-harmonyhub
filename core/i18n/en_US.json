@@ -1,9 +1,11 @@
 {
     "plugins\/harmonyhub\/plugin_info\/configuration.php": {
-        "Adresse IP du Hub (plusieurs Ips possibles séparées par |) : ": "Hub IP address (several possible IP separated by |):",
-        "Créer\/MAJ les configs :": "Create \/ update configs:",
-        "Lancer": "Run",
-        "Etes-vous sûr de vouloir installer\/mettre à jour vos fichiers de config ? ": "Are you sure you want to install \/ update your config files?",
+        "Adresse IP du Hub": "Hub IP address",
+        "Il est possible de renseigner plusieurs adresses IP séparées par le symbole |": "It is possible to enter several IP addresses separated by the symbol |",
+        "Création\/MAJ des configurations": "Creation \/ update of configurations",
+        "Cliquer sur le bouton pour créer ou mettre à jour les fichiers de configuration du ou des hub(s) Harmony": "Click on the button to create or update the configuration files of the Harmony hub (s)",
+        "Fichiers de configuration": "Configuration files",
+        "Etes-vous sûr de vouloir installer\/mettre à jour vos fichiers de configuration ? ": "Are you sure you want to install \/ update your config files?",
         "Installation \/ Mise à jour ! Cela peut prendre plus d'une minute. Veuillez patienter jusqu\\'à l\\'apparition du message de fin": "Installation \/ Update! It may take more than a minute. Please wait until the end message appears"
     },
     "plugins\/harmonyhub\/desktop\/modal\/health.php": {
@@ -33,25 +35,32 @@
         "Configuration": "Setup",
         "Santé": "Health",
         "Mes Dispositifs": "My devices",
-        "Vous n'avez pas encore de télécommande Harmony, aller sur Général -> Plugin et cliquez sur synchroniser pour commencer": "You don't have a Harmony remote yet, go to General -> Plugin and click on synchronize to start",
+        "Aucune télécommande Harmony n\\'a été trouvée, cliquer sur \"Ajouter\" pour commencer": "No Harmony remote was found, click on \"Add\" to begin",
+        "Rechercher": "Search",
+        "Configuration avancée": "Advanced configuration",
+        "Dupliquer": "Duplicate",
         "Sauvegarder": "Save",
         "Supprimer": "Delete",
-        "Configuration avancée": "Advanced configuration",
         "Equipement": "Device",
         "Commandes": "Commands",
+        "Paramètres généraux": "General settings",
         "Nom de l'équipement": "Name of equipment",
         "Objet parent": "Parent object",
         "Aucun": "None",
         "Catégorie": "Category",
+        "Options": "Options",
         "Activer": "Activate",
         "Visible": "Visible",
+        "Paramètres spécifiques": "Specific parameters",
         "Hub": "Hub",
-        "Dispositif": "Devices",
-        "Activer la récupération des activités toutes les minutes": "Activate activity retrieval every minute",
+        "Sélectionner le Hub Harmony parmis les adresses IP renseignées dans la configuration du plugin": "Select the Harmony Hub among the IP addresses entered in the plugin configuration",
+        "Type de dispositif": "Device type",
+        "Sélectionner le type de dispositif parmis ceux découverts dans le fichier de configuration du Hub": "Select the type of device among those discovered in the Hub configuration file",
+        "Récupération des activités chaque minute": "Recovery of activities every minute",
+        "Cocher la case pour activer la récupération des activités toutes les minutes": "Check the box to activate the recovery of activities every minute",
         "Informations": "Information",
-        "Nom dispositif": "Device name",
-        "Id dispositif": "Device ID",
-        "Visuel du dispositif": "Device picture",
+        "Nom du dispositif": "Device name",
+        "ID du dispositif": "Device ID",
         "Icône du dispositif": "Device icon",
         "Télévision": "TV",
         "Climatisation": "Air conditioning",
@@ -67,7 +76,6 @@
         "Photophore": "Tealight holder",
         "Nom": "Name",
         "Commande": "Command",
-        "Options": "Options",
         "Action": "Action"
     },
     "plugins\/harmonyhub\/desktop\/js\/harmonyhub.js": {
@@ -77,7 +85,7 @@
     },
     "plugins\/harmonyhub\/core\/ajax\/harmonyhub.ajax.php": {
         "401 - Accès non autorisé": "401 - Unauthorized access",
-        "Aucune methode correspondante à : ": "No method corresponding to:"
+        "Aucune méthode correspondante à : ": "No method corresponding to:"
     },
     "plugins\/harmonyhub\/core\/class\/harmonyhub.class.php": {
         "$name": "$name",
@@ -85,6 +93,6 @@
         "Refresh Activity": "Refresh Activity"
     },
     "info.json": {
-        "Plugin pour controller votre Harmony Hub": "Plugin to control your Harmony Hub"
+        "Plugin permettant de contrôler un ou plusieurs Harmony Hub.": "Plugin allowing to control one or more Harmony Hub"
     }
 }

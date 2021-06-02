@@ -1,9 +1,11 @@
 {
     "plugins\/harmonyhub\/plugin_info\/configuration.php": {
-        "Adresse IP du Hub (plusieurs Ips possibles séparées par |) : ": "Adresse IP du Hub (plusieurs Ips possibles séparées par |) : ",
-        "Créer\/MAJ les configs :": "Créer\/MAJ les configs :",
-        "Lancer": "Lancer",
-        "Etes-vous sûr de vouloir installer\/mettre à jour vos fichiers de config ? ": "Etes-vous sûr de vouloir installer\/mettre à jour vos fichiers de config ? ",
+        "Adresse IP du Hub": "Adresse IP du Hub",
+        "Il est possible de renseigner plusieurs adresses IP séparées par le symbole |": "Il est possible de renseigner plusieurs adresses IP séparées par le symbole |",
+        "Création\/MAJ des configurations": "Création\/MAJ des configurations",
+        "Cliquer sur le bouton pour créer ou mettre à jour les fichiers de configuration du ou des hub(s) Harmony": "Cliquer sur le bouton pour créer ou mettre à jour les fichiers de configuration du ou des hub(s) Harmony",
+        "Fichiers de configuration": "Fichiers de configuration",
+        "Etes-vous sûr de vouloir installer\/mettre à jour vos fichiers de configuration ? ": "Etes-vous sûr de vouloir installer\/mettre à jour vos fichiers de configuration ? ",
         "Installation \/ Mise à jour ! Cela peut prendre plus d'une minute. Veuillez patienter jusqu\\'à l\\'apparition du message de fin": "Installation \/ Mise à jour ! Cela peut prendre plus d'une minute. Veuillez patienter jusqu\\'à l\\'apparition du message de fin"
     },
     "plugins\/harmonyhub\/desktop\/modal\/health.php": {
@@ -33,25 +35,32 @@
         "Configuration": "Configuration",
         "Santé": "Santé",
         "Mes Dispositifs": "Mes Dispositifs",
-        "Vous n'avez pas encore de télécommande Harmony, aller sur Général -> Plugin et cliquez sur synchroniser pour commencer": "Vous n'avez pas encore de télécommande Harmony, aller sur Général -> Plugin et cliquez sur synchroniser pour commencer",
+        "Aucune télécommande Harmony n\\'a été trouvée, cliquer sur \"Ajouter\" pour commencer": "Aucune télécommande Harmony n\\'a été trouvée, cliquer sur \"Ajouter\" pour commencer",
+        "Rechercher": "Rechercher",
+        "Configuration avancée": "Configuration avancée",
+        "Dupliquer": "Dupliquer",
         "Sauvegarder": "Sauvegarder",
         "Supprimer": "Supprimer",
-        "Configuration avancée": "Configuration avancée",
         "Equipement": "Equipement",
         "Commandes": "Commandes",
+        "Paramètres généraux": "Paramètres généraux",
         "Nom de l'équipement": "Nom de l'équipement",
         "Objet parent": "Objet parent",
         "Aucun": "Aucun",
         "Catégorie": "Catégorie",
+        "Options": "Options",
         "Activer": "Activer",
         "Visible": "Visible",
+        "Paramètres spécifiques": "Paramètres spécifiques",
         "Hub": "Hub",
-        "Dispositif": "Dispositif",
-        "Activer la récupération des activités toutes les minutes": "Activer la récupération des activités toutes les minutes",
+        "Sélectionner le Hub Harmony parmis les adresses IP renseignées dans la configuration du plugin": "Sélectionner le Hub Harmony parmis les adresses IP renseignées dans la configuration du plugin",
+        "Type de dispositif": "Type de dispositif",
+        "Sélectionner le type de dispositif parmis ceux découverts dans le fichier de configuration du Hub": "Sélectionner le type de dispositif parmis ceux découverts dans le fichier de configuration du Hub",
+        "Récupération des activités chaque minute": "Récupération des activités chaque minute",
+        "Cocher la case pour activer la récupération des activités toutes les minutes": "Cocher la case pour activer la récupération des activités toutes les minutes",
         "Informations": "Informations",
-        "Nom dispositif": "Nom dispositif",
-        "Id dispositif": "Id dispositif",
-        "Visuel du dispositif": "Visuel du dispositif",
+        "Nom du dispositif": "Nom du dispositif",
+        "ID du dispositif": "ID du dispositif",
         "Icône du dispositif": "Icône du dispositif",
         "Télévision": "Télévision",
         "Climatisation": "Climatisation",
@@ -67,7 +76,6 @@
         "Photophore": "Photophore",
         "Nom": "Nom",
         "Commande": "Commande",
-        "Options": "Options",
         "Action": "Action"
     },
     "plugins\/harmonyhub\/desktop\/js\/harmonyhub.js": {
@@ -77,7 +85,7 @@
     },
     "plugins\/harmonyhub\/core\/ajax\/harmonyhub.ajax.php": {
         "401 - Accès non autorisé": "401 - Accès non autorisé",
-        "Aucune methode correspondante à : ": "Aucune methode correspondante à : "
+        "Aucune méthode correspondante à : ": "Aucune méthode correspondante à : "
     },
     "plugins\/harmonyhub\/core\/class\/harmonyhub.class.php": {
         "$name": "$name",
@@ -85,6 +93,6 @@
         "Refresh Activity": "Refresh Activity"
     },
     "info.json": {
-        "Plugin pour controller votre Harmony Hub": "Plugin pour controller votre Harmony Hub"
+        "Plugin permettant de contrôler un ou plusieurs Harmony Hub.": "Plugin permettant de contrôler un ou plusieurs Harmony Hub."
     }
 }
