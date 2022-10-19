@@ -4,6 +4,11 @@
 >
 >Pour rappel, s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement la mise à jour de documentation, de traduction ou de texte.
 
+# 19/10/2022
+
+- Mise à jours liste des commandes pour Jeedom v4.3
+- Corrections & optimisations mineures dans l'écran de gestion des équipements
+
 # 18/05/2021
 
 - Correction d'un défaut de fonctionnement de certaines commandes
