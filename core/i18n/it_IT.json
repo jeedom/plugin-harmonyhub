@@ -35,8 +35,10 @@
         "Configuration": "Configurazione",
         "Santé": "Salute",
         "Mes Dispositifs": "Mes Dispositifs",
-        "Aucune télécommande Harmony n\\'a été trouvée, cliquer sur \"Ajouter\" pour commencer": "Aucune télécommande Harmony n\\'a été trouvée, cliquer sur \"Ajouter\" pour commencer",
+        "Aucun équipement trouvé, cliquer sur \"Ajouter\" pour commencer": "Aucun équipement trouvé, cliquer sur \"Ajouter\" pour commencer",
         "Rechercher": "Ricercare",
+        "Equipement visible": "Equipement visible",
+        "Equipement non visible": "Equipement non visible",
         "Configuration avancée": "Configurazione avanzata",
         "Dupliquer": "Duplicato",
         "Sauvegarder": "Salva",
@@ -76,10 +78,13 @@
         "Photophore": "Photophore",
         "Nom": "Nome",
         "Commande": "Comando",
-        "Action": "Azione"
+        "Etat": "Etat",
+        "Actions": "Actions"
     },
     "plugins\/harmonyhub\/desktop\/js\/harmonyhub.js": {
         "Santé Harmony": "Santé Harmony",
+        "Nom de la commande": "Nom de la commande",
+        "Choisir une icône": "Choisir une icône",
         "Afficher": "Mostra",
         "Tester": "Prova"
     },

@@ -35,8 +35,10 @@
         "Configuration": "Setup",
         "Santé": "Health",
         "Mes Dispositifs": "My devices",
-        "Aucune télécommande Harmony n\\'a été trouvée, cliquer sur \"Ajouter\" pour commencer": "No Harmony remote was found, click on \"Add\" to begin",
+        "Aucun équipement trouvé, cliquer sur \"Ajouter\" pour commencer": "No equipment found, click \"Add\" to start",
         "Rechercher": "Search",
+        "Equipement visible": "Visible equipment",
+        "Equipement non visible": "Equipment not visible",
         "Configuration avancée": "Advanced configuration",
         "Dupliquer": "Duplicate",
         "Sauvegarder": "Save",
@@ -76,10 +78,13 @@
         "Photophore": "Tealight holder",
         "Nom": "Name",
         "Commande": "Command",
-        "Action": "Action"
+        "Etat": "State",
+        "Actions": "Shares"
     },
     "plugins\/harmonyhub\/desktop\/js\/harmonyhub.js": {
         "Santé Harmony": "Harmony Health",
+        "Nom de la commande": "Command name",
+        "Choisir une icône": "Choose an icon",
         "Afficher": "Pin up",
         "Tester": "Test"
     },
