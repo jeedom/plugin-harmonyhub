@@ -9,49 +9,52 @@ $eqLogics = eqLogic::byType($plugin->getId());
 
 <div class="row row-overflow">
   <div class="col-lg-12 eqLogicThumbnailDisplay">
-    <legend><i class="fas fa-cog"></i>  {{Gestion}}</legend>
+    <legend><i class="fas fa-cog"></i> {{Gestion}}</legend>
     <div class="eqLogicThumbnailContainer">
-      <div class="cursor eqLogicAction logoPrimary" data-action="add" >
+      <div class="cursor eqLogicAction logoPrimary" data-action="add">
         <i class="fas fa-plus-circle"></i>
-        <br/>
-        <span><center>{{Ajouter}}</center></span>
+        <br>
+        <span>{{Ajouter}}</span>
       </div>
       <div class="cursor eqLogicAction logoSecondary" data-action="gotoPluginConf">
         <i class="fas fa-wrench"></i>
-        <br/>
-        <span><center>{{Configuration}}</center></span>
+        <br>
+        <span>{{Configuration}}</span>
       </div>
       <div class="cursor logoSecondary" id="bt_healthharmony">
         <i class="fas fa-medkit"></i>
-        <br/>
-        <span><center>{{Santé}}</center></span>
+        <br>
+        <span>{{Santé}}</span>
       </div>
     </div>
-    <legend><i class="icon techno-tv6"></i>  {{Mes Dispositifs}}</legend>
+    <legend><i class="icon techno-tv6"></i> {{Mes Dispositifs}}</legend>
     <?php
     if (count($eqLogics) == 0) {
-      echo '<br/><div class="text-center" style="font-size:1.2em;font-weight:bold;">{{Aucune télécommande Harmony n\'a été trouvée, cliquer sur "Ajouter" pour commencer}}</div>';
+      echo '<br><div class="text-center" style="font-size:1.2em;font-weight:bold;">{{Aucun équipement trouvé, cliquer sur "Ajouter" pour commencer}}</div>';
     } else {
-      // Champ de recherche
       echo '<div class="input-group" style="margin:5px;">';
-      echo '<input class="form-control roundedLeft" placeholder="{{Rechercher}}" id="in_searchEqlogic"/>';
+      echo '<input class="form-control roundedLeft" placeholder="{{Rechercher}}" id="in_searchEqlogic">';
       echo '<div class="input-group-btn">';
-      echo '<a id="bt_resetSearch" class="btn roundedRight" style="width:30px"><i class="fas fa-times"></i></a>';
+      echo '<a id="bt_resetSearch" class="btn" style="width:30px"><i class="fas fa-times"></i></a>';
+      echo '<a class="btn roundedRight hidden" id="bt_pluginDisplayAsTable" data-coreSupport="1" data-state="0"><i class="fas fa-grip-lines"></i></a>';
       echo '</div>';
       echo '</div>';
       echo '<div class="eqLogicThumbnailContainer">';
       foreach ($eqLogics as $eqLogic) {
         $opacity = ($eqLogic->getIsEnable()) ? '' : 'disableCard';
-        echo '<div class="eqLogicDisplayCard cursor '.$opacity.'" data-eqLogic_id="' . $eqLogic->getId() . '">';
+        echo '<div class="eqLogicDisplayCard cursor ' . $opacity . '" data-eqLogic_id="' . $eqLogic->getId() . '">';
         $file = $eqLogic->getConfiguration('icone');
         if (file_exists($file)) {
           $path = $eqLogic->getConfiguration('icone');
         } else {
           $path = $plugin->getPathImgIcon();
         }
-        echo '<img src="'.$path.'"/>';
+        echo '<img src="' . $path . '"/>';
         echo '<br>';
         echo '<span class="name">' . $eqLogic->getHumanName(true, true) . '</span>';
+        echo '<span class="hiddenAsCard displayTableRight hidden">';
+        echo ($eqLogic->getIsVisible() == 1) ? '<i class="fas fa-eye" title="{{Equipement visible}}"></i>' : '<i class="fas fa-eye-slash" title="{{Equipement non visible}}"></i>';
+        echo '</span>';
         echo '</div>';
       }
       echo '</div>';
@@ -63,7 +66,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
     <div class="input-group pull-right" style="display:inline-flex;">
       <span class="input-group-btn">
         <a class="btn btn-sm btn-default eqLogicAction roundedLeft" data-action="configure"><i class="fas fa-cogs"></i><span class="hidden-xs"> {{Configuration avancée}}</span>
-        </a><a class="btn btn-sm btn-default eqLogicAction" data-action="copy"><i class="fas fa-copy"></i><span class="hidden-xs">  {{Dupliquer}}</span>
+        </a><a class="btn btn-sm btn-default eqLogicAction" data-action="copy"><i class="fas fa-copy"></i><span class="hidden-xs"> {{Dupliquer}}</span>
         </a><a class="btn btn-sm btn-success eqLogicAction" data-action="save"><i class="fas fa-check-circle"></i> {{Sauvegarder}}
         </a><a class="btn btn-sm btn-danger eqLogicAction roundedRight" data-action="remove"><i class="fas fa-minus-circle"></i> {{Supprimer}}
         </a>
@@ -83,15 +86,15 @@ $eqLogics = eqLogic::byType($plugin->getId());
             <div class="col-lg-6">
               <legend><i class="fas fa-wrench"></i> {{Paramètres généraux}}</legend>
               <div class="form-group">
-                <label class="col-sm-3 control-label">{{Nom de l'équipement}}</label>
-                <div class="col-sm-7">
+                <label class="col-sm-4 control-label">{{Nom de l'équipement}}</label>
+                <div class="col-sm-6">
                   <input type="text" class="eqLogicAttr form-control" data-l1key="id" style="display : none;" />
-                  <input type="text" class="eqLogicAttr form-control" data-l1key="name" placeholder="{{Nom de l'équipement}}"/>
+                  <input type="text" class="eqLogicAttr form-control" data-l1key="name" placeholder="{{Nom de l'équipement}}" />
                 </div>
               </div>
               <div class="form-group">
-                <label class="col-sm-3 control-label" >{{Objet parent}}</label>
-                <div class="col-sm-7">
+                <label class="col-sm-4 control-label">{{Objet parent}}</label>
+                <div class="col-sm-6">
                   <select id="sel_object" class="eqLogicAttr form-control" data-l1key="object_id">
                     <option value="">{{Aucun}}</option>
                     <?php
@@ -105,8 +108,8 @@ $eqLogics = eqLogic::byType($plugin->getId());
                 </div>
               </div>
               <div class="form-group">
-                <label class="col-sm-3 control-label">{{Catégorie}}</label>
-                <div class="col-sm-7">
+                <label class="col-sm-4 control-label">{{Catégorie}}</label>
+                <div class="col-sm-6">
                   <?php
                   foreach (jeedom::getConfiguration('eqLogic:category') as $key => $value) {
                     echo '<label class="checkbox-inline">';
@@ -117,22 +120,22 @@ $eqLogics = eqLogic::byType($plugin->getId());
                 </div>
               </div>
               <div class="form-group">
-                <label class="col-sm-3 control-label">{{Options}}</label>
-                <div class="col-sm-7">
-                  <label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="isEnable" checked/>{{Activer}}</label>
-                  <label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="isVisible" checked/>{{Visible}}</label>
+                <label class="col-sm-4 control-label">{{Options}}</label>
+                <div class="col-sm-6">
+                  <label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="isEnable" checked />{{Activer}}</label>
+                  <label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="isVisible" checked />{{Visible}}</label>
                 </div>
               </div>
 
               <legend><i class="fas fa-cogs"></i> {{Paramètres spécifiques}}</legend>
               <div class="form-group">
-                <label class="col-sm-3 control-label">{{Hub}}
+                <label class="col-sm-4 control-label">{{Hub}}
                   <sup><i class="fas fa-question-circle tooltips" title="{{Sélectionner le Hub Harmony parmis les adresses IP renseignées dans la configuration du plugin}}"></i></sup>
                 </label>
-                <div class="col-sm-7">
+                <div class="col-sm-6">
                   <select id="sel_itemhub" class="eqLogicAttr form-control hubIp" data-l1key="configuration" data-l2key="hubIp">
                     <?php
-                    foreach (explode('|',config::byKey('ip', 'harmonyhub', 0)) as $hub) {
+                    foreach (explode('|', config::byKey('ip', 'harmonyhub', 0)) as $hub) {
                       echo '<option value="' . $hub . '">' . $hub . '</option>';
                     }
                     ?>
@@ -140,42 +143,42 @@ $eqLogics = eqLogic::byType($plugin->getId());
                 </div>
               </div>
               <div class="form-group">
-                <label class="col-sm-3 control-label">{{Type de dispositif}}
+                <label class="col-sm-4 control-label">{{Type de dispositif}}
                   <sup><i class="fas fa-question-circle tooltips" title="{{Sélectionner le type de dispositif parmis ceux découverts dans le fichier de configuration du Hub}}"></i></sup>
                 </label>
-                <div class="col-sm-7">
-                  <select id="sel_item" class="eqLogicAttr form-control dispositifid" data-l1key="configuration" data-l2key="dispositifid">
+                <div class="col-sm-6">
+                  <select id="sel_dispositifid" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="dispositifid">
                   </select>
                 </div>
               </div>
               <div class="form-group cron">
-                <label class="col-sm-3 control-label" >{{Récupération des activités chaque minute}}
+                <label class="col-sm-4 control-label">{{Récupération des activités chaque minute}}
                   <sup><i class="fas fa-question-circle tooltips" title="{{Cocher la case pour activer la récupération des activités toutes les minutes}}"></i></sup>
                 </label>
-                <div class="col-sm-7">
-                  <input type="checkbox" class="eqLogicAttr" data-l1key="configuration" data-l2key="cronenabled" checked/>
+                <div class="col-sm-6">
+                  <input type="checkbox" class="eqLogicAttr" data-l1key="configuration" data-l2key="cronenabled" checked />
                 </div>
               </div>
             </div>
 
             <div class="col-lg-6">
-              <legend><i class="fas fa-info"></i>  {{Informations}}</legend>
+              <legend><i class="fas fa-info"></i> {{Informations}}</legend>
               <div class="form-group">
-                <label class="col-sm-3 control-label">{{Nom du dispositif}}</label>
-                <div class="col-sm-7">
-                  <input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="disponame" readonly/>
+                <label class="col-sm-4 control-label">{{Nom du dispositif}}</label>
+                <div class="col-sm-6">
+                  <input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="disponame" readonly />
                 </div>
               </div>
               <div class="form-group">
-                <label class="col-sm-3 control-label">{{ID du dispositif}}</label>
-                <div class="col-sm-7">
-                  <input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="dispoid" readonly/>
+                <label class="col-sm-4 control-label">{{ID du dispositif}}</label>
+                <div class="col-sm-6">
+                  <input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="dispoid" readonly />
                 </div>
               </div>
               <div class="form-group">
-                <label class="col-sm-3 control-label">{{Icône du dispositif}}</label>
-                <div class="col-sm-7">
-                  <select id="sel_item2" class="form-control eqLogicAttr" data-l1key="configuration" data-l2key="icone" oninput="document.icon_visu.src=this.value;">
+                <label class="col-sm-4 control-label">{{Icône du dispositif}}</label>
+                <div class="col-sm-6">
+                  <select id="sel_icone" class="form-control eqLogicAttr" data-l1key="configuration" data-l2key="icone">
                     <option value=""></option>
                     <option value="plugins/harmonyhub/core/template/images/tv.png">{{Télévision}}</option>
                     <option value="plugins/harmonyhub/core/template/images/clim.png">{{Climatisation}}</option>
@@ -193,10 +196,10 @@ $eqLogics = eqLogic::byType($plugin->getId());
                 </div>
               </div>
               <div class="form-group">
-                <label class="col-sm-3 control-label"></label>
-                <div class="col-sm-7">
+                <label class="col-sm-4 control-label"></label>
+                <div class="col-sm-6">
                   <div class="text-center">
-                    <img name="icon_visu" src="" style="max-width:160px;"/>
+                    <img id="icon_visu" src="" style="max-width:160px;" />
                   </div>
                 </div>
               </div>
@@ -210,10 +213,11 @@ $eqLogics = eqLogic::byType($plugin->getId());
         <table id="table_cmd" class="table table-bordered table-condensed">
           <thead>
             <tr>
-              <th style="width: 300px;">{{Nom}}</th>
-              <th>{{Commande}}</th>
-              <th>{{Options}}</th>
-              <th>{{Action}}</th>
+              <th style="min-width:200px;width:350px;">{{Nom}}</th>
+              <th style="min-width:140px;width:200px;">{{Commande}}</th>
+              <th style="min-width:260px;">{{Options}}</th>
+              <th>{{Etat}}</th>
+              <th style="min-width:80px;width:140px;">{{Actions}}</th>
             </tr>
           </thead>
           <tbody>
@@ -226,21 +230,3 @@ $eqLogics = eqLogic::byType($plugin->getId());
 
 <?php include_file('desktop', 'harmonyhub', 'js', 'harmonyhub'); ?>
 <?php include_file('core', 'plugin.template', 'js'); ?>
-<script>
-$(document).ready(function() {
-  var opt = $("#sel_item option").sort(function (a,b) { return a.text.toUpperCase().localeCompare(b.text.toUpperCase()) });
-  $("#sel_item").append(opt);
-
-  var opt = $("#sel_item2 option").sort(function (a,b) { return a.text.toUpperCase().localeCompare(b.text.toUpperCase()) });
-  $("#sel_item2").append(opt);
-});
-
-$("#sel_item").change(function(){
-  var select=  $(this).val();
-  if(select=='activity'){
-    $('.cron').show();
-  } else {
-    $('.cron').hide();
-  }
-});
-</script>

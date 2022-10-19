@@ -4,7 +4,7 @@
 >
 >Zur Erinnerung: Wenn keine Informationen zum Update vorhanden sind, handelt es sich nur um die Aktualisierung von Dokumentation, Übersetzung oder Text.
 
-# 05/2021
+# 18.05.2021
 
 - Korrektur einer Fehlfunktion einiger Steuerungen
 - Schnittstellenüberprüfung

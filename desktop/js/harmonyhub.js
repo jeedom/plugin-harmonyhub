@@ -16,52 +16,20 @@
 */
 
 $('#bt_healthharmony').on('click', function () {
-  $('#md_modal').dialog({title: "{{Santé Harmony}}"});
+  $('#md_modal').dialog({ title: "{{Santé Harmony}}" });
   $('#md_modal').load('index.php?v=d&plugin=harmonyhub&modal=health').dialog('open');
 });
 
-$("#table_cmd").sortable({axis: "y", cursor: "move", items: ".cmd", placeholder: "ui-state-highlight", tolerance: "intersect", forcePlaceholderSize: true});
+$("#sel_dispositifid").change(function () {
+  if ($(this).val() == 'activity') {
+    $('.cron').show();
+  } else {
+    $('.cron').hide();
+  }
+});
 
-function addCmdToTable(_cmd) {
-  if (!isset(_cmd)) {
-    var _cmd = {configuration: {}};
-  }
-  var tr = '<tr class="cmd" data-cmd_id="' + init(_cmd.id) + '">';
-  tr += '<td>';
-  tr += '<input class="cmdAttr form-control input-sm" data-l1key="id" style="display : none;">';
-  tr += '<div class="row">';
-  tr += '<div class="col-sm-6">';
-  tr += '<input class="cmdAttr form-control input-sm" data-l1key="name">';
-  tr += '</div>';
-  tr += '<div class="col-sm-6">';
-  tr += '<a class="cmdAction btn btn-default btn-sm" data-l1key="chooseIcon"><i class="fas fa-flag"></i> Icone</a>';
-  tr += '<span class="cmdAttr" data-l1key="display" data-l2key="icon" style="margin-left : 10px;"></span>';
-  tr += '</div>';
-  tr += '</div>';
-  tr += '<td>';
-  tr += '<span class="cmdAttr" data-l1key="configuration" data-l2key="parameters"></span>';
-  tr += '</td>';
-  tr += '<td>';
-  if (_cmd.logicalId != 'refresh'){
-    tr += '<span><label class="checkbox-inline"><input type="checkbox" class="cmdAttr checkbox-inline" data-l1key="isVisible" checked/>{{Afficher}}</label></span> ';
-  }
-  tr += '</td>';
-  tr += '<td>';
-  tr += '<input class="cmdAttr form-control input-sm" data-l1key="type" style="display : none;">';
-  tr += '<input class="cmdAttr form-control input-sm" data-l1key="subType" style="display : none;">';
-  if (is_numeric(_cmd.id)) {
-    tr += '<a class="btn btn-default btn-xs cmdAction expertModeVisible" data-action="configure"><i class="fas fa-cogs"></i></a> ';
-    tr += '<a class="btn btn-default btn-xs cmdAction" data-action="test"><i class="fas fa-rss"></i> {{Tester}}</a>';
-  }
-  tr += '<i class="fas fa-minus-circle pull-right cmdAction cursor" data-action="remove"></i></td>';
-  tr += '</tr>';
-  $('#table_cmd tbody').append(tr);
-  $('#table_cmd tbody tr:last').setValues(_cmd, '.cmdAttr');
-  jeedom.cmd.changeType($('#table_cmd tbody tr:last'), init(_cmd.subType));
-}
-
-$('.eqLogicAttr[data-l1key=configuration][data-l2key=hubIp]').on('change', function () {
-  getdevicelist($(this).value());
+$("#sel_icone").change(function () {
+  $("#icon_visu").attr("src", $(this).val());
 });
 
 function getdevicelist(_ip) {
@@ -80,25 +48,84 @@ function getdevicelist(_ip) {
     },
     success: function (data) { // si l'appel a bien fonctionné
       if (data.state != 'ok') {
-        $('#div_alert').showAlert({message: data.result, level: 'danger'});
+        $('#div_alert').showAlert({ message: data.result, level: 'danger' });
         return;
       }
       var options = '';
       if (data.result[0] != null) {
         for (var i in data.result[0].device) {
-          if (data.result[0].device[i].id ==  data.result[1]){
-            options += '<option value="'+data.result[0].device[i].id+'" selected>'+data.result[0].device[i].label+'</option>';
+          if (data.result[0].device[i].id == data.result[1]) {
+            options += '<option value="' + data.result[0].device[i].id + '" selected>' + data.result[0].device[i].label + '</option>';
           } else {
-            options += '<option value="'+data.result[0].device[i].id+'">'+data.result[0].device[i].label+'</option>';
+            options += '<option value="' + data.result[0].device[i].id + '">' + data.result[0].device[i].label + '</option>';
           }
         }
-        if (data.result[1] == 'activity'){
+        if (data.result[1] == 'activity') {
           options += '<option value="activity" selected>Activité</option>';
         } else {
           options += '<option value="activity">Activité</option>';
         }
-        $(".dispositifid").html(options);
+        $("#sel_dispositifid").html(options);
+
+        const opt = $("#sel_dispositifid option").detach().sort(function (a, b) {
+          return a.text.toUpperCase().localeCompare(b.text.toUpperCase())
+        });
+        console.log(opt);
+        $("#sel_dispositifid").append(opt);
       }
     }
   });
+}
+
+function printEqLogic(_eqLogic) {
+  const opt = $("#sel_icone option").detach().sort(function (a, b) {
+    return a.text.toUpperCase().localeCompare(b.text.toUpperCase())
+  });
+  $("#sel_icone").append(opt).val(_eqLogic.configuration.icone);
+
+  getdevicelist(_eqLogic.configuration.hubIp);
+
+  if (_eqLogic.configuration.dispositifid == 'activity') {
+    $('.cron').show();
+  } else {
+    $('.cron').hide();
+  }
+}
+
+$("#table_cmd").sortable({ axis: "y", cursor: "move", items: ".cmd", placeholder: "ui-state-highlight", tolerance: "intersect", forcePlaceholderSize: true });
+
+function addCmdToTable(_cmd) {
+  if (!isset(_cmd)) {
+    var _cmd = { configuration: {} };
+  }
+  var tr = '<tr class="cmd" data-cmd_id="' + init(_cmd.id) + '">';
+  tr += '<td>';
+  tr += '<input class="cmdAttr form-control input-sm" data-l1key="id" style="display : none;">';
+  tr += '<div class="input-group">'
+  tr += '<input class="cmdAttr form-control input-sm roundedLeft" data-l1key="name" placeholder="{{Nom de la commande}}">'
+  tr += '<span class="input-group-btn"><a class="cmdAction btn btn-sm btn-default" data-l1key="chooseIcon" title="{{Choisir une icône}}"><i class="fas fa-icons"></i></a></span>'
+  tr += '<span class="cmdAttr input-group-addon roundedRight" data-l1key="display" data-l2key="icon" style="font-size:19px;padding:0 5px 0 0!important;"></span>'
+  tr += '</div>'
+  tr += '</td>';
+  tr += '<td>';
+  tr += '<span class="cmdAttr" data-l1key="configuration" data-l2key="parameters"></span>';
+  tr += '</td>';
+  tr += '<td>'
+  tr += '<label class="checkbox-inline"><input type="checkbox" class="cmdAttr" data-l1key="isVisible" checked/>{{Afficher}}</label> '
+  tr += '</td>';
+  tr += '<td>';
+  tr += '<span class="cmdAttr" data-l1key="htmlstate"></span>';
+  tr += '</td>';
+  tr += '<td>';
+  tr += '<input class="cmdAttr form-control input-sm" data-l1key="type" style="display : none;">';
+  tr += '<input class="cmdAttr form-control input-sm" data-l1key="subType" style="display : none;">';
+  if (is_numeric(_cmd.id)) {
+    tr += '<a class="btn btn-default btn-xs cmdAction expertModeVisible" data-action="configure"><i class="fas fa-cogs"></i></a> ';
+    tr += '<a class="btn btn-default btn-xs cmdAction" data-action="test"><i class="fas fa-rss"></i> {{Tester}}</a>';
+  }
+  tr += '<i class="fas fa-minus-circle pull-right cmdAction cursor" data-action="remove"></i></td>';
+  tr += '</tr>';
+  $('#table_cmd tbody').append(tr);
+  $('#table_cmd tbody tr:last').setValues(_cmd, '.cmdAttr');
+  jeedom.cmd.changeType($('#table_cmd tbody tr:last'), init(_cmd.subType));
 }

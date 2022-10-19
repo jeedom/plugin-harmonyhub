@@ -4,7 +4,7 @@
 >
 >As a reminder, if there is no information on the update, it is because it only concerns the update of documentation, translation or text.
 
-# 05/2021
+# 05/18/2021
 
 - Correction of a malfunction of some controls
 - Interface review
