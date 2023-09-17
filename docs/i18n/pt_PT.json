@@ -2,6 +2,10 @@
     "changelog.md": {
         "Changelog Harmony Hub": "Changelog Harmony Hub",
         "Pour rappel, s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement la mise à jour de documentation, de traduction ou de texte": "Recorde-se que, se não existe informação sobre a atualização, é porque se trata apenas de atualização de documentação, tradução ou texto",
+        "17\/09\/2023": "17\/09\/2023",
+        "Fix compatibilité Debian 11 & Python 3": "Corrigir compatibilidade com Debian 11 e Python 3",
+        "version du core minimum requise": "versão mínima do núcleo necessária",
+        "v4.2": "v4.2",
         "19\/10\/2022": "19\/10\/2022",
         "Mise à jours liste des commandes pour Jeedom v4.3": "Lista atualizada de comandos para Jeedom v4.3",
         "Corrections & optimisations mineures dans l'écran de gestion des équipements": "Pequenas correções e otimizações na tela de gerenciamento de equipamentos",
