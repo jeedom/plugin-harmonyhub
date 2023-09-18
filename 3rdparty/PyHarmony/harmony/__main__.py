@@ -9,7 +9,7 @@ import client as harmony_client
 import discovery as harmony_discovery
 import sys
 import time
-import thread
+import threading
 import os
 
 logger = logging.getLogger(__name__)
@@ -37,7 +37,7 @@ def get_client(ip, port):
     Returns:
         object: Authenticated client instance.
     """
-    token = "unused" 
+    token = "unused"
     client = harmony_client.create_and_connect_client(ip, port, token)
     return client
 
@@ -46,7 +46,7 @@ def get_client(ip, port):
 
 
 def ha_get_token(ip, port):
-    token = "unused" 
+    token = "unused"
     return token
 
 
@@ -489,10 +489,10 @@ def main():
     time.sleep(10)
     os._exit(0)
 
-def timeout(name):
+def timeout():
     time.sleep(15)
     os._exit(0)
 
 if __name__ == '__main__':
-    thread.start_new_thread( timeout, ('timeout',))
+    threading.Thread(target=timeout)
     main()

@@ -35,8 +35,10 @@
         "Configuration": "Konfiguration",
         "Santé": "Gesundheit",
         "Mes Dispositifs": "Meine Geräte",
-        "Aucune télécommande Harmony n\\'a été trouvée, cliquer sur \"Ajouter\" pour commencer": "Es wurde keine Harmony-Fernbedienung gefunden. Klicken Sie auf \"Hinzufügen\", um zu beginnen",
+        "Aucun équipement trouvé, cliquer sur \"Ajouter\" pour commencer": "Keine Ausrüstung gefunden, klicken Sie zum Starten auf \"Hinzufügen\"",
         "Rechercher": "Suchen nach",
+        "Equipement visible": "Sichtbare Ausrüstung",
+        "Equipement non visible": "Ausrüstung nicht sichtbar",
         "Configuration avancée": "Erweiterte Konfiguration",
         "Dupliquer": "Duplikat",
         "Sauvegarder": "Speichern",
@@ -76,10 +78,13 @@
         "Photophore": "Teelichthalter",
         "Nom": "Name",
         "Commande": "Befehl",
-        "Action": "Aktion"
+        "Etat": "Bundesland",
+        "Actions": "Anteile"
     },
     "plugins\/harmonyhub\/desktop\/js\/harmonyhub.js": {
         "Santé Harmony": "Harmonie Gesundheit",
+        "Nom de la commande": "Befehlsname",
+        "Choisir une icône": "Wählen Sie ein Symbol aus",
         "Afficher": "Anzeige",
         "Tester": "Test"
     },

@@ -35,8 +35,10 @@
         "Configuration": "コンフィギュレーション",
         "Santé": "健康",
         "Mes Dispositifs": "Mes Dispositifs",
-        "Aucune télécommande Harmony n\\'a été trouvée, cliquer sur \"Ajouter\" pour commencer": "Aucune télécommande Harmony n\\'a été trouvée, cliquer sur \"Ajouter\" pour commencer",
+        "Aucun équipement trouvé, cliquer sur \"Ajouter\" pour commencer": "Aucun équipement trouvé, cliquer sur \"Ajouter\" pour commencer",
         "Rechercher": "検索",
+        "Equipement visible": "Equipement visible",
+        "Equipement non visible": "Equipement non visible",
         "Configuration avancée": "高度な構成",
         "Dupliquer": "重複",
         "Sauvegarder": "セーブ",
@@ -76,10 +78,13 @@
         "Photophore": "Photophore",
         "Nom": "表題",
         "Commande": "オーダー",
-        "Action": "アクション"
+        "Etat": "Etat",
+        "Actions": "Actions"
     },
     "plugins\/harmonyhub\/desktop\/js\/harmonyhub.js": {
         "Santé Harmony": "Santé Harmony",
+        "Nom de la commande": "Nom de la commande",
+        "Choisir une icône": "Choisir une icône",
         "Afficher": "ディスプレイ",
         "Tester": "テスト"
     },

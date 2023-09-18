@@ -35,8 +35,10 @@
         "Configuration": "Configuração",
         "Santé": "Saúde",
         "Mes Dispositifs": "Meus dispositivos",
-        "Aucune télécommande Harmony n\\'a été trouvée, cliquer sur \"Ajouter\" pour commencer": "Nenhum controle remoto Harmony foi encontrado, clique em \"Adicionar\" para começar",
+        "Aucun équipement trouvé, cliquer sur \"Ajouter\" pour commencer": "Nenhum equipamento encontrado, clique em \"Adicionar\" para iniciar",
         "Rechercher": "Pesquisa",
+        "Equipement visible": "Equipamento visível",
+        "Equipement non visible": "Equipamento não visível",
         "Configuration avancée": "Configuração avançada",
         "Dupliquer": "Duplicar",
         "Sauvegarder": "Salvar",
@@ -76,10 +78,13 @@
         "Photophore": "Suporte Tealight",
         "Nom": "Nome",
         "Commande": "Ordem",
-        "Action": "Ação"
+        "Etat": "Estado",
+        "Actions": "Ações"
     },
     "plugins\/harmonyhub\/desktop\/js\/harmonyhub.js": {
         "Santé Harmony": "Harmony Health",
+        "Nom de la commande": "Nome do comando",
+        "Choisir une icône": "Escolha um ícone",
         "Afficher": "Display",
         "Tester": "Teste"
     },

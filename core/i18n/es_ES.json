@@ -35,8 +35,10 @@
         "Configuration": "Configuración",
         "Santé": "Salud",
         "Mes Dispositifs": "Mis dispositivos",
-        "Aucune télécommande Harmony n\\'a été trouvée, cliquer sur \"Ajouter\" pour commencer": "No se encontró ningún control remoto Harmony, haga clic en \"Agregar\" para comenzar",
+        "Aucun équipement trouvé, cliquer sur \"Ajouter\" pour commencer": "No se encontró ningún equipo, haga clic en \"Agregar\" para comenzar",
         "Rechercher": "Buscar",
+        "Equipement visible": "Equipos visibles",
+        "Equipement non visible": "Equipo no visible",
         "Configuration avancée": "Configuración avanzada",
         "Dupliquer": "Duplicar",
         "Sauvegarder": "Guardar",
@@ -76,10 +78,13 @@
         "Photophore": "Portavelas",
         "Nom": "Nombre",
         "Commande": "Comando",
-        "Action": "Acción"
+        "Etat": "Estado",
+        "Actions": "Comparte"
     },
     "plugins\/harmonyhub\/desktop\/js\/harmonyhub.js": {
         "Santé Harmony": "Salud Harmony",
+        "Nom de la commande": "Nombre del comando",
+        "Choisir une icône": "Elige un icono",
         "Afficher": "Mostrar",
         "Tester": "Probar"
     },
