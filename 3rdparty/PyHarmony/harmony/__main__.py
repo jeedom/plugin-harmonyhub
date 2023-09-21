@@ -494,5 +494,7 @@ def timeout():
     os._exit(0)
 
 if __name__ == '__main__':
-    threading.Thread(target=timeout)
+    thread = threading.Thread(target=timeout)
+    thread.setDaemon(True)
+    thread.start()
     main()
