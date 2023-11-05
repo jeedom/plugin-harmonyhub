@@ -51,27 +51,23 @@ function getdevicelist(_ip) {
         $('#div_alert').showAlert({ message: data.result, level: 'danger' });
         return;
       }
-      var options = '';
       if (data.result[0] != null) {
-        for (var i in data.result[0].device) {
-          if (data.result[0].device[i].id == data.result[1]) {
-            options += '<option value="' + data.result[0].device[i].id + '" selected>' + data.result[0].device[i].label + '</option>';
-          } else {
-            options += '<option value="' + data.result[0].device[i].id + '">' + data.result[0].device[i].label + '</option>';
-          }
+        // create options list
+        const $sel_dispositifid = document.querySelector("#sel_dispositifid");
+        $sel_dispositifid.innerHTML = '';
+        $sel_dispositifid.append(new Option('Activité', 'activity'));
+        for (let i in data.result[0].device) {
+          $sel_dispositifid.append(new Option(data.result[0].device[i].label, data.result[0].device[i].id));
         }
-        if (data.result[1] == 'activity') {
-          options += '<option value="activity" selected>Activité</option>';
-        } else {
-          options += '<option value="activity">Activité</option>';
-        }
-        $("#sel_dispositifid").html(options);
 
+        // sort options
         const opt = $("#sel_dispositifid option").detach().sort(function (a, b) {
           return a.text.toUpperCase().localeCompare(b.text.toUpperCase())
         });
-        console.log(opt);
         $("#sel_dispositifid").append(opt);
+
+        // set value
+        $sel_dispositifid.value = data.result[1] || '';
       }
     }
   });
