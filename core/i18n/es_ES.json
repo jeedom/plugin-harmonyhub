@@ -1,12 +1,7 @@
 {
     "plugins\/harmonyhub\/plugin_info\/configuration.php": {
         "Adresse IP du Hub": "Dirección IP del concentrador",
-        "Il est possible de renseigner plusieurs adresses IP séparées par le symbole |": "Es posible ingresar varias direcciones IP separadas por el símbolo |",
-        "Création\/MAJ des configurations": "Creación \/ actualización de configuraciones",
-        "Cliquer sur le bouton pour créer ou mettre à jour les fichiers de configuration du ou des hub(s) Harmony": "Haga clic en el botón para crear o actualizar los archivos de configuración de los concentradores Harmony",
-        "Fichiers de configuration": "Archivos de configuración",
-        "Etes-vous sûr de vouloir installer\/mettre à jour vos fichiers de configuration ? ": "¿Está seguro de que desea instalar \/ actualizar sus archivos de configuración?",
-        "Installation \/ Mise à jour ! Cela peut prendre plus d'une minute. Veuillez patienter jusqu\\'à l\\'apparition du message de fin": "Instalación \/ actualización! Puede tomar más de un minuto. Por favor espere hasta que aparezca el mensaje final"
+        "Il est possible de renseigner plusieurs adresses IP séparées par le symbole |": "Es posible ingresar varias direcciones IP separadas por el símbolo |"
     },
     "plugins\/harmonyhub\/desktop\/modal\/health.php": {
         "Image": "Imagen",
@@ -18,29 +13,17 @@
         "OK": "Bueno",
         "NOK": "NOK"
     },
-    "plugins\/harmonyhub\/desktop\/modal\/config.harmonyhub.php": {
-        "401 - Accès non autorisé": "401 - Acceso no autorizado",
-        "Pause": "Pausa",
-        "Rechercher": "Buscar"
-    },
-    "plugins\/harmonyhub\/desktop\/modal\/update.harmonyhub.php": {
-        "401 - Accès non autorisé": "401 - Acceso no autorizado",
-        "Pause": "Pausa",
-        "Rechercher": "Buscar"
-    },
     "plugins\/harmonyhub\/desktop\/php\/harmonyhub.php": {
         "401 - Accès non autorisé": "401 - Acceso no autorizado",
         "Gestion": "Gestión",
-        "Ajouter": "Añadir",
         "Configuration": "Configuración",
         "Santé": "Salud",
         "Mes Dispositifs": "Mis dispositivos",
-        "Aucun équipement trouvé, cliquer sur \"Ajouter\" pour commencer": "No se encontró ningún equipo, haga clic en \"Agregar\" para comenzar",
+        "Aucun équipement trouvé, Configurez le plugin et démarrez le démon pour commencer": "No se encontró ningún equipo. Configure el complemento e inicie el demonio para comenzar",
         "Rechercher": "Buscar",
         "Equipement visible": "Equipos visibles",
         "Equipement non visible": "Equipo no visible",
         "Configuration avancée": "Configuración avanzada",
-        "Dupliquer": "Duplicar",
         "Sauvegarder": "Guardar",
         "Supprimer": "Borrar",
         "Equipement": "Dispositivos",
@@ -53,17 +36,11 @@
         "Options": "Opciones",
         "Activer": "Activar",
         "Visible": "Visible",
-        "Paramètres spécifiques": "Parámetros específicos",
-        "Hub": "Hub",
-        "Sélectionner le Hub Harmony parmis les adresses IP renseignées dans la configuration du plugin": "Seleccione Harmony Hub entre las direcciones IP ingresadas en la configuración del complemento",
-        "Type de dispositif": "Tipo de dispositivo",
-        "Sélectionner le type de dispositif parmis ceux découverts dans le fichier de configuration du Hub": "Seleccione el tipo de dispositivo entre los descubiertos en el archivo de configuración del Hub",
-        "Récupération des activités chaque minute": "Recuperación de actividades cada minuto",
-        "Cocher la case pour activer la récupération des activités toutes les minutes": "Marque la casilla para activar la recuperación de actividades cada minuto",
         "Informations": "Información",
-        "Nom du dispositif": "Nombre del dispositivo",
-        "ID du dispositif": "ID del dispositivo",
+        "Nom du hub": "Nombre del centro",
+        "IP du hub": "IP del concentrador",
         "Icône du dispositif": "Icono del dispositivo",
+        "Aucune": "Ninguno",
         "Télévision": "Televisión",
         "Climatisation": "Climatización",
         "Ventilateur": "Ventilador",
@@ -88,14 +65,15 @@
         "Afficher": "Mostrar",
         "Tester": "Probar"
     },
-    "plugins\/harmonyhub\/core\/ajax\/harmonyhub.ajax.php": {
-        "401 - Accès non autorisé": "401 - Acceso no autorizado",
-        "Aucune méthode correspondante à : ": "Ningún método correspondiente a:"
+    "plugins\/harmonyhub\/core\/php\/harmonyhub.php": {
+        "Vous n\\'etes pas autorisé à effectuer cette action": "No estás autorizado a realizar esta acción",
+        "Hub ID inconnu {$hubId}. Ce message est normal s'il s'agit de la première découverte du hub": "ID de centro desconocido {$hubId}. Este mensaje es normal si este es el primer descubrimiento del concentrador"
     },
     "plugins\/harmonyhub\/core\/class\/harmonyhub.class.php": {
-        "$name": "$name",
+        "Veuillez vérifier la configuration": "Por favor revisa la configuración",
+        "Impossible de lancer le démon": "No se puede iniciar el demonio",
         "Activité Courante": "Actividad actual",
-        "Refresh Activity": "Refresh Activity"
+        "Démarrage activité": "Iniciar actividad"
     },
     "info.json": {
         "Plugin permettant de contrôler un ou plusieurs Harmony Hub.": "Complemento que permite controlar uno o más Harmony Hub"

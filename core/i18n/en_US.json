@@ -1,12 +1,7 @@
 {
     "plugins\/harmonyhub\/plugin_info\/configuration.php": {
         "Adresse IP du Hub": "Hub IP address",
-        "Il est possible de renseigner plusieurs adresses IP séparées par le symbole |": "It is possible to enter several IP addresses separated by the symbol |",
-        "Création\/MAJ des configurations": "Creation \/ update of configurations",
-        "Cliquer sur le bouton pour créer ou mettre à jour les fichiers de configuration du ou des hub(s) Harmony": "Click on the button to create or update the configuration files of the Harmony hub (s)",
-        "Fichiers de configuration": "Configuration files",
-        "Etes-vous sûr de vouloir installer\/mettre à jour vos fichiers de configuration ? ": "Are you sure you want to install \/ update your config files?",
-        "Installation \/ Mise à jour ! Cela peut prendre plus d'une minute. Veuillez patienter jusqu\\'à l\\'apparition du message de fin": "Installation \/ Update! It may take more than a minute. Please wait until the end message appears"
+        "Il est possible de renseigner plusieurs adresses IP séparées par le symbole |": "It is possible to enter several IP addresses separated by the symbol |"
     },
     "plugins\/harmonyhub\/desktop\/modal\/health.php": {
         "Image": "Picture",
@@ -15,32 +10,20 @@
         "Statut": "Status",
         "Dernière communication": "Last communication",
         "Date création": "Creation Date",
-        "OK": "Ok",
+        "OK": "Okay",
         "NOK": "NOk"
-    },
-    "plugins\/harmonyhub\/desktop\/modal\/config.harmonyhub.php": {
-        "401 - Accès non autorisé": "401 - Unauthorized access",
-        "Pause": "Pause",
-        "Rechercher": "Search"
-    },
-    "plugins\/harmonyhub\/desktop\/modal\/update.harmonyhub.php": {
-        "401 - Accès non autorisé": "401 - Unauthorized access",
-        "Pause": "Pause",
-        "Rechercher": "Search"
     },
     "plugins\/harmonyhub\/desktop\/php\/harmonyhub.php": {
         "401 - Accès non autorisé": "401 - Unauthorized access",
         "Gestion": "Management",
-        "Ajouter": "Add",
         "Configuration": "Setup",
         "Santé": "Health",
         "Mes Dispositifs": "My devices",
-        "Aucun équipement trouvé, cliquer sur \"Ajouter\" pour commencer": "No equipment found, click \"Add\" to start",
+        "Aucun équipement trouvé, Configurez le plugin et démarrez le démon pour commencer": "No equipment found, Configure plugin and start daemon to begin",
         "Rechercher": "Search",
         "Equipement visible": "Visible equipment",
         "Equipement non visible": "Equipment not visible",
         "Configuration avancée": "Advanced configuration",
-        "Dupliquer": "Duplicate",
         "Sauvegarder": "Save",
         "Supprimer": "Delete",
         "Equipement": "Device",
@@ -53,17 +36,11 @@
         "Options": "Options",
         "Activer": "Activate",
         "Visible": "Visible",
-        "Paramètres spécifiques": "Specific parameters",
-        "Hub": "Hub",
-        "Sélectionner le Hub Harmony parmis les adresses IP renseignées dans la configuration du plugin": "Select the Harmony Hub among the IP addresses entered in the plugin configuration",
-        "Type de dispositif": "Device type",
-        "Sélectionner le type de dispositif parmis ceux découverts dans le fichier de configuration du Hub": "Select the type of device among those discovered in the Hub configuration file",
-        "Récupération des activités chaque minute": "Recovery of activities every minute",
-        "Cocher la case pour activer la récupération des activités toutes les minutes": "Check the box to activate the recovery of activities every minute",
         "Informations": "Information",
-        "Nom du dispositif": "Device name",
-        "ID du dispositif": "Device ID",
+        "Nom du hub": "Hub Name",
+        "IP du hub": "Hub IP",
         "Icône du dispositif": "Device icon",
+        "Aucune": "None",
         "Télévision": "TV",
         "Climatisation": "Air conditioning",
         "Ventilateur": "Fan",
@@ -85,14 +62,18 @@
         "Santé Harmony": "Harmony Health",
         "Nom de la commande": "Command name",
         "Choisir une icône": "Choose an icon",
+        "Afficher": "Pin up",
         "Tester": "Test"
     },
-    "plugins\/harmonyhub\/core\/ajax\/harmonyhub.ajax.php": {
-        "401 - Accès non autorisé": "401 - Unauthorized access",
-        "Aucune méthode correspondante à : ": "No method corresponding to:"
+    "plugins\/harmonyhub\/core\/php\/harmonyhub.php": {
+        "Vous n\\'etes pas autorisé à effectuer cette action": "You are not allowed to perform this action",
+        "Hub ID inconnu {$hubId}. Ce message est normal s'il s'agit de la première découverte du hub": "Unknown Hub ID {$hubId}. This message is normal if this is the first time you have discovered the hub"
     },
     "plugins\/harmonyhub\/core\/class\/harmonyhub.class.php": {
-        "Activité Courante": "Current Activity"
+        "Veuillez vérifier la configuration": "Please check the configuration",
+        "Impossible de lancer le démon": "Unable to start daemon",
+        "Activité Courante": "Current Activity",
+        "Démarrage activité": "Start activity"
     },
     "info.json": {
         "Plugin permettant de contrôler un ou plusieurs Harmony Hub.": "Plugin allowing to control one or more Harmony Hub"
