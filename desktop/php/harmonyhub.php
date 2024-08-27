@@ -11,11 +11,6 @@ $eqLogics = eqLogic::byType($plugin->getId());
   <div class="col-lg-12 eqLogicThumbnailDisplay">
     <legend><i class="fas fa-cog"></i> {{Gestion}}</legend>
     <div class="eqLogicThumbnailContainer">
-      <div class="cursor eqLogicAction logoPrimary" data-action="add">
-        <i class="fas fa-plus-circle"></i>
-        <br>
-        <span>{{Ajouter}}</span>
-      </div>
       <div class="cursor eqLogicAction logoSecondary" data-action="gotoPluginConf">
         <i class="fas fa-wrench"></i>
         <br>
@@ -30,7 +25,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
     <legend><i class="icon techno-tv6"></i> {{Mes Dispositifs}}</legend>
     <?php
     if (count($eqLogics) == 0) {
-      echo '<br><div class="text-center" style="font-size:1.2em;font-weight:bold;">{{Aucun équipement trouvé, cliquer sur "Ajouter" pour commencer}}</div>';
+      echo '<br><div class="text-center" style="font-size:1.2em;font-weight:bold;">{{Aucun équipement trouvé, Configurez le plugin et démarrez le démon pour commencer}}</div>';
     } else {
       echo '<div class="input-group" style="margin:5px;">';
       echo '<input class="form-control roundedLeft" placeholder="{{Rechercher}}" id="in_searchEqlogic">';
@@ -43,13 +38,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
       foreach ($eqLogics as $eqLogic) {
         $opacity = ($eqLogic->getIsEnable()) ? '' : 'disableCard';
         echo '<div class="eqLogicDisplayCard cursor ' . $opacity . '" data-eqLogic_id="' . $eqLogic->getId() . '">';
-        $file = $eqLogic->getConfiguration('icone');
-        if (file_exists($file)) {
-          $path = $eqLogic->getConfiguration('icone');
-        } else {
-          $path = $plugin->getPathImgIcon();
-        }
-        echo '<img src="' . $path . '"/>';
+        echo '<img src="' . $eqLogic->getImage() . '"/>';
         echo '<br>';
         echo '<span class="name">' . $eqLogic->getHumanName(true, true) . '</span>';
         echo '<span class="hiddenAsCard displayTableRight hidden">';
@@ -66,7 +55,6 @@ $eqLogics = eqLogic::byType($plugin->getId());
     <div class="input-group pull-right" style="display:inline-flex;">
       <span class="input-group-btn">
         <a class="btn btn-sm btn-default eqLogicAction roundedLeft" data-action="configure"><i class="fas fa-cogs"></i><span class="hidden-xs"> {{Configuration avancée}}</span>
-        </a><a class="btn btn-sm btn-default eqLogicAction" data-action="copy"><i class="fas fa-copy"></i><span class="hidden-xs"> {{Dupliquer}}</span>
         </a><a class="btn btn-sm btn-success eqLogicAction" data-action="save"><i class="fas fa-check-circle"></i> {{Sauvegarder}}
         </a><a class="btn btn-sm btn-danger eqLogicAction roundedRight" data-action="remove"><i class="fas fa-minus-circle"></i> {{Supprimer}}
         </a>
@@ -126,72 +114,39 @@ $eqLogics = eqLogic::byType($plugin->getId());
                   <label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="isVisible" checked />{{Visible}}</label>
                 </div>
               </div>
-
-              <legend><i class="fas fa-cogs"></i> {{Paramètres spécifiques}}</legend>
-              <div class="form-group">
-                <label class="col-sm-4 control-label">{{Hub}}
-                  <sup><i class="fas fa-question-circle tooltips" title="{{Sélectionner le Hub Harmony parmis les adresses IP renseignées dans la configuration du plugin}}"></i></sup>
-                </label>
-                <div class="col-sm-6">
-                  <select id="sel_itemhub" class="eqLogicAttr form-control hubIp" data-l1key="configuration" data-l2key="hubIp">
-                    <?php
-                    foreach (explode('|', config::byKey('ip', 'harmonyhub', 0)) as $hub) {
-                      echo '<option value="' . $hub . '">' . $hub . '</option>';
-                    }
-                    ?>
-                  </select>
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="col-sm-4 control-label">{{Type de dispositif}}
-                  <sup><i class="fas fa-question-circle tooltips" title="{{Sélectionner le type de dispositif parmis ceux découverts dans le fichier de configuration du Hub}}"></i></sup>
-                </label>
-                <div class="col-sm-6">
-                  <select id="sel_dispositifid" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="dispositifid">
-                  </select>
-                </div>
-              </div>
-              <div class="form-group cron">
-                <label class="col-sm-4 control-label">{{Récupération des activités chaque minute}}
-                  <sup><i class="fas fa-question-circle tooltips" title="{{Cocher la case pour activer la récupération des activités toutes les minutes}}"></i></sup>
-                </label>
-                <div class="col-sm-6">
-                  <input type="checkbox" class="eqLogicAttr" data-l1key="configuration" data-l2key="cronenabled" checked />
-                </div>
-              </div>
             </div>
 
             <div class="col-lg-6">
               <legend><i class="fas fa-info"></i> {{Informations}}</legend>
               <div class="form-group">
-                <label class="col-sm-4 control-label">{{Nom du dispositif}}</label>
+                <label class="col-sm-4 control-label">{{Nom du hub}}</label>
                 <div class="col-sm-6">
-                  <input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="disponame" readonly />
+                  <span class="label label-default eqLogicAttr" data-l1key="configuration" data-l2key="hub_name"></span>
                 </div>
               </div>
               <div class="form-group">
-                <label class="col-sm-4 control-label">{{ID du dispositif}}</label>
+                <label class="col-sm-4 control-label">{{IP du hub}}</label>
                 <div class="col-sm-6">
-                  <input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="dispoid" readonly />
+                  <span class="label label-default eqLogicAttr" data-l1key="configuration" data-l2key="hub_ip"></span>
                 </div>
               </div>
               <div class="form-group">
                 <label class="col-sm-4 control-label">{{Icône du dispositif}}</label>
                 <div class="col-sm-6">
-                  <select id="sel_icone" class="form-control eqLogicAttr" data-l1key="configuration" data-l2key="icone">
-                    <option value=""></option>
-                    <option value="plugins/harmonyhub/core/template/images/tv.png">{{Télévision}}</option>
-                    <option value="plugins/harmonyhub/core/template/images/clim.png">{{Climatisation}}</option>
-                    <option value="plugins/harmonyhub/core/template/images/ventilateur.png">{{Ventilateur}}</option>
-                    <option value="plugins/harmonyhub/core/template/images/amplis.png">{{Ampli A/V}}</option>
-                    <option value="plugins/harmonyhub/core/template/images/lampe.png">{{Lampe}}</option>
-                    <option value="plugins/harmonyhub/core/template/images/htpc.png">{{Htpc}}</option>
-                    <option value="plugins/harmonyhub/core/template/images/lampepied.png">{{Lampe sur pied}}</option>
-                    <option value="plugins/harmonyhub/core/template/images/console.png">{{Console de jeux}}</option>
-                    <option value="plugins/harmonyhub/core/template/images/boxtv.png">{{Box TV}}</option>
-                    <option value="plugins/harmonyhub/core/template/images/bandeauled.png">{{Bandeau Leds}}</option>
-                    <option value="plugins/harmonyhub/core/template/images/action.png">{{Activité}}</option>
-                    <option value="plugins/harmonyhub/core/template/images/photophore.png">{{Photophore}}</option>
+                  <select id="sel_icon" class="form-control eqLogicAttr" data-l1key="configuration" data-l2key="icon">
+                    <option value="generic.png">{{Aucune}}</option>
+                    <option value="tv.png">{{Télévision}}</option>
+                    <option value="clim.png">{{Climatisation}}</option>
+                    <option value="ventilateur.png">{{Ventilateur}}</option>
+                    <option value="amplis.png">{{Ampli A/V}}</option>
+                    <option value="lampe.png">{{Lampe}}</option>
+                    <option value="htpc.png">{{Htpc}}</option>
+                    <option value="lampepied.png">{{Lampe sur pied}}</option>
+                    <option value="console.png">{{Console de jeux}}</option>
+                    <option value="boxtv.png">{{Box TV}}</option>
+                    <option value="bandeauled.png">{{Bandeau Leds}}</option>
+                    <option value="action.png">{{Activité}}</option>
+                    <option value="photophore.png">{{Photophore}}</option>
                   </select>
                 </div>
               </div>

@@ -16,7 +16,7 @@
 * along with Jeedom. If not, see <http://www.gnu.org/licenses/>.
 */
 
-require_once dirname(__FILE__) . '/../../../core/php/core.inc.php';
+require_once __DIR__ . '/../../../core/php/core.inc.php';
 include_file('core', 'authentification', 'php');
 if (!isConnect()) {
   include_file('desktop', '404', 'php');
@@ -30,26 +30,8 @@ if (!isConnect()) {
         <sup><i class="fas fa-question-circle tooltips" title="{{Il est possible de renseigner plusieurs adresses IP séparées par le symbole |}}"></i></sup>
       </label>
       <div class="col-md-4">
-        <input id="harmonyhub_api" class="configKey form-control" data-l1key="ip" style="margin-top:-5px" placeholder="Adresse IP"/>
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="col-md-4 control-label">{{Création/MAJ des configurations}}
-        <sup><i class="fas fa-question-circle tooltips" title="{{Cliquer sur le bouton pour créer ou mettre à jour les fichiers de configuration du ou des hub(s) Harmony}}"></i></sup>
-      </label>
-      <div class="col-md-4">
-        <a class="btn btn-warning" id="bt_update" title="{{Cliquer sur le bouton pour créer ou mettre à jour les fichiers de configuration du ou des hub(s) Harmony}}"><i class="fa fa-sync"></i> {{Fichiers de configuration}}</a>
+        <input id="harmonyhub_api" class="configKey form-control" data-l1key="ip" style="margin-top:-5px" placeholder="Adresse IP" />
       </div>
     </div>
   </fieldset>
 </form>
-<script>
-$('#bt_update').on('click',function(){
-  bootbox.confirm('{{Etes-vous sûr de vouloir installer/mettre à jour vos fichiers de configuration ? }}', function (result) {
-    if (result) {
-      $('#md_modal').dialog({title: "{{Installation / Mise à jour ! Cela peut prendre plus d'une minute. Veuillez patienter jusqu\'à l\'apparition du message de fin}}"});
-      $('#md_modal').load('index.php?v=d&plugin=harmonyhub&modal=config.harmonyhub').dialog('open');
-    }
-  });
-});
-</script>

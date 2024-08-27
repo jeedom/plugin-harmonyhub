@@ -19,243 +19,249 @@
 /* * ***************************Includes********************************* */
 require_once __DIR__ . '/../../../../core/php/core.inc.php';
 
-
 class harmonyhub extends eqLogic {
 
-    public static function dependancy_info() {
+    public static function deamon_info() {
         $return = array();
-        $return['log'] = 'harmonyhub_update';
-        $return['progress_file'] = jeedom::getTmpFolder('harmonyhub') . '/dependance';
-        $cmd = "pip3 list | grep requests";
-        exec($cmd, $output, $return_var);
+        $return['log'] = __CLASS__;
+        $return['launchable'] = 'ok';
         $return['state'] = 'nok';
-        if (array_key_exists(0, $output)) {
-            if ($output[0] != "") {
+        $pid_file = jeedom::getTmpFolder(__CLASS__) . '/daemon.pid';
+        if (file_exists($pid_file)) {
+            if (@posix_getsid(trim(file_get_contents($pid_file)))) {
                 $return['state'] = 'ok';
+            } else {
+                shell_exec(system::getCmdSudo() . 'rm -rf ' . $pid_file . ' 2>&1 > /dev/null');
             }
         }
         return $return;
     }
 
-    public static function dependancy_install() {
-        log::remove(__CLASS__ . '_update');
-        return array('script' => __DIR__ . '/../../resources/install_#stype#.sh ' . jeedom::getTmpFolder('harmonyhub') . '/dependance', 'log' => log::getPathToLog(__CLASS__ . '_update'));
+    public static function deamon_stop() {
+        $pid_file = jeedom::getTmpFolder(__CLASS__) . '/daemon.pid';
+        if (file_exists($pid_file)) {
+            $pid = intval(trim(file_get_contents($pid_file)));
+            system::kill($pid);
+        }
+        sleep(1);
+        system::kill('harmonyd.py');
+        // system::fuserk(config::byKey('socketport', __CLASS__));
     }
 
+    public static function deamon_start() {
+        self::deamon_stop();
+        $deamon_info = self::deamon_info();
+        if ($deamon_info['launchable'] != 'ok') {
+            throw new Exception(__('Veuillez vérifier la configuration', __FILE__));
+        }
 
-    public static function cron() {
+        $path = realpath(__DIR__ . '/../../resources');
+        $cmd = system::getCmdPython3(__CLASS__) . " {$path}/harmonyd.py";
+        $cmd .= ' --loglevel ' . log::convertLogLevel(log::getLogLevel(__CLASS__));
+        $cmd .= ' --socketport ' . 24123;
+        $cmd .= ' --cycle ' . config::byKey('cycle', __CLASS__, 0.5);
+        $cmd .= ' --callback ' . network::getNetworkAccess('internal', 'proto:127.0.0.1:port:comp') . '/plugins/harmonyhub/core/php/harmonyhub.php';
+        $cmd .= ' --apikey ' . jeedom::getApiKey(__CLASS__);
+        $cmd .= ' --pid ' . jeedom::getTmpFolder(__CLASS__) . '/daemon.pid';
+        $cmd .= ' --harmony_ip ' . config::byKey('ip', 'harmonyhub', 0);
+        log::add(__CLASS__, 'info', 'Lancement démon');
+        exec($cmd . ' >> ' . log::getPathToLog(__CLASS__ . '_daemon') . ' 2>&1 &');
+        $i = 0;
+        while ($i < 10) {
+            $deamon_info = self::deamon_info();
+            if ($deamon_info['state'] == 'ok') {
+                break;
+            }
+            sleep(1);
+            $i++;
+        }
+        if ($i >= 10) {
+            log::add(__CLASS__, 'error', __('Impossible de lancer le démon', __FILE__), 'unableStartDeamon');
+            return false;
+        }
+        message::removeAll(__CLASS__, 'unableStartDeamon');
+
+        return true;
+    }
+
+    public static function createHubs(array $hubs) {
+        foreach ($hubs as $hubId => $hub_data) {
+            /** @var harmonyhub */
+            $hub = eqLogic::byLogicalId($hubId, __CLASS__);
+            if (!is_object($hub)) {
+                // search by ip to migrate eqLogic
+                /** @var harmonyhub */
+                $hub = eqLogic::byLogicalId($hub_data['ip_address'], __CLASS__);
+                if (is_object($hub)) {
+                    $hub->setLogicalId($hubId);
+                }
+            }
+            if (!is_object($hub)) {
+                log::add(__CLASS__, 'info', "Create new hub '{$hub_data['name']}' with ip {$hub_data['ip_address']} and id {$hubId}");
+                $hub = new self();
+                $hub->setLogicalId($hubId);
+                $hub->setName($hub_data['name']);
+                $hub->setEqType_name(__CLASS__);
+                $hub->setIsVisible(1);
+                $hub->setIsEnable(1);
+            }
+            $hub->setConfiguration('hub_name', $hub_data['name']);
+            $hub->setConfiguration('hub_ip', $hub_data['ip_address']);
+            $hub->save();
+
+            if (isset($hub_data['Activities'])) {
+                $hub->createActivityCommands($hub_data['Activities']);
+            }
+
+            if (isset($hub_data['Devices'])) {
+                foreach ($hub_data['Devices'] as $name => $device_data) {
+                    self::createDevice($hub, $name, $device_data);
+                }
+            }
+        }
+    }
+
+    private function createActivityCommands($activities) {
+        foreach ($activities as $activity_id => $activity_name) {
+            $cmd = $this->getCmd('action', $activity_id);
+            if (!is_object($cmd)) {
+                $cmd = new harmonyhubCmd();
+                $cmd->setName($activity_name);
+                $cmd->setLogicalId($activity_id);
+                $cmd->setEqLogic_id($this->getId());
+                $cmd->setConfiguration('action_id', 'start_activity');
+                $cmd->setType('action');
+                $cmd->setSubType('other');
+                $cmd->setIsVisible(1);
+                $cmd->save();
+            }
+        }
+        $cmd = $this->getCmd('info', 'current_activity');
+        if (!is_object($cmd)) {
+            $cmd = new harmonyhubCmd();
+            $cmd->setName(__('Activité Courante', __FILE__));
+            $cmd->setLogicalId('current_activity');
+            $cmd->setEqLogic_id($this->getId());
+            $cmd->setType('info');
+            $cmd->setSubType('string');
+            $cmd->setIsVisible(1);
+            $cmd->save();
+        }
+        $cmd = $this->getCmd('info', 'starting_activity');
+        if (!is_object($cmd)) {
+            $cmd = new harmonyhubCmd();
+            $cmd->setName(__('Démarrage activité', __FILE__));
+            $cmd->setLogicalId('starting_activity');
+            $cmd->setEqLogic_id($this->getId());
+            $cmd->setType('info');
+            $cmd->setSubType('string');
+            $cmd->setIsVisible(1);
+            $cmd->save();
+        }
+    }
+
+    private static function createDevice(harmonyhub $hub, string $name, array $data) {
+        assert(isset($data['id']) && isset($data['commands']), "Expected id & commands to create device");
+
         /** @var harmonyhub */
-        foreach (eqLogic::byType('harmonyhub', true) as $harmonyhub) {
-            if ($harmonyhub->getConfiguration('disponame') == 'Activité' && $harmonyhub->getConfiguration('cronenabled') == 1) {
-                $harmonyhub->getactivityInfo();
+        $device = eqLogic::byLogicalId($data['id'], __CLASS__);
+        if (!is_object($device)) {
+            log::add(__CLASS__, 'info', "Create new device '{$name}' with id {$data['id']}");
+            $device = new self();
+            $device->setLogicalId($data['id']);
+            $device->setName($name);
+            $device->setEqType_name(__CLASS__);
+            $device->setIsVisible(0);
+            $device->setIsEnable(1);
+        }
+        $device->setConfiguration('hub_id', $hub->getLogicalId());
+        $device->setConfiguration('hub_name', $hub->getName());
+        $device->setConfiguration('hub_ip', $hub->getConfiguration('hub_ip'));
+        $device->save();
+
+        foreach ($data['commands'] as $cmd) {
+            $device->createDeviceCommand($cmd);
+        }
+    }
+
+    private function createDeviceCommand($cmdId) {
+        $cmd = $this->getCmd('action', $cmdId);
+        if (!is_object($cmd)) {
+            $cmd = new harmonyhubCmd();
+            $cmd->setLogicalId($cmdId);
+            $cmd->setName($cmdId);
+            $cmd->setType('action');
+            $cmd->setSubType('other');
+            $cmd->setEqLogic_id($this->getId());
+            $cmd->setConfiguration('action_id', 'send_command');
+            try {
+                $cmd->save();
+            } catch (\Throwable $th) {
+                $cmd->setName($cmdId + "_new");
+                try {
+                    $cmd->save();
+                } catch (\Throwable $th) {
+                    log::add(__CLASS__, 'error', "Impossible de sauvegarder la commande {$cmdId} sur l'équipement {$this->getName()}, veuillez supprimer l'ancienne commande ou l'équipement pour réessayer");
+                }
             }
         }
     }
 
-    public static function getdevicelist($_ip, $_id = '') {
-        $result_json = array();
-        $data_path = __DIR__ . '/../../data';
-        if (!file_exists($data_path)) {
-            exec('mkdir ' . $data_path . ' && chmod 775 -R ' . $data_path . ' && chown -R www-data:www-data ' . $data_path);
-        }
-        $file = $data_path . '/' . str_replace('.', '', $_ip);
-        if (file_exists($file)) {
-            $config = file_get_contents($file);
-            $result_json = json_decode($config, true);
-        }
-        $selected = '';
-        if ($_id != '') {
-            $eqLogic =  eqLogic::byId($_id);
-            $selected = $eqLogic->getConfiguration('dispositifid', '');
-        }
-        return [$result_json, $selected];
-    }
-
-    public static function configharmonyhub() {
-        log::remove('harmonyhub_update');
-        $ips = explode('|', config::byKey('ip', 'harmonyhub', 0));
-        foreach ($ips as $ip) {
-            $cmd = 'sudo /usr/bin/python3 ' . __DIR__ . "/../../3rdparty/PyHarmony/harmony/__main__.py --harmony_ip {$ip} show_config";
-            log::add('harmonyhub_update', 'alert', "########Recherche de la config en cours########");
-            $config = trim(shell_exec($cmd));
-            $result_json = json_decode($config, true);
-            log::add('harmonyhub_update', 'alert', '######### Dispositifs trouvés ' . $ip);
-            foreach ($result_json['device'] as $device) {
-                log::add('harmonyhub_update', 'alert', $device["label"] . ' | ');
-            }
-            log::add('harmonyhub_update', 'alert', '######### Activités trouvées ' . $ip);
-            foreach ($result_json["activity"] as $activity) {
-                log::add('harmonyhub_update', 'alert', $activity["label"] . ' | ');
-            }
-            $data_path = __DIR__ . '/../../data';
-            if (!file_exists($data_path)) {
-                exec('mkdir ' . $data_path . ' && chmod 775 -R ' . $data_path . ' && chown -R www-data:www-data ' . $data_path);
-            }
-            $file = $data_path . '/' . str_replace('.', '', $ip);
-            file_put_contents($file, $config);
-            log::add('harmonyhub_update', 'alert', "#### Fin de la recherche " . $ip);
-            log::add('harmonyhub', 'debug', 'Sortie console : ' . $config);
-        }
-    }
-
-    public function getactivityInfo() {
-        $ip = $this->getConfiguration('hubIp');
-        if ($ip != '') {
-            $cmd = 'sudo /usr/bin/python3 ' . __DIR__ . "/../../3rdparty/PyHarmony/harmony/__main__.py --harmony_ip {$ip} show_current_activity";
-            log::add('harmonyhub', 'debug', "Exec:{$cmd}");
-            $activityid = trim(shell_exec($cmd));
-            log::add('harmonyhub', 'debug', "result:{$activityid}");
-            if ($activityid == '') {
-                $activityid = 'Hors Ligne';
-            }
-            foreach ($this->getCmd('info') as $cmd) {
-                $cmd->event($activityid);
-            }
-            return;
-        }
+    public function preInsert() {
+        $this->setConfiguration('icon', 'generic.png');
     }
 
     public function getImage() {
-        return $this->getConfiguration('icone', 'plugins/harmonyhub/plugin_info/harmonyhub_icon.png');
+        $icon = $this->getConfiguration('icon');
+        if ($icon == '') {
+            return parent::getImage();
+        }
+        return "plugins/harmonyhub/core/template/images/{$icon}";
     }
 
-    public function preUpdate() {
-        $result_json = array();
-        $data_path = __DIR__ . '/../../data';
-        $file = $data_path . '/' . str_replace('.', '', $this->getConfiguration('hubIp'));
-        if (file_exists($file)) {
-            $config = file_get_contents($file);
-            $result_json = json_decode($config, true);
+    public static function sendToDaemon($params) {
+        $deamon_info = self::deamon_info();
+        if ($deamon_info['state'] != 'ok') {
+            throw new RuntimeException("Le démon n'est pas démarré");
         }
-        if ($this->getConfiguration('dispositifid') == 'activity') {
-            $list = array();
-            foreach ($this->getCmd(null, null) as $actual) {
-                foreach ($result_json["activity"] as $value) {
-                    $action = $value['id'];
-                    $list[] = $action;
-                }
-                if (!in_array($actual->getLogicalId(), $list) && $actual->getLogicalId() != 'activityinfo') {
-                    $actual->remove();
-                }
-            }
-        } else {
-            $list = array();
-            foreach ($this->getCmd(null, null) as $actual) {
-                foreach ($result_json["device"] as $device) {
-                    if ($device["id"] == $this->getConfiguration('dispositifid')) {
-                        foreach ($device["controlGroup"] as $controlGroup) {
-                            foreach ($controlGroup["function"] as $function) {
-                                $action = $function["name"];
-                                $list[] = $action;
-                            }
-                        }
-                    }
-                }
-                if (!in_array($actual->getLogicalId(), $list)) {
-                    $actual->remove();
-                }
-            }
-        }
-        //Recherche de l'id et du name
-        if ($this->getConfiguration('dispositifid') == 'activity') {
-            $this->setConfiguration('dispoid', 'Pas d\'id');
-            $this->setConfiguration('disponame', 'Activité');
-            foreach ($result_json["activity"] as $value) {
-                $name = $value['label'];
-                $action = $value['id'];
-                $harmonyhubCmd = $this->getCmd(null, $action);
-                if (!is_object($harmonyhubCmd)) {
-                    $harmonyhubCmd = new harmonyhubCmd();
-                    $harmonyhubCmd->setName(__($name, __FILE__));
-                    $harmonyhubCmd->setLogicalId($action);
-                    $harmonyhubCmd->setEqLogic_id($this->getId());
-                    $harmonyhubCmd->setConfiguration('parameters', $action);
-                    $harmonyhubCmd->setConfiguration('type', 'activity');
-                    $harmonyhubCmd->setType('action');
-                    $harmonyhubCmd->setSubType('other');
-                    $harmonyhubCmd->setIsVisible(0);
-                    $harmonyhubCmd->save();
-                }
-            }
-            $harmonyhubCmd = $this->getCmd(null, 'activityinfo');
-            if (!is_object($harmonyhubCmd)) {
-                $harmonyhubCmd = new harmonyhubCmd();
-                $harmonyhubCmd->setName(__('Activité Courante', __FILE__));
-                $harmonyhubCmd->setLogicalId('activityinfo');
-                $harmonyhubCmd->setIsVisible(0);
-            }
-            $harmonyhubCmd->setEqLogic_id($this->getId());
-            $harmonyhubCmd->setConfiguration('parameters', 'N/A');
-            $harmonyhubCmd->setUnite('');
-            $harmonyhubCmd->setType('info');
-            $harmonyhubCmd->setSubType('string');
-            $harmonyhubCmd->save();
-            $harmonyhubCmd = $this->getCmd(null, 'refreshactivity');
-            if (!is_object($harmonyhubCmd)) {
-                $harmonyhubCmd = new harmonyhubCmd();
-                $harmonyhubCmd->setName(__('Refresh Activity', __FILE__));
-                $harmonyhubCmd->setEqLogic_id($this->getId());
-                $harmonyhubCmd->setConfiguration('parameters', 'N/A');
-                $harmonyhubCmd->setUnite('');
-                $harmonyhubCmd->setType('action');
-                $harmonyhubCmd->setSubType('other');
-            }
-            $harmonyhubCmd->setLogicalId('refresh');
-            $harmonyhubCmd->save();
-            $this->getactivityInfo();
-        } else {
-            foreach ($result_json["device"] as $device) {
-                if ($device["id"] == $this->getConfiguration('dispositifid')) {
-                    $this->setConfiguration('dispoid', $device["id"]);
-                    $this->setConfiguration('disponame', $device["label"]);
-                    foreach ($device["controlGroup"] as $controlGroup) {
-                        foreach ($controlGroup["function"] as $function) {
-                            $action = $function["name"];
-                            $actionCommand = json_decode($function["action"], true)['command'];
-                            $name = str_replace('#', 'sharp', $function["label"]);
-                            $harmonyhubCmd = $this->getCmd(null, $action);
-                            if (!is_object($harmonyhubCmd)) {
-                                $harmonyhubCmd = new harmonyhubCmd();
-                                $harmonyhubCmd->setName(__($name, __FILE__));
-                                $harmonyhubCmd->setLogicalId($action);
-                                $harmonyhubCmd->setEqLogic_id($this->getId());
-                                $harmonyhubCmd->setConfiguration('parameters', $actionCommand);
-                                $harmonyhubCmd->setConfiguration('type', 'device');
-                                $harmonyhubCmd->setType('action');
-                                $harmonyhubCmd->setSubType('other');
-                                $harmonyhubCmd->setIsVisible(0);
-                                $harmonyhubCmd->save();
-                            }
-                        }
-                    }
-                }
-            }
-        }
+        $port = 24123;
+
+        log::add(__CLASS__, 'debug', 'params to send to daemon:' . json_encode($params));
+        // $params['apikey'] = jeedom::getApiKey(__CLASS__);
+        $payLoad = json_encode($params);
+        $socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
+        socket_connect($socket, '127.0.0.1', $port);
+        socket_write($socket, $payLoad, strlen($payLoad));
+        socket_close($socket);
     }
 }
 
 class harmonyhubCmd extends cmd {
     public function execute($_options = null) {
         /** @var harmonyhub */
-        $harmonyhub = $this->getEqLogic();
-        $ip = $harmonyhub->getConfiguration('hubIp');
-        $device = $harmonyhub->getConfiguration('dispoid');
-        $logical = $this->getLogicalId();
-        if ($this->type == 'action' && $logical != 'refresh') {
-            $action = $this->getConfiguration('parameters');
-            if (strlen($action) > 6 && strtolower(substr($action, 0, 6)) == 'number') {
-                $action = substr($action, 6);
-            }
-            $type = $this->getConfiguration('type');
-            if ($type == 'activity') {
-                $cmd = 'sudo /usr/bin/python3 ' . __DIR__ . "/../../3rdparty/PyHarmony/harmony/__main__.py --harmony_ip {$ip} start_activity --activity '{$action}'";
-            } else {
-                $cmd = 'sudo /usr/bin/python3 ' . __DIR__ . "/../../3rdparty/PyHarmony/harmony/__main__.py --harmony_ip {$ip} send_command  --device_id {$device} --command '{$action}'";
-            }
-            exec($cmd);
-            log::add('harmonyhub', 'debug', "Exec:{$cmd}");
-        } else {
-            $harmonyhub->getactivityInfo();
+        $eqLogic = $this->getEqLogic();
+        $action = $this->getConfiguration('action_id');
+        switch ($action) {
+            case 'start_activity':
+                $params = [
+                    'action' => $action,
+                    'hub_id' => $eqLogic->getLogicalId(),
+                    'activity_id' => $this->getLogicalId()
+                ];
+                $eqLogic->sendToDaemon($params);
+                break;
+            case 'send_command':
+                $params = [
+                    'action' => $action,
+                    'hub_id' => strval($eqLogic->getConfiguration('hub_id')),
+                    'device_id' => $eqLogic->getLogicalId(),
+                    'command' => $this->getLogicalId()
+                ];
+                $eqLogic->sendToDaemon($params);
+                break;
+            default:
+                log::add('harmonyhub', 'warning', "Unknown action: {$action}");
+                return;
         }
     }
 }

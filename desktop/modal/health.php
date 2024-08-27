@@ -33,26 +33,20 @@ $eqLogics = harmonyhub::byType('harmonyhub');
 		</tr>
 	</thead>
 	<tbody>
-	 <?php
-foreach ($eqLogics as $eqLogic) {
-	$opacity = ($eqLogic->getIsEnable()) ? '' : jeedom::getConfiguration('eqLogic:style:noactive');
-    $file = $eqLogic->getConfiguration('icone');
-    if (file_exists($file)) {
-		$path = $eqLogic->getConfiguration('icone');
-	} else {
-		$path = 'plugins/harmonyhub/core/template/images/harmonyhub_icon.png';
-    }
-    $img = '<img src="'.$path.'" height="65" width="55" style="' . $opacity . '"/>';
-	echo '<tr><td>' . $img . '</td><td><a href="' . $eqLogic->getLinkToConfiguration() . '" style="text-decoration: none;">' . $eqLogic->getHumanName(true) . '</a></td>';
-	echo '<td><span class="label label-info" style="font-size : 1em;cursor:default;">' . $eqLogic->getId() . '</span></td>';
-	$status = '<span class="label label-success" style="font-size : 1em;cursor:default;">{{OK}}</span>';
-	if ($eqLogic->getStatus('state') == 'nok') {
-		$status = '<span class="label label-danger" style="font-size : 1em;cursor:default;">{{NOK}}</span>';
-	}
-	echo '<td>' . $status . '</td>';
-	echo '<td><span class="label label-info" style="font-size : 1em;cursor:default;">' . $eqLogic->getStatus('lastCommunication') . '</span></td>';
-	echo '<td><span class="label label-info" style="font-size : 1em;cursor:default;">' . $eqLogic->getConfiguration('createtime') . '</span></td></tr>';
-}
-?>
+		<?php
+		foreach ($eqLogics as $eqLogic) {
+			$opacity = ($eqLogic->getIsEnable()) ? '' : jeedom::getConfiguration('eqLogic:style:noactive');
+			$img = '<img src="' . $eqLogic->getImage() . '" height="65" width="55" style="' . $opacity . '"/>';
+			echo '<tr><td>' . $img . '</td><td><a href="' . $eqLogic->getLinkToConfiguration() . '" style="text-decoration: none;">' . $eqLogic->getHumanName(true) . '</a></td>';
+			echo '<td><span class="label label-info" style="font-size : 1em;cursor:default;">' . $eqLogic->getId() . '</span></td>';
+			$status = '<span class="label label-success" style="font-size : 1em;cursor:default;">{{OK}}</span>';
+			if ($eqLogic->getStatus('state') == 'nok') {
+				$status = '<span class="label label-danger" style="font-size : 1em;cursor:default;">{{NOK}}</span>';
+			}
+			echo '<td>' . $status . '</td>';
+			echo '<td><span class="label label-info" style="font-size : 1em;cursor:default;">' . $eqLogic->getStatus('lastCommunication') . '</span></td>';
+			echo '<td><span class="label label-info" style="font-size : 1em;cursor:default;">' . $eqLogic->getConfiguration('createtime') . '</span></td></tr>';
+		}
+		?>
 	</tbody>
 </table>

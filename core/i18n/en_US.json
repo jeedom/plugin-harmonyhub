@@ -15,7 +15,7 @@
         "Statut": "Status",
         "Dernière communication": "Last communication",
         "Date création": "Creation Date",
-        "OK": "Okay",
+        "OK": "Ok",
         "NOK": "NOk"
     },
     "plugins\/harmonyhub\/desktop\/modal\/config.harmonyhub.php": {
@@ -85,7 +85,6 @@
         "Santé Harmony": "Harmony Health",
         "Nom de la commande": "Command name",
         "Choisir une icône": "Choose an icon",
-        "Afficher": "Pin up",
         "Tester": "Test"
     },
     "plugins\/harmonyhub\/core\/ajax\/harmonyhub.ajax.php": {
@@ -93,9 +92,7 @@
         "Aucune méthode correspondante à : ": "No method corresponding to:"
     },
     "plugins\/harmonyhub\/core\/class\/harmonyhub.class.php": {
-        "$name": "$name",
-        "Activité Courante": "Current Activity",
-        "Refresh Activity": "Refresh Activity"
+        "Activité Courante": "Current Activity"
     },
     "info.json": {
         "Plugin permettant de contrôler un ou plusieurs Harmony Hub.": "Plugin allowing to control one or more Harmony Hub"
