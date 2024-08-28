@@ -227,7 +227,7 @@ class harmonyhub extends eqLogic {
         $port = 24123;
 
         log::add(__CLASS__, 'debug', 'params to send to daemon:' . json_encode($params));
-        // $params['apikey'] = jeedom::getApiKey(__CLASS__);
+        $params['apikey'] = jeedom::getApiKey(__CLASS__);
         $payLoad = json_encode($params);
         $socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
         socket_connect($socket, '127.0.0.1', $port);
