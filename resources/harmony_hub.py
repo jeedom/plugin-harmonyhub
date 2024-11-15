@@ -48,7 +48,7 @@ class HarmonyHub():
             self.__logger.warning("Already connected to %s, disconnect first", self.__ip)
             return
 
-        self.__logger.debug("Connecting %s", self.__ip)
+        self.__logger.info("Initialize connection to %s", self.__ip)
 
         callbacks = {
             "config_updated": self._on_config_updated,
