@@ -17,7 +17,7 @@
 
 # 25/11/2024
 
-- Fix la version d'une dépendance pour éviter un breaking change (async-timeout v5 break timeout context) sur Debian 12
+- Fix la version d'une dépendance pour éviter un breaking change (async-timeout v5 break timeout context)
 
 # 28/08/2024
 
