@@ -12,6 +12,8 @@
         "ce sujet sur community": "este tema en la comunidad",
         "Voir également": "Ver también",
         "pour plus de détails": "para más detalles",
+        "25\/11\/2024": "25\/11\/2024",
+        "Fix la version d'une dépendance pour éviter un breaking change (async-timeout v5 break timeout context": "Corrija la versión de una dependencia para evitar un cambio importante (contexto de tiempo de espera de interrupción async-timeout v5",
         "28\/08\/2024": "28\/08\/2024",
         "Réécriture complète du plugin": "Reescritura completa del complemento",
         "Utilisation de la méthode d'installation des dépendances du core": "Usando el método de instalación de dependencia central",
