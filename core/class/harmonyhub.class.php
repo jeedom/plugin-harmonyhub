@@ -63,7 +63,7 @@ class harmonyhub extends eqLogic {
         $cmd .= ' --callback ' . network::getNetworkAccess('internal', 'proto:127.0.0.1:port:comp') . '/plugins/harmonyhub/core/php/harmonyhub.php';
         $cmd .= ' --apikey ' . jeedom::getApiKey(__CLASS__);
         $cmd .= ' --pid ' . jeedom::getTmpFolder(__CLASS__) . '/daemon.pid';
-        $cmd .= ' --harmony_ip ' . config::byKey('ip', 'harmonyhub', 0);
+        $cmd .= ' --harmony_ip ' . escapeshellarg(config::byKey('ip', 'harmonyhub', 0));
         log::add(__CLASS__, 'info', 'Lancement démon');
         exec($cmd . ' >> ' . log::getPathToLog(__CLASS__ . '_daemon') . ' 2>&1 &');
         $i = 0;

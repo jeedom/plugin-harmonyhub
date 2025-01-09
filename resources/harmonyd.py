@@ -36,6 +36,8 @@ class HarmonyDaemon(BaseDaemon):
     async def on_start(self):
         payload = {'hubs': {}}
         for ip in self._config.harmony_ip:
+            if ip in self._hubs or ip == '':
+                continue
             new_hub = HarmonyHub(ip, self.on_activity_change)
             await new_hub.connect()
             self._hubs[new_hub.hub_id] = new_hub
