@@ -4,6 +4,7 @@ from jeedomdaemon.base_config import BaseConfig
 
 from harmony_hub import HarmonyHub
 
+
 class HarmonyConfig(BaseConfig):
     """This is where you declare your custom argument/configuration
 
@@ -16,8 +17,9 @@ class HarmonyConfig(BaseConfig):
 
     @property
     def harmony_ip(self) -> list[str]:
-        ips:str = self._args.harmony_ip
+        ips: str = self._args.harmony_ip
         return ips.split('|')
+
 
 class HarmonyDaemon(BaseDaemon):
     """This is the main class of you daemon"""
@@ -75,5 +77,6 @@ class HarmonyDaemon(BaseDaemon):
     def on_activity_change(self, hub: HarmonyHub, type: str, activity_info: tuple):
         self._logger.info("%s: %s %s", hub.name, type, activity_info)
         self.create_task_add_change(f'{type}::{hub.hub_id}', activity_info[1])
+
 
 HarmonyDaemon().run()

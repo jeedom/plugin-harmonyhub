@@ -8,6 +8,7 @@ import aioharmony.exceptions as aioexc
 
 from consts import CURRENT_ACTIVITY, STARTING_ACTIVITY
 
+
 class HarmonyHub():
 
     def __init__(self, ip: str, on_activty_change: Callable[[any, str, tuple], None]):
@@ -104,7 +105,7 @@ class HarmonyHub():
 
     def _on_new_activity(self, activity_info: tuple) -> None:
         self.__logger.debug("%s: activity %s started", self.name, activity_info)
-        self.__on_activty_change(self, STARTING_ACTIVITY, ('',''))
+        self.__on_activty_change(self, STARTING_ACTIVITY, ('', ''))
         self.__on_activty_change(self, CURRENT_ACTIVITY, activity_info)
 
     async def start_activity(self, activity_id: str):
