@@ -12,6 +12,8 @@
         "ce sujet sur community": "este tópico na comunidade",
         "Voir également": "Veja também",
         "pour plus de détails": "para mais detalhes",
+        "10\/01\/2025": "",
+        "Fix un crash démon si plusieurs hubs configurés": "",
         "25\/11\/2024": "25\/11\/2024",
         "Fix la version d'une dépendance pour éviter un breaking change (async-timeout v5 break timeout context": "Corrija a versão de uma dependência para evitar uma alteração significativa (async-timeout v5 break timeout context",
         "28\/08\/2024": "28\/08\/2024",
