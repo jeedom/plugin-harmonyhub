@@ -5,7 +5,7 @@
         "Pour rappel, s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement la mise à jour de documentation, de traduction ou de texte": "Pour rappel, s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement la mise à jour de documentation, de traduction ou de texte",
         "Attention": "Attention",
         "Refonte importante du plugin": "Refonte importante du plugin",
-        "le plugin a été entièrement réécrit y compris la communication avec le hub Harmony (via démon à présent": "le plugin a été entièrement réécrit y compris la communication avec le hub Harmony (via démon à présent",
+        "le plugin a été entièrement réécrit y compris la communication avec le hub Harmony (via démon à présent); voir changelog depuis le 28\/08\/2024 ci-dessous pour la liste complète des changements": "le plugin a été entièrement réécrit y compris la communication avec le hub Harmony (via démon à présent); voir changelog depuis le 28\/08\/2024 ci-dessous pour la liste complète des changements",
         "Nécessite Jeedom 4.4.8": "Nécessite Jeedom 4.4.8",
         "Compatible Debian 11 et 12": "Compatible Debian 11 et 12",
         "Le plugin n'est plus compatible Debian 10, si vous êtes encore sous Debian 10, n'installez pas cette version": "Le plugin n'est plus compatible Debian 10, si vous êtes encore sous Debian 10, n'installez pas cette version",
