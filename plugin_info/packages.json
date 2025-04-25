@@ -1,0 +1,9 @@
+{
+  "pip3": {
+    "jeedomdaemon": {},
+    "aioharmony": {},
+    "async-timeout": {
+      "version": "4.0.3"
+    }
+  }
+}

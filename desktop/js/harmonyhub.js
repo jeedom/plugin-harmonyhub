@@ -20,76 +20,15 @@ $('#bt_healthharmony').on('click', function () {
   $('#md_modal').load('index.php?v=d&plugin=harmonyhub&modal=health').dialog('open');
 });
 
-$("#sel_dispositifid").change(function () {
-  if ($(this).val() == 'activity') {
-    $('.cron').show();
-  } else {
-    $('.cron').hide();
-  }
+$("#sel_icon").change(function () {
+  $("#icon_visu").attr("src", 'plugins/harmonyhub/core/template/images/' + $(this).val());
 });
-
-$("#sel_icone").change(function () {
-  $("#icon_visu").attr("src", $(this).val());
-});
-
-function getdevicelist(_ip) {
-  $.ajax({// fonction permettant de faire de l'ajax
-    type: "POST", // methode de transmission des données au fichier php
-    url: "plugins/harmonyhub/core/ajax/harmonyhub.ajax.php", // url du fichier php
-    data: {
-      action: "getdevicelist",
-      ip: _ip,
-      id: $('.eqLogicAttr[data-l1key=id]').value(),
-    },
-    dataType: 'json',
-    global: false,
-    error: function (request, status, error) {
-      handleAjaxError(request, status, error);
-    },
-    success: function (data) { // si l'appel a bien fonctionné
-      if (data.state != 'ok') {
-        $('#div_alert').showAlert({ message: data.result, level: 'danger' });
-        return;
-      }
-      var options = '';
-      if (data.result[0] != null) {
-        for (var i in data.result[0].device) {
-          if (data.result[0].device[i].id == data.result[1]) {
-            options += '<option value="' + data.result[0].device[i].id + '" selected>' + data.result[0].device[i].label + '</option>';
-          } else {
-            options += '<option value="' + data.result[0].device[i].id + '">' + data.result[0].device[i].label + '</option>';
-          }
-        }
-        if (data.result[1] == 'activity') {
-          options += '<option value="activity" selected>Activité</option>';
-        } else {
-          options += '<option value="activity">Activité</option>';
-        }
-        $("#sel_dispositifid").html(options);
-
-        const opt = $("#sel_dispositifid option").detach().sort(function (a, b) {
-          return a.text.toUpperCase().localeCompare(b.text.toUpperCase())
-        });
-        console.log(opt);
-        $("#sel_dispositifid").append(opt);
-      }
-    }
-  });
-}
 
 function printEqLogic(_eqLogic) {
-  const opt = $("#sel_icone option").detach().sort(function (a, b) {
+  const opt = $("#sel_icon option").detach().sort(function (a, b) {
     return a.text.toUpperCase().localeCompare(b.text.toUpperCase())
   });
-  $("#sel_icone").append(opt).val(_eqLogic.configuration.icone);
-
-  getdevicelist(_eqLogic.configuration.hubIp);
-
-  if (_eqLogic.configuration.dispositifid == 'activity') {
-    $('.cron').show();
-  } else {
-    $('.cron').hide();
-  }
+  $("#sel_icon").append(opt).val(_eqLogic.configuration.icon);
 }
 
 $("#table_cmd").sortable({ axis: "y", cursor: "move", items: ".cmd", placeholder: "ui-state-highlight", tolerance: "intersect", forcePlaceholderSize: true });

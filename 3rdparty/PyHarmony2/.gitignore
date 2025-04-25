@@ -1,7 +1,0 @@
-# Python compiled files.
-*.pyc
-
-# Eclipse project files.
-.project
-.pydevproject
-
