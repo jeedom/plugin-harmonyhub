@@ -3,7 +3,7 @@
         "Changelog Harmony Hub": "Changelog Harmony Hub",
         "Pour rappel, s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement la mise à jour de documentation, de traduction ou de texte": "Zur Erinnerung: Wenn keine Informationen zum Update vorhanden sind, handelt es sich nur um die Aktualisierung von Dokumentation, Übersetzung oder Text",
         "Refonte importante du plugin": "Bedeutende Neugestaltung des Plugins",
-        "le plugin a été entièrement réécrit y compris la communication avec le hub Harmony (via démon à présent); voir changelog depuis le 28\/08\/2024 ci-dessous pour la liste complète des changements": "",
+        "le plugin a été entièrement réécrit y compris la communication avec le hub Harmony (via démon à présent); voir changelog depuis le 28\/08\/2024 ci-dessous pour la liste complète des changements": "le plugin a été entièrement réécrit y compris la communication avec le hub Harmony (via démon à présent); voir changelog depuis le 28\/08\/2024 ci-dessous pour la liste complète des changements",
         "Nécessite Jeedom 4.4.8": "Erfordert Jeedom 4.4.8",
         "Compatible Debian 11 et 12": "Debian 11 und 12 kompatibel",
         "Le plugin n'est plus compatible Debian 10, si vous êtes encore sous Debian 10, n'installez pas cette version": "Das Plugin ist nicht mehr mit Debian 10 kompatibel. Wenn Sie noch Debian 10 verwenden, installieren Sie diese Version nicht",
