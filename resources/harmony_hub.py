@@ -25,7 +25,7 @@ class HarmonyHub():
 
     @property
     def hub_id(self) -> str:
-        return self.__api.hub_id
+        return str(self.__api.hub_id)
 
     @property
     def name(self) -> str:
