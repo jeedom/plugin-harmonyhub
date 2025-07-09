@@ -1,4 +1,6 @@
+import asyncio
 import logging
+import ipaddress
 from jeedomdaemon.base_daemon import BaseDaemon
 from jeedomdaemon.base_config import BaseConfig
 
@@ -10,6 +12,7 @@ class HarmonyConfig(BaseConfig):
 
     Remember that all usual arguments are managed by the BaseConfig class already so you only have to take care of yours; e.g. user & password in this case
     """
+
     def __init__(self):
         super().__init__()
 
@@ -18,7 +21,17 @@ class HarmonyConfig(BaseConfig):
     @property
     def harmony_ip(self) -> list[str]:
         ips: str = self._args.harmony_ip
-        return ips.split('|')
+        ip_list = ips.split('|') if ips else []
+        ip_list = list(set(ip_list))  # Remove duplicates
+        return [ip for ip in ip_list if self.__is_valid_ip_address(ip)]
+
+    def __is_valid_ip_address(self, ip: str):
+        """Validate the IP address format."""
+        try:
+            ipaddress.ip_address(ip)
+            return True
+        except ValueError:
+            return False
 
 
 class HarmonyDaemon(BaseDaemon):
@@ -35,18 +48,46 @@ class HarmonyDaemon(BaseDaemon):
 
     async def on_start(self):
         payload = {'hubs': {}}
+
         for ip in self._config.harmony_ip:
             if ip in self._hubs or ip == '':
                 continue
             new_hub = HarmonyHub(ip, self.on_activity_change)
-            await new_hub.connect()
-            self._hubs[new_hub.hub_id] = new_hub
+            try:
+                await new_hub.connect()
+                self._hubs[new_hub.hub_id] = new_hub
 
-            payload['hubs'][new_hub.hub_id] = new_hub.json_config
-            payload['hubs'][new_hub.hub_id]['name'] = new_hub.name
-            payload['hubs'][new_hub.hub_id]['ip_address'] = new_hub.ip_address
+            except Exception as e:
+                self._logger.error("Exception during connect on start: %s", e)
+            else:
+                payload['hubs'][new_hub.hub_id] = new_hub.json_config
+                payload['hubs'][new_hub.hub_id]['name'] = new_hub.name
+                payload['hubs'][new_hub.hub_id]['ip_address'] = new_hub.ip_address
 
+        if len(self._hubs) == 0:
+            self._logger.error("No Harmony hubs connected, please check your configuration")
+            asyncio.create_task(self.stop())
+            return
         await self.send_to_jeedom(payload)
+
+        asyncio.create_task(self.__health_check_task())
+
+    async def __health_check_task(self):
+        try:
+            delay = 300
+            self._logger.info("[Health check]: Starting with a delay of %d seconds", delay)
+            while True:
+                await asyncio.sleep(delay)
+                for hub in self._hubs.values():
+                    if not hub.connected:
+                        self._logger.info("[Health check]: Hub with ip %s is not connected, trying to reconnect", hub.ip_address)
+                        try:
+                            await hub.connect()
+                            self._logger.info("[Health check]: Reconnected to hub with ip %s", hub.ip_address)
+                        except Exception as e:
+                            self._logger.warning("[Health check]: %s", e)
+        except asyncio.CancelledError:
+            self._logger.info("[Health check]: task cancelled")
 
     async def on_message(self, message: list):
         """
@@ -63,6 +104,10 @@ class HarmonyDaemon(BaseDaemon):
             hub = self._hubs[hub_id]
         except KeyError:
             self._logger.error("Unknown hub ID: %s", hub_id)
+            return
+
+        if not hub.connected:
+            self._logger.error("Hub %s is not connected", hub_id)
             return
 
         if message['action'] == 'start_activity':
