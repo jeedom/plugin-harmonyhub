@@ -21,15 +21,15 @@ class HarmonyHub():
 
     @property
     def ip_address(self) -> str:
-        return self.__api.ip_address
+        return self.__ip
 
     @property
     def hub_id(self) -> str:
-        return str(self.__api.hub_id)
+        return str(self.__api.hub_id) if self.__api else ''
 
     @property
     def name(self) -> str:
-        return self.__api.name
+        return str(self.__api.name) if self.__api else ''
 
     @property
     def connected(self):
@@ -38,11 +38,11 @@ class HarmonyHub():
     @property
     def json_config(self) -> dict:
         """Returns configuration as a dictionary (json)"""
-        return self.__api.json_config
+        return self.__api.json_config if self.__api else {}
 
     @property
     def current_activity_name(self) -> str:
-        return self.__api.current_activity[1]
+        return self.__api.current_activity[1] if self.__api else ''
 
     async def connect(self):
         if self._connected:
@@ -58,9 +58,8 @@ class HarmonyHub():
             "new_activity_starting": self._on_new_activity_starting,
             "new_activity": self._on_new_activity,
         }
-
         self.__api = HarmonyAPI(ip_address=self.__ip, callbacks=ClientCallbackType(**callbacks))
-        self._connected = False
+
         try:
             self._connected = await self.__api.connect()
         except (TimeoutError, aioexc.TimeOut) as err:
@@ -72,8 +71,6 @@ class HarmonyHub():
         if not self._connected:
             await self.__api.close()
             raise Exception(f"Unable to connect to HUB at: {self.__ip}:8088")
-
-        self.__logger.info("Connected to %s (%s) on %s", self.name, self.hub_id, self.ip_address)
 
     async def disconnect(self):
         if not self._connected:
