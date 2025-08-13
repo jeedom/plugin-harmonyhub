@@ -41,6 +41,14 @@ try {
             case 'starting_activity':
             case 'current_activity':
                 foreach ($data as $hubId => $activity) {
+                    if (!is_numeric($hubId)) {
+                        log::add('harmonyhub', 'debug', "Unexpected hub ID '{$hubId}' in message '{$key}' => " . json_encode($data));
+                        continue;
+                    }
+                    if (!is_string($activity) || $activity === '') {
+                        log::add('harmonyhub', 'debug', "Unexpected activity value '{$activity}' in message '{$key}' => " . json_encode($data));
+                        continue;
+                    }
                     /** @var harmonyhub */
                     $hub = eqLogic::byLogicalId($hubId, 'harmonyhub');
                     if (!is_object($hub)) {

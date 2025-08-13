@@ -122,6 +122,8 @@ class HarmonyDaemon(BaseDaemon):
             await hub.disconnect()
 
     def on_activity_change(self, hub: HarmonyHub, type: str, activity_info: tuple):
+        if activity_info[1] == '':
+            return
         self._logger.info("%s: %s %s", hub.name, type, activity_info)
         self.create_task_add_change(f'{type}::{hub.hub_id}', activity_info[1])
 

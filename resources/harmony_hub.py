@@ -116,7 +116,7 @@ class HarmonyHub():
             self.__logger.info("%s: Current activity is already %s", self.name, current_activity_name)
             return
         try:
-            self.__logger.info("%s: start activity %s", self.name, self.__api.get_activity_name(activity_id))
+            self.__logger.info("%s: start activity %s (%s)", self.name, self.__api.get_activity_name(activity_id), activity_id)
             await self.__api.start_activity(activity_id)
         except aioexc.TimeOut:
             self.__logger.error("%s: Starting activity %s timed-out", self.name, activity_id)
