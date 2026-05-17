@@ -59,7 +59,6 @@
         "Actions": "Ações"
     },
     "plugins\/harmonyhub\/desktop\/js\/harmonyhub.js": {
-        "Santé Harmony": "Harmony Health",
         "Nom de la commande": "Nome do comando",
         "Choisir une icône": "Escolha um ícone",
         "Afficher": "Display",
@@ -74,8 +73,5 @@
         "Impossible de lancer le démon": "Não é possível iniciar o daemon",
         "Activité Courante": "Atividade Atual",
         "Démarrage activité": "Iniciar atividade"
-    },
-    "info.json": {
-        "Plugin permettant de contrôler un ou plusieurs Harmony Hub.": "Plugin que permite controlar um ou mais Hub Harmony"
     }
 }

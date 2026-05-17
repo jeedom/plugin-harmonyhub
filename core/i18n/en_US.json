@@ -74,8 +74,5 @@
         "Impossible de lancer le démon": "Unable to start daemon",
         "Activité Courante": "Current Activity",
         "Démarrage activité": "Start activity"
-    },
-    "info.json": {
-        "Plugin permettant de contrôler un ou plusieurs Harmony Hub.": "Plugin allowing to control one or more Harmony Hub"
     }
 }
