@@ -1,46 +1,43 @@
 {
-    "id": "harmonyhub",
-    "name": "Harmony Hub",
-    "description": {
-        "fr_FR": "Plugin permettant de contrôler un ou plusieurs Harmony Hub.",
-        "en_US": "Plugin allowing to control one or more Harmony Hub",
-        "es_ES": "Complemento que permite controlar uno o más Harmony Hub",
-        "de_DE": "Plugin zur Steuerung eines oder mehrerer Harmony Hub",
-        "pt_PT": "Plugin que permite controlar um ou mais Hub Harmony"
-    },
-    "licence": "AGPL",
-    "author": "Jeedom SAS",
-    "require": "4.5",
-    "category": "multimedia",
-    "hasDependency": true,
-    "hasOwnDeamon": true,
-    "maxDependancyInstallTime": 60,
-    "changelog": "https:\/\/doc.jeedom.com\/#language#\/plugins\/multimedia\/harmonyhub\/changelog",
-    "documentation": "https:\/\/doc.jeedom.com\/#language#\/plugins\/multimedia\/harmonyhub\/",
-    "language": [
-        "fr_FR",
-        "en_US",
-        "es_ES",
-        "de_DE",
-        "ru_RU",
-        "id_ID",
-        "it_IT",
-        "ja_JP",
-        "pt_PT",
-        "tr"
-    ],
-    "compatibility": [
-        "atlas",
-        "smart",
-        "rpi",
-        "docker",
-        "diy",
-        "mobile",
-        "v4"
-    ],
-    "os": {
-        "min": 11
-    },
-    "changelog_beta": "https:\/\/doc.jeedom.com\/#language#\/plugins\/multimedia\/harmonyhub\/beta\/changelog",
-    "documentation_beta": "https:\/\/doc.jeedom.com\/#language#\/plugins\/multimedia\/harmonyhub\/beta"
+	"id": "harmonyhub",
+	"name": "Harmony Hub",
+	"description": {
+		"fr_FR": "Plugin permettant de contrôler un ou plusieurs Harmony Hub.",
+		"en_US": "Plugin allowing to control one or more Harmony Hub",
+		"es_ES": "Complemento que permite controlar uno o más Harmony Hub",
+		"de_DE": "Plugin zur Steuerung eines oder mehrerer Harmony Hub",
+		"pt_PT": "Plugin que permite controlar um ou mais Hub Harmony",
+		"it_IT": "Plugin che consente di controllare uno o più Harmony Hub."
+	},
+	"licence": "AGPL",
+	"author": "Jeedom SAS",
+	"require": "4.5",
+	"category": "multimedia",
+	"hasDependency": true,
+	"hasOwnDeamon": true,
+	"maxDependancyInstallTime": 60,
+	"changelog": "https://doc.jeedom.com/#language#/plugins/multimedia/harmonyhub/changelog",
+	"documentation": "https://doc.jeedom.com/#language#/plugins/multimedia/harmonyhub/",
+	"language": [
+		"de_DE",
+		"en_US",
+		"es_ES",
+		"fr_FR",
+		"it_IT",
+		"pt_PT"
+	],
+	"compatibility": [
+		"atlas",
+		"smart",
+		"rpi",
+		"docker",
+		"diy",
+		"mobile",
+		"v4"
+	],
+	"os": {
+		"min": 11
+	},
+	"changelog_beta": "https://doc.jeedom.com/#language#/plugins/multimedia/harmonyhub/beta/changelog",
+	"documentation_beta": "https://doc.jeedom.com/#language#/plugins/multimedia/harmonyhub/beta"
 }
