@@ -1,9 +1,8 @@
 import asyncio
 import logging
 import ipaddress
-from jeedomdaemon.base_daemon import BaseDaemon
-from jeedomdaemon.base_config import BaseConfig
 
+from jeedomdaemon import BaseDaemon, BaseConfig
 from harmony_hub import HarmonyHub
 
 
@@ -70,25 +69,6 @@ class HarmonyDaemon(BaseDaemon):
             return
         await self.send_to_jeedom(payload)
 
-        asyncio.create_task(self.__health_check_task())
-
-    async def __health_check_task(self):
-        try:
-            delay = 300
-            self._logger.info("[Health check]: Starting with a delay of %d seconds", delay)
-            while True:
-                await asyncio.sleep(delay)
-                for hub in self._hubs.values():
-                    if not hub.connected:
-                        self._logger.info("[Health check]: Hub with ip %s is not connected, trying to reconnect", hub.ip_address)
-                        try:
-                            await hub.connect()
-                            self._logger.info("[Health check]: Reconnected to hub with ip %s", hub.ip_address)
-                        except Exception as e:
-                            self._logger.warning("[Health check]: %s", e)
-        except asyncio.CancelledError:
-            self._logger.info("[Health check]: task cancelled")
-
     async def on_message(self, message: list):
         """
         This function will be called once a message is received from Jeedom; check on api key is done already, just care about your logic
@@ -111,9 +91,31 @@ class HarmonyDaemon(BaseDaemon):
             return
 
         if message['action'] == 'start_activity':
-            await hub.start_activity(str(message['activity_id']))
+            for attempt in range(2):
+                try:
+                    await hub.start_activity(str(message['activity_id']))
+                    break
+                except Exception as e:
+                    if attempt == 0:
+                        self._logger.error("Failed to start activity %s on hub %s: %s. Trying to reconnect...", message['activity_id'], hub_id, e)
+                        hub = await self.__reconnect_hub(hub)
+                        if hub is None:
+                            break
+                    else:
+                        self._logger.error("Failed to start activity %s on hub %s after reconnect: %s", message['activity_id'], hub_id, e)
         elif message['action'] == 'send_command':
-            await hub.send_command(str(message['device_id']), message['command'])
+            for attempt in range(2):
+                try:
+                    await hub.send_command(str(message['device_id']), message['command'])
+                    break
+                except Exception as e:
+                    if attempt == 0:
+                        self._logger.error("Failed to send command %s to device %s on hub %s: %s. Trying to reconnect...", message['command'], message['device_id'], hub_id, e)
+                        hub = await self.__reconnect_hub(hub)
+                        if hub is None:
+                            break
+                    else:
+                        self._logger.error("Failed to send command %s to device %s on hub %s after reconnect: %s", message['command'], message['device_id'], hub_id, e)
         else:
             self._logger.warning('Unknown action: %s', message['action'])
 
@@ -126,6 +128,24 @@ class HarmonyDaemon(BaseDaemon):
             return
         self._logger.info("%s: %s %s", hub.name, type, activity_info)
         self.create_task_add_change(f'{type}::{hub.hub_id}', activity_info[1])
+
+    async def __reconnect_hub(self, hub: HarmonyHub):
+        self._logger.info("Reconnecting to %s", hub.ip_address)
+        try:
+            new_hub = HarmonyHub(hub.ip_address, self.on_activity_change)
+            try:
+                await new_hub.connect()
+                self._hubs[new_hub.hub_id] = new_hub
+                await hub.disconnect()
+                del hub
+            except Exception as e:
+                self._logger.error("Exception during re-connect: %s", e)
+                return None
+            self._logger.info("Reconnected to %s", new_hub.ip_address)
+            return new_hub
+        except Exception as e:
+            self._logger.error("Failed to reconnect to %s: %s", hub.ip_address, e)
+            return None
 
 
 HarmonyDaemon().run()
