@@ -1,2 +1,2 @@
-jeedomdaemon~=0.11.0
+jeedomdaemon~=2.0.0
 aioharmony~=0.2.10
