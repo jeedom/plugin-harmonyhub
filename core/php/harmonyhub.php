@@ -45,7 +45,7 @@ try {
                         log::add('harmonyhub', 'debug', "Unexpected hub ID '{$hubId}' in message '{$key}' => " . json_encode($data));
                         continue;
                     }
-                    if (!is_string($activity) || $activity === '') {
+                    if (!is_string($activity)) {
                         log::add('harmonyhub', 'debug', "Unexpected activity value '{$activity}' in message '{$key}' => " . json_encode($data));
                         continue;
                     }
