@@ -1,81 +1,78 @@
 {
-    "plugins\/harmonyhub\/plugin_info\/configuration.php": {
-        "Adresse IP du Hub": "Adresse IP du Hub",
-        "Il est possible de renseigner plusieurs adresses IP séparées par le symbole |": "Il est possible de renseigner plusieurs adresses IP séparées par le symbole |"
+    "plugins\/harmonyhub\/core\/class\/harmonyhub.class.php": {
+        "Activité Courante": "Attività corrente",
+        "Démarrage activité": "Avvio dell'attività",
+        "Impossible de lancer le démon": "Impossibile avviare il demone",
+        "Veuillez vérifier la configuration": "Si prega di verificare la configurazione"
+    },
+    "plugins\/harmonyhub\/core\/php\/harmonyhub.php": {
+        "Hub ID inconnu {$hubId}. Ce message est normal s'il s'agit de la première découverte du hub": "ID hub sconosciuto {$hubId}. Questo messaggio è normale se si tratta del primo rilevamento dell'hub",
+        "Vous n\\'etes pas autorisé à effectuer cette action": "Non sei autorizzato a eseguire questa azione"
+    },
+    "plugins\/harmonyhub\/desktop\/js\/harmonyhub.js": {
+        "Afficher": "Mostra",
+        "Choisir une icône": "Seleziona un\\'icona",
+        "Nom de la commande": "Nome del comando",
+        "Santé Harmony": "Salute Harmony",
+        "Tester": "Prova"
     },
     "plugins\/harmonyhub\/desktop\/modal\/health.php": {
-        "Image": "Immagine",
-        "Dispositifs": "Dispositifs",
-        "ID": "ID",
-        "Statut": "Stato",
-        "Dernière communication": "Dernière communication",
         "Date création": "Data di creazione",
+        "Dernière communication": "Dernière communication",
+        "Dispositifs": "Dispositivi",
+        "ID": "ID",
+        "Image": "Immagine",
+        "NOK": "NOK",
         "OK": "Bene",
-        "NOK": "NOK"
+        "Statut": "Stato"
     },
     "plugins\/harmonyhub\/desktop\/php\/harmonyhub.php": {
         "401 - Accès non autorisé": "401 - Accesso non autorizzato",
-        "Gestion": "Gestione",
+        "Actions": "Stock",
+        "Activer": "Attivare",
+        "Activité": "Attività",
+        "Ampli A\/V": "Amplificatore A\/V",
+        "Aucun": "Nessuno",
+        "Aucun équipement trouvé, Configurez le plugin et démarrez le démon pour commencer": "Nessuna apparecchiatura trovata. Configura il plugin e avvia il demone per iniziare",
+        "Aucune": "Aucune",
+        "Bandeau Leds": "Striscia LED",
+        "Box TV": "Set-top box",
+        "Catégorie": "Categoria",
+        "Climatisation": "Climatizzazione",
+        "Commande": "Comando",
+        "Commandes": "Comandi",
         "Configuration": "Configurazione",
-        "Santé": "Salute",
-        "Mes Dispositifs": "Mes Dispositifs",
-        "Aucun équipement trouvé, Configurez le plugin et démarrez le démon pour commencer": "Aucun équipement trouvé, Configurez le plugin et démarrez le démon pour commencer",
-        "Rechercher": "Ricercare",
-        "Equipement visible": "Equipement visible",
-        "Equipement non visible": "Equipement non visible",
         "Configuration avancée": "Configurazione avanzata",
+        "Console de jeux": "Console di gioco",
+        "Equipement": "Dispositivo",
+        "Equipement non visible": "Apparecchiature non visibili",
+        "Equipement visible": "Apparecchiature a vista",
+        "Etat": "Stato",
+        "Gestion": "Gestione",
+        "Htpc": "HTPC",
+        "IP du hub": "IP dell'hub",
+        "Icône du dispositif": "Icona del dispositivo",
+        "Informations": "Informazioni",
+        "Lampe": "Lampada",
+        "Lampe sur pied": "Lampada da terra",
+        "Mes Dispositifs": "I miei dispositivi",
+        "Nom": "Nome",
+        "Nom de l'équipement": "Nome dispositivo",
+        "Nom du hub": "Nome dell'hub",
+        "Objet parent": "Oggetto padre",
+        "Options": "Opzioni",
+        "Paramètres généraux": "Impostazioni generali",
+        "Photophore": "Photophore",
+        "Rechercher": "Ricercare",
+        "Santé": "Salute",
         "Sauvegarder": "Salva",
         "Supprimer": "Rimuovere",
-        "Equipement": "Dispositivo",
-        "Commandes": "Comandi",
-        "Paramètres généraux": "Paramètres généraux",
-        "Nom de l'équipement": "Nome dispositivo",
-        "Objet parent": "Oggetto padre",
-        "Aucun": "Nessuno",
-        "Catégorie": "Categoria",
-        "Options": "Opzioni",
-        "Activer": "Attivare",
-        "Visible": "Visibile",
-        "Informations": "Informazioni",
-        "Nom du hub": "Nom du hub",
-        "IP du hub": "IP du hub",
-        "Icône du dispositif": "Icône du dispositif",
-        "Aucune": "Aucune",
-        "Télévision": "Télévision",
-        "Climatisation": "Climatisation",
+        "Télévision": "Televisione",
         "Ventilateur": "Ventilateur",
-        "Ampli A\/V": "Ampli A\/V",
-        "Lampe": "Lampe",
-        "Htpc": "Htpc",
-        "Lampe sur pied": "Lampe sur pied",
-        "Console de jeux": "Console de jeux",
-        "Box TV": "Box TV",
-        "Bandeau Leds": "Bandeau Leds",
-        "Activité": "Activité",
-        "Photophore": "Photophore",
-        "Nom": "Nome",
-        "Commande": "Comando",
-        "Etat": "Etat",
-        "Actions": "Actions"
+        "Visible": "Visibile"
     },
-    "plugins\/harmonyhub\/desktop\/js\/harmonyhub.js": {
-        "Santé Harmony": "Santé Harmony",
-        "Nom de la commande": "Nom de la commande",
-        "Choisir une icône": "Choisir une icône",
-        "Afficher": "Mostra",
-        "Tester": "Prova"
-    },
-    "plugins\/harmonyhub\/core\/php\/harmonyhub.php": {
-        "Vous n\\'etes pas autorisé à effectuer cette action": "Vous n\\'etes pas autorisé à effectuer cette action",
-        "Hub ID inconnu {$hubId}. Ce message est normal s'il s'agit de la première découverte du hub": "Hub ID inconnu {$hubId}. Ce message est normal s'il s'agit de la première découverte du hub"
-    },
-    "plugins\/harmonyhub\/core\/class\/harmonyhub.class.php": {
-        "Veuillez vérifier la configuration": "Veuillez vérifier la configuration",
-        "Impossible de lancer le démon": "Impossible de lancer le démon",
-        "Activité Courante": "Activité Courante",
-        "Démarrage activité": "Démarrage activité"
-    },
-    "info.json": {
-        "Plugin permettant de contrôler un ou plusieurs Harmony Hub.": "Plugin permettant de contrôler un ou plusieurs Harmony Hub"
+    "plugins\/harmonyhub\/plugin_info\/configuration.php": {
+        "Adresse IP du Hub": "Indirizzo IP dell'hub",
+        "Il est possible de renseigner plusieurs adresses IP séparées par le symbole |": "È possibile inserire più indirizzi IP separati dal simbolo |"
     }
 }
