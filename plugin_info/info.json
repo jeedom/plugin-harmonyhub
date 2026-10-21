@@ -16,8 +16,8 @@
 	"hasDependency": true,
 	"hasOwnDeamon": true,
 	"maxDependancyInstallTime": 60,
-	"changelog": "https://doc.jeedom.com/#language#/plugins/multimedia/harmonyhub/changelog",
-	"documentation": "https://doc.jeedom.com/#language#/plugins/multimedia/harmonyhub/",
+	"changelog": "https://doc.jeedom.com/plugins/multimedia/harmonyhub/#language#/changelog",
+	"documentation": "https://doc.jeedom.com/plugins/multimedia/harmonyhub/#language#/",
 	"language": [
 		"de_DE",
 		"en_US",
@@ -38,6 +38,6 @@
 	"os": {
 		"min": 11
 	},
-	"changelog_beta": "https://doc.jeedom.com/#language#/plugins/multimedia/harmonyhub/beta/changelog",
-	"documentation_beta": "https://doc.jeedom.com/#language#/plugins/multimedia/harmonyhub/beta"
+	"changelog_beta": "https://doc.jeedom.com/plugins/multimedia/harmonyhub/beta/#language#/changelog",
+	"documentation_beta": "https://doc.jeedom.com/plugins/multimedia/harmonyhub/beta/#language#/"
 }
