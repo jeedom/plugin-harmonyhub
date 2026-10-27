@@ -1,50 +1,53 @@
-# Changelog Harmony Hub
+# Änderungsprotokoll Harmony Hub
 
->**Wichtig**
+>**WICHTIG**
 >
->Zur Erinnerung: Wenn keine Informationen zum Update vorhanden sind, handelt es sich nur um die Aktualisierung von Dokumentation, Übersetzung oder Text.
+>Zur Erinnerung: Wenn keine Informationen zum Update vorhanden sind, bedeutet dies, dass es sich ausschließlich um eine Aktualisierung der Dokumentation, der Übersetzung oder des Textes handelt.
 
-> Attention
-> Bedeutende Neugestaltung des Plugins: le plugin a été entièrement réécrit y compris la communication avec le hub Harmony (via démon à présent); voir changelog depuis le 28/08/2024 ci-dessous pour la liste complète des changements
+# 22/10/2026
+
+- Überprüfung der Verbindung zwischen dem Daemon und dem Hub beim Senden von Befehlen
+- Behebung eines Absturzes beim Start des Daemons, falls ein Hub falsch konfiguriert oder nicht erreichbar ist: Der Daemon kann nun zusammen mit den anderen Hubs starten, sofern diese vorhanden sind, oder wird ordnungsgemäß beendet, wenn kein Hub erreichbar ist
+- Anpassung der Protokolle
+
+# 30/04/2025
+
+- Behebung eines Problems beim Ausführen von Befehlen für bestimmte Installationen (unbekannter Hub) nach der Version vom 28.04.
+
+# 28/04/2025
+
+> Aufmerksamkeit
+> Umfassende Überarbeitung des Plugins: Das Plugin wurde komplett neu geschrieben, einschließlich der Kommunikation mit dem Harmony-Hub (jetzt über einen Daemon).
 >
 > Erfordert Jeedom 4.4.8
 >
-> Debian 11 und 12 kompatibel! Das Plugin ist nicht mehr mit Debian 10 kompatibel. Wenn Sie noch Debian 10 verwenden, installieren Sie diese Version nicht.
+> Kompatibel mit Debian 11 und 12! Das Plugin ist nicht mehr mit Debian 10 kompatibel. Wenn Sie noch Debian 10 verwenden, installieren Sie diese Version bitte nicht.
 >
-> Alte Geräte werden als veraltet markiert und nicht migriert. Nutzen Sie das „Replace“-Tool des Cores, wenn Sie Ihre Szenarien einfach anpassen möchten.
+> Ältere Geräte werden als veraltet gekennzeichnet und nicht migriert. Verwenden Sie das Tool „Ersetzen“ des Core, wenn Sie Ihre Szenarien einfach anpassen möchten.
 >
-> Siehe auch [dieses Thema auf Community](https://community.jeedom.com/t/importante-mise-a-jour-pour-debian-11-et-debian-12/129908) für weitere Details
-
-## 10/01/2025
-
-- Fix un crash démon si plusieurs hubs configurés
-
-# 25.11.2024
-
-- Korrigieren Sie die Version einer Abhängigkeit, um eine Breaking Change zu vermeiden (async-timeout v5 Break Timeout-Kontext))
-
-# 28.08.2024
+> Siehe auch [dieses Thema auf Community](https://community.jeedom.com/t/importante-mise-a-jour-pour-debian-11-et-debian-12/129908) Weitere Informationen
 
 - Komplette Neufassung des Plugins
 - Verwenden der Kernabhängigkeitsinstallationsmethode
 - Ändern der Bibliothek zur Kommunikation mit dem Harmony-Hub, um eine Bibliothek mit besserer Nachverfolgung zu verwenden
-- Verwenden eines Daemons, um:
+- Verwendung eines Daemons, um:
   - um die Reaktionsfähigkeit von Aktionen zu verbessern
   - um Status-Feedback in Echtzeit zu erhalten
-- Vereinfachte Konfiguration: Es bleibt nur noch die Konfiguration der Hub-IP in die Plugin-Konfiguration einzutragen und den Daemon zu starten und schon synchronisiert sich das Gerät mit Jeedom.
-- Bestellung hinzufügen **Aktivität starten** Gibt die Aktivität an, die gestartet wird (leer, wenn keine Aktivität vorhanden ist))
+- Vereinfachte Konfiguration: Sie müssen lediglich die IP-Adresse des Hubs in den Plugin-Einstellungen eingeben und den Daemon starten – schon synchronisieren sich die Geräte von selbst mit Jeedom.
+- Hinzufügen eines Befehls **Aktivität starten**, der angibt, welche Aktivität gerade gestartet wird (leer, falls keine vorhanden ist)
+- Blockiert die Version einer Abhängigkeit, um eine Breaking Change zu vermeiden (async-timeout v5 bricht den Timeout-Kontext)
 
-# 17.09.2023
+# 17/09/2023
 
 - Korrigieren Sie die Debian 11- und Python 3-Kompatibilität
-- Mindestkernversion erforderlich: v4.2
+- Erforderliche Mindestversion des Core: v4.2
 
-# 19.10.2022
+# 19/10/2022
 
 - Aktualisierte Befehlsliste für Jeedom v4.3
 - Kleinere Korrekturen und Optimierungen im Ausrüstungsverwaltungsbildschirm
 
-# 18.05.2021
+# 18/05/2021
 
 - Korrektur einer Fehlfunktion einiger Steuerungen
 - Schnittstellenüberprüfung
@@ -54,25 +57,25 @@
 
 - Allgemeine Optimierungen
 - Neue Darstellung der Objektliste
-- Hinzufügung des Tags "V4-Kompatibilität"
+- Hinzufügen des Tags „V4-Kompatibilität“
 
-# 20.09.2019
+# 20/09/2019
 
 - V4 Anpassung
 
-# 07-06-2019
+# 07/06/2019
 
 - Bugfix für NOK-Abhängigkeiten bei OK
 
-# 2019-05-23
+# 23/05/2019
 
 - Installation der Ausrüstungsseite für zukünftige Jeedom
 
-# 2019-02-19
+# 19/02/2019
 
-Dieses Update ist ein wichtiger Bestandteil des Updates von Logitech, mit dem XMMP reaktiviert wird. Sie müssen die conf-Datei neu erstellen und insbesondere in der Harmony-Anwendung den Entwicklermodus aktivieren, der das XMMP aktiviert
-Zur Information: Diese Verschiebung erfolgt am selben Tag wie der Logitech-Patch. Genau wie die Problemumgehung vom 21-12-2018, die es vielen Menschen ermöglichte, repariert zu werden, da sie für alle Personen funktionierte, die sich unter Debian-Dehnung befanden (besser als nichts)). Wir wussten nicht, wann Logitech die Unterstützung für XMMP veröffentlichen würde. Aber Schlag auf Schlag gab es eine Reaktion.
+Dieses Update ist ein größeres Update im Zusammenhang mit dem Logitech-Update, das XMMP wieder aktiviert. Sie müssen die Konfigurationsdatei neu erstellen und vor allem in der Harmony-App den Entwicklermodus aktivieren, um XMMP zu aktivieren.
+Zur Information: Dieses Update erscheint am selben Tag wie der Patch von Logitech. Genau wie die Umgehungslösung vom 21.12.2018, die vielen Nutzern geholfen hat, da sie bei allen funktionierte, die Debian Stretch nutzten (besser als nichts). Wir wussten nicht, wann Logitech die Unterstützung für XMMP wiederherstellen würde. Doch kurz darauf gab es eine Reaktion.
 
-# 2018-12-21
+# 21/12/2018
 
-Notfallkorrektur in Bezug auf den Hauptteil von Logitech (vorübergehend zur Fehlerbehebung, denken Sie daran, die Abhängigkeiten neu zu starten)
+Dringende Korrektur im Zusammenhang mit dem Logitech-Update (vorläufige Lösung zur Behebung des Problems; bitte denken Sie daran, die Abhängigkeiten neu zu starten)

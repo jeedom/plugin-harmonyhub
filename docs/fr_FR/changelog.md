@@ -4,6 +4,12 @@
 >
 >Pour rappel, s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement la mise à jour de documentation, de traduction ou de texte.
 
+# 22/10/2026
+
+- Vérification de la connectivité entre le démon et le hub lors de l'envoi de commande
+- Fix un crash au démarrage du démon dans le cas où un hub est mal configuré ou non-joignable: le démon pourra démarrer avec les autres hubs s'ils existent ou s'arrêtera proprement si aucun hub n'est joignable
+- Adaptation des logs
+
 # 30/04/2025
 
 - Fix un problème sur le lancement de commandes pour certaines installations (hub inconnu) suite à la version du 28/04
@@ -29,8 +35,7 @@
   - d'avoir un retour d'état en temps réel
 - Simplification de la configuration: il ne reste que la configuration de l'IP du hub à renseigner dans la config du plugin et démarrer le démon et les équipements se synchronisent tous seuls avec Jeedom.
 - Ajout d'une commande **Démarrage activité** qui indique l'activité qui est en cours de démarrage (vide si aucune)
-- Fix un crash démon si plusieurs hubs configurés
-- Fix la version d'une dépendance pour éviter un breaking change (async-timeout v5 break timeout context)
+- Bloque la version d'une dépendance pour éviter un breaking change (async-timeout v5 break timeout context)
 
 # 17/09/2023
 
@@ -54,23 +59,23 @@
 - Nouvelle présentation de la liste des objets
 - Ajout du tag "Compatibilité V4"
 
-# 20-09-2019
+# 20/09/2019
 
 - Adaptation V4
 
-# 07-06-2019
+# 07/06/2019
 
 - Bugfix sur dépendances NOK alors que OK
 
-# 23-05-2019
+# 23/05/2019
 
 - Mise en place de la page équipement pour futur Jeedom
 
-# 19-02-2019
+# 19/02/2019
 
 Cette mise à jour est une maj en liée à la mise à jour de Logitech qui réactives le XMMP. Il vous faudra recréer le fichier de conf et surtout activer dans l\'application Harmony le mode développeur activant le XMMP
 Pour information cette maj intervient le jour même du correctif de Logitech. Tout comme le moyen de contournement du 21-12-2018 qui  a permis à de nombreuses personnes d'être dépanné puisque ca marchait chez toutes les personnes qui etait sous Debian stretch (mieux que rien). Nous ne savions pas quand Logitech allait remettre le support du XMMP. Mais coup sur coup il y a eu une réaction.
 
-# 21-12-2018
+# 21/12/2018
 
 Correction en urgence lié à la maj de Logitech (provisoire pour dépanner, pensez à relancer les dépendances)
